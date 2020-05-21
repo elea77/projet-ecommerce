@@ -2,11 +2,154 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
     </head>
     <body>
+        <header>
+            <!-- Navbar non connecté -->
+            <!-- <nav>
+                <ul>
+                    
+                    <img class="logo_reagames" src="{{ asset('/img/logo_reagames2.png') }}">
+                    
+                    <li>
+                        <a href="{{ path('home') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('login') }}">Connexion</a>
+                    </li>
+                    <li class="icon">
+                        <span class="iconify loupe" data-inline="false" data-icon="ant-design:search-outlined"></span>
+                    </li>
+                </ul>
+            </nav> -->
+
+            <!-- Navbar d'un membre connecté: -->
+            <!-- <nav>
+                <ul>
+                    <img class="logo_reagames" src="{{ asset('/img/logo_reagames2.png') }}">
+
+                    <li>
+                        <a href="{{ path('home') }}">Home</a>
+                    </li>
+                    <li class="icon_list">
+                        <a href="{{ path('logout') }}">
+                            <span class="iconify icon" data-inline="false" data-icon="fe:logout"></span>
+                        </a>
+                    
+                        <a href="">
+                            <span class="iconify icon" data-inline="false" data-icon="ant-design:search-outlined"></span>
+                        </a>
+
+                        <a href="{{ path('basket') }}">
+                            <span class="iconify icon" data-inline="false" data-icon="ant-design:shopping-cart-outlined"></span>
+                        </a>
+                        
+                        <a href="{{ path('memberArea') }}">
+                            <span class="iconify icon" data-inline="false" data-icon="gridicons:user-circle"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav> -->
+
+            <!-- Navbar d'un admin connecté -->
+            <nav>
+                <ul>
+                    <img class="logo_reagames" src="{{ asset('/img/logo_reagames2.png') }}">
+
+                    <li>
+                        <a href="{{ path('home') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="icon_list">
+                        <a href="{{ path('logout') }}">
+                            <span class="iconify icon" data-inline="false" data-icon="fe:logout"></span>
+                        </a>
+                    
+                        <a href="">
+                            <span class="iconify icon" data-inline="false" data-icon="ant-design:search-outlined"></span>
+                        </a>
+
+                        <a href="{{ path('basket') }}">
+                            <span class="iconify icon" data-inline="false" data-icon="ant-design:shopping-cart-outlined"></span>
+                        </a>
+                        
+                        <a href="{{ path('memberArea') }}">
+                            <span class="iconify icon" data-inline="false" data-icon="gridicons:user-circle"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
+
+<style>
+    header nav{
+		background-color: #1F2326;
+		height: 10vh;
+		width: 100%;
+	}
+
+	header nav ul {
+	    height: 100% ;
+	    display: flex;
+	}
+
+	header nav ul li{
+	    height: 100%;
+	    width: 6%;
+	    display: inline-flex;
+	    align-items: center;
+	    position: relative;
+        font-family: Roboto;
+        font-size: 120%;
+        color: #ffffff;
+        margin-left: 2%;
+	}
+	
+    header nav ul li a{
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    header nav ul li a:hover {
+	    color: #8D197E;
+	    transition: all 0.3s linear;
+	}
+
+	body, ul {
+		margin: 0;
+		padding: 0;
+	}
+    
+    .logo_reagames{
+        display: block;
+        max-height: 85%;
+        width: auto;
+        border-right: solid #ffffff;
+        padding-right: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .icon{
+        width: 45%;
+        height: 45%;
+    }
+
+    .icon_list{
+        text-align: right;
+        margin-right: 2%;
+        margin-left: auto;
+        width: 20%;
+    }
+</style>
