@@ -5,7 +5,7 @@
         <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
-        <link rel="stylesheet" href="{{ asset('/css/navbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('/css/navbar2.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap" rel="stylesheet">
     </head>
@@ -58,7 +58,7 @@
             </nav> -->
 
             <!-- Navbar d'un admin connecté -->
-            <nav>
+            {# <nav>
                 <ul>
                     <img class="logo_reagames" src="{{ asset('/img/logo_reagames2.png') }}">
 
@@ -84,6 +84,39 @@
                         <a href="{{ path('memberArea') }}">
                             <span class="iconify icon" data-inline="false" data-icon="gridicons:user-circle"></span>
                         </a>
+                    </li>
+                </ul>
+            </nav> #}
+            <nav>
+                <ul>
+                    <img class="logo_reagames" src="{{ asset('/img/logo_reagames2.png') }}">
+
+                    <li>
+                        <a href="{{ path('home') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="icon-list">
+                        <a href="{{ path('logout') }}">
+                            <span class="iconify icon" id="logout" data-inline="false" data-icon="fe:logout"></span>
+                        </a>
+
+                        <li class="icons">
+                    
+                            <a href="">
+                                <span class="iconify icon" data-inline="false" data-icon="ant-design:search-outlined"></span>
+                            </a>
+
+                            <a href="{{ path('basket') }}">
+                                <span class="iconify icon" data-inline="false" data-icon="ant-design:shopping-cart-outlined"></span>
+                            </a>
+                            
+                            <a href="{{ path('memberArea') }}">
+                                <span class="iconify icon" data-inline="false" data-icon="gridicons:user-circle"></span>
+                            </a>
+
+                        </li>
                     </li>
                 </ul>
             </nav>
