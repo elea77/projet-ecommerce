@@ -1,0 +1,63 @@
+body {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #363C41;
+}
+
+.container {
+    margin: 2%;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    text-align: center;
+}
+
+.game-info img {
+    width: 75%;
+    margin: auto;
+    margin-block-end: 3%;
+}
+
+.info {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.descrip {
+    text-align: start;
+    line-height: 25px;
+}
+
+.button {
+    border-color: white;
+    color: white;
+    background-color: #8D197E;
+    border-radius: 6px;
+    font-size: 20px;
+}
+
+.plateform img {
+    width: 20px;
+    margin:0;
+}
+
+.plateform p {
+    margin:0;
+}
+
+.plateform {
+    display: inline-flex;
+    margin-top: 5%;
+    justify-content: space-between;
+    width: 15%;
+}
+
+
+.comment h2 {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: 2%;
+}
+

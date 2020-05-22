@@ -1,9 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}ReaGames{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/infoGame.css') }}">
+{% endblock %}
 
 {% block body %}
 
-Nous voici sur la page d'information du jeux.
+    <div class="container">
+
+        <div class="game-info">
+
+            <img src="{{ asset('/img/Rainbow6.png') }}" alt="">
+
+            <div class="info">
+                <h1> Rainbow 6 Siege </h1><br>
+                <p class="descrip">Rainbow Six Siege est un jeu de tir tactique où le joueur
+                    incarne différents agents de plusieurs unités de forces spéciales
+                    et de groupes d'interventions qui constituent l’équipe Rainbow.
+                    Comme les autres titres de la série, il se concentre fortement sur
+                    le jeu en équipe et le "réalisme" des interventions.
+                    Cependant, il existe de grandes différences par rapport à d'anciennes
+                    versions du jeu, avec un accent multijoueur important et des environnements
+                    entièrement destructibles.</p>
+                <div>
+                    <p>Note</p>
+                </div>
+                <p>59,99 €</p>
+                <button class="button">Ajouter au panier</button><br>
+                <div class="plateform">
+                    <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
+                    <img src="{{ asset('/img/002-xbox.png') }}" alt="">
+                    <p>PC</p>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <div class="comment">
+            <h2>Avis</h2>
+        </div>
+
+
+
+
+    </div>
 
 {% endblock %}
