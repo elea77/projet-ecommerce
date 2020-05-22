@@ -58,11 +58,11 @@ class MemberController extends AbstractController
     public function loginCheck(){}
     
     /**
-     * @Route("/signUp", name="signUp")
+     * @Route("/register", name="register")
      */
-    public function signUp()
+    public function register()
     {
-        return $this->render('member/signUp.html.twig', []);
+        return $this->render('member/register.html.twig', []);
     }
 
 
