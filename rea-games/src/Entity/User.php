@@ -74,6 +74,11 @@ class User
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $register_date;
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
@@ -271,6 +276,18 @@ class User
                 $comment->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRegisterDate(): ?\DateTimeInterface
+    {
+        return $this->register_date;
+    }
+
+    public function setRegisterDate(\DateTimeInterface $register_date): self
+    {
+        $this->register_date = $register_date;
 
         return $this;
     }
