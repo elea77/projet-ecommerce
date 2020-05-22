@@ -1,9 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ReaGames{% endblock %}
+{% block title %}ReaGames - Login{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
+{% endblock %}
 
 {% block body %}
 
-Voici la page de connexion
+    <div class="container">
+        <h1>Connexion</h1>
+        <form action="" method="post">
+            <label for="">Adresse mail</label><br>
+            <input type="email" name="lastname" class="input-large"><br><br>
+            <label for="">Mot de passe</label><br>
+            <input type="password" name="password" class="input-large"><br>
+            <button type="submit" name="submit" class="button">Se connecter</button>
+        </form>
+        <a href=""><p>Mot de passe oublié ?</p></a>
+        <div class="register">
+            <h5>Nouveau sur ReaGames ?</h5>
+        </div>
+        <button class="button-register">Créer votre compte ReaGames</button>
+    </div>
 
 {% endblock %}
