@@ -1,8 +1,89 @@
+body {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #363C41;
+}
+
 #top {
+    background-image: url('../img/fond-home.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     z-index: 99999;
     width: 100%;
     height: 90vh;
+    display: flex;
+}
+
+
+#titles-top {
+    text-align: start;
+    margin-top: auto; /* eh oui, tout bêtement */
+    margin-bottom: auto;
+    margin-left: 5%;
+}
+
+#titles-top h1 {
+    margin-bottom: 3%;
+    font-size: 50px;
+}
+
+
+#titles-top p {
+    margin-bottom: 3%;
+    font-size: 18px;
+}
+
+#container {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#container h2 {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: 2%;
+}
+
+.catalogue {
+    display: grid;
+    grid-template-columns: repeat(4,25%);
+}
+
+.game {
+    width: 85%;
+    height: auto;
+    margin-left:auto;
+    margin-right: auto;
+    margin-block-end: 10%;
+}
+
+
+.game img {
+    width: 100%;
+    height: calc(100% - 34px);
+    border-radius: 6px 6px 0px 0px;
+}
+
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+
+.game-name {
+    background-color: white;
+    padding: 5px;
+    border-radius: 0px 0px 6px 6px;
+}
+
+.game-name p {
+    color: #8D197E;
+    text-align: center;
+    margin: 0;
+}
+
+.game a {
+    text-decoration: none;
 }
