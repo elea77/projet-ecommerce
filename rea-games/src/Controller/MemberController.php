@@ -28,6 +28,14 @@ class MemberController extends AbstractController
     }
 
     /**
+     * @Route("/profile", name="profile")
+     */
+    public function profile()
+    {
+        return $this->render('member/profile.html.twig', []);
+    }
+
+    /**
 	* @Route("/login", name="login")
 	*/
 
