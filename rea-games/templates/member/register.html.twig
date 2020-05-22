@@ -1,9 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}ReaGames{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/register.css') }}">
+{% endblock %}
 
 {% block body %}
 
-Voici la page d'inscription
+    <div class="container">
+        <h1>Inscription</h1>
+        <form action="" method="post">
+            <input type="text" name="username" class="input" placeholder="Pseudo">
+            <input type="date" name="birthday" class="input"><br>
+            <input type="text" name="username" class="input-large" placeholder="Prénom"><br>
+            <input type="text" name="firstname" class="input-large" placeholder="Nom"><br>
+            <input type="email" name="lastname" class="input-large" placeholder="Adresse mail"><br>
+            <input type="password" name="password" class="input-large" placeholder="Mot de passe"><br>
+            <input type="password" name="confirm" class="input-large" placeholder="Confirmer le mot de passe"><br><br>
+            <button type="submit" name="submit" class="button">S'inscrire</button>
+        </form>
+    </div>
+
 
 {% endblock %}
