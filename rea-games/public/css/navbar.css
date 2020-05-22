@@ -1,0 +1,59 @@
+header nav{
+    background-color: #1F2326;
+    height: 10vh;
+    width: 100%;
+}
+
+header nav ul {
+    height: 100% ;
+    display: flex;
+}
+
+header nav ul li{
+    height: 100%;
+    width: 6%;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-size: 120%;
+    color: #ffffff;
+    margin-left: 2%;
+}
+
+header nav ul li a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+header nav ul li a:hover {
+    color: #8D197E;
+    transition: all 0.3s linear;
+}
+
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+.logo_reagames{
+    display: block;
+    max-height: 85%;
+    width: auto;
+    border-right: solid #ffffff;
+    padding-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.icon{
+    width: 45%;
+    height: 45%;
+}
+
+.icon_list{
+    text-align: right;
+    margin-right: 2%;
+    margin-left: auto;
+    width: 20%;
+}
