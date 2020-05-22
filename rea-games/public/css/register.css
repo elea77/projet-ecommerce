@@ -45,6 +45,11 @@ input:hover {
     border-style: solid;
 }
 
+input:focus {
+    border-color: #8D197E;
+    border-style: solid;
+}
+
 input[type=date] {
     padding: 7.3px;
 }
