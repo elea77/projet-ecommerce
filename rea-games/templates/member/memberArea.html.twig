@@ -1,9 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ReaGames{% endblock %}
+{% block title %}ReaGames - Espace membre{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/memberArea.css') }}">
+{% endblock %}
+
 
 {% block body %}
 
-Voici la page d'espace membre
+    <div class="container">
+        <h1>Espace membre</h1>
+        <div class="games">
+            <h3>Liste de mes jeux achetés :</h3>
+            <h4>Sur PlayStation :</h4>
+            <div id="div-scroll">
+                <div id="scrollmenu">
+                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                </div>
+            </div><br>
+            <h4>Sur PC :</h4>
+            <div id="div-scroll">
+                <div id="scrollmenu">
+                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/game/1'">
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

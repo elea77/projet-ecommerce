@@ -1,0 +1,45 @@
+body {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #363C41;
+}
+
+.container {
+    margin: 2%;
+}
+
+.container h1 {
+    text-align: center;
+    margin-block-end: 4%;
+    margin-top: 1%;
+}
+
+
+#scrollmenu {   
+    display: flex;   
+    overflow-x: auto;
+}
+
+#scrollmenu img, #scrollmenu iframe {    
+    margin-right: 15px;
+}
+
+#scrollmenu::-webkit-scrollbar {    
+    display: none;
+}
+
+#div-scroll {   
+    display: flex;   
+    align-items: center;   
+    height: auto;
+}
+
+.game {
+    width:25%;
+    height:auto;
+}
+
+
+.game:hover {
+    cursor: pointer;
+}
