@@ -9,10 +9,59 @@
 
     <div class="container">
         <h1>Profil</h1>
-        <div>
-            
+        <div id="profile">
+            <div class="user-info">
+                <img src="{{ asset('/img/user.png') }}" width="10%" alt="">
+                <div class="info">
+                    <p>Pseudo : <b>Jojo</b></p>
+                    <p>Prénom : <b>John</b></p>
+                    <p>Nom : <b>Doe</b></p>
+                    <p>Adresse mail : <b>john.doe@gmail.com</b></p>
+                    <p>Date de naissance : <b>01/01/1999</b></p>
+                    <p>Solde : <b>34,01€</b></p>
+                </div>
+            </div>
+            <div class="buttons">       
+                <button id="edit">Modifier le profil</button>
+                <button>Ajouter de l'argent</button>
+            </div>
+        </div>
+        <div id="edit-profile" style="display: none;">
+            <div class="edit-info">
+                <div class="edit-img">
+                    <img src="{{ asset('/img/user.png') }}" width="10%" alt=""><br>
+                    <input type="file" name="" id="">
+                </div>
+                <div class="edit-password">
+                    <h4>Modifier le mot de passe</h4>
+                    <input type="password" name="password" id="" placeholder="Ancien mot de passe"><br>
+                    <input type="password" name="password" id="" placeholder="Nouveau mot de passe"><br>
+                    <input type="password" name="confirm" id="" placeholder="Confirmer le mot de passe"><br>
+                </div>   
+            </div>
+            <div class="buttons"> 
+                <button id="cancel" onclick="location.href='/profile'">Annuler</button>      
+                <button type="submit">Enregistrer</button>
+            </div>
         </div>
     </div>
 
+    <script>
+        var profile = document.getElementById('profile');
+        
+        document.getElementById('edit').addEventListener('click', function () {
+            if(profile.style.display === 'block') {
+                document.getElementById('profile').style.display = 'none'
+                document.getElementById('edit-profile').style.display = 'block'
+            } else {
+                document.getElementById('edit-profile').style.display = 'block'
+                document.getElementById('profile').style.display = 'none'
+            }
+            
+        })
+    
+    </script>
 
 {% endblock %}
+
+
