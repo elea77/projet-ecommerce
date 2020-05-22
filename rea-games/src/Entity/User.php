@@ -3,14 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -18,6 +17,22 @@ class User
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $role = 'ROLE_USER';
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -35,16 +50,6 @@ class User
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
-
-    /**
      * @ORM\Column(type="date")
      */
     private $birthday;
@@ -54,46 +59,82 @@ class User
      */
     private $balance;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $status;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Invoice::class, mappedBy="id_user", orphanRemoval=true)
-     */
-    private $invoices;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="id_user", orphanRemoval=true)
-     */
-    private $notes;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="id_user", orphanRemoval=true)
-     */
-    private $comments;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $register_date;
-
-    public function __construct()
-    {
-        $this->invoices = new ArrayCollection();
-        $this->notes = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getEmail(): ?string
     {
-        return $this->username;
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        return [$this -> role];
+    }
+
+    public function getRole(){
+        return $this -> role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function setUsername(string $username): self
@@ -127,30 +168,6 @@ class User
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getBirthday(): ?\DateTimeInterface
     {
         return $this->birthday;
@@ -171,123 +188,6 @@ class User
     public function setBalance(int $balance): self
     {
         $this->balance = $balance;
-
-        return $this;
-    }
-
-    public function getStatus(): ?bool
-    {
-        return $this->status;
-    }
-
-    public function setStatus(bool $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Invoice[]
-     */
-    public function getInvoices(): Collection
-    {
-        return $this->invoices;
-    }
-
-    public function addInvoice(Invoice $invoice): self
-    {
-        if (!$this->invoices->contains($invoice)) {
-            $this->invoices[] = $invoice;
-            $invoice->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInvoice(Invoice $invoice): self
-    {
-        if ($this->invoices->contains($invoice)) {
-            $this->invoices->removeElement($invoice);
-            // set the owning side to null (unless already changed)
-            if ($invoice->getIdUser() === $this) {
-                $invoice->setIdUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
-
-    public function addNote(Note $note): self
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes[] = $note;
-            $note->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->contains($note)) {
-            $this->notes->removeElement($note);
-            // set the owning side to null (unless already changed)
-            if ($note->getIdUser() === $this) {
-                $note->setIdUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
-            // set the owning side to null (unless already changed)
-            if ($comment->getIdUser() === $this) {
-                $comment->setIdUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getRegisterDate(): ?\DateTimeInterface
-    {
-        return $this->register_date;
-    }
-
-    public function setRegisterDate(\DateTimeInterface $register_date): self
-    {
-        $this->register_date = $register_date;
 
         return $this;
     }
