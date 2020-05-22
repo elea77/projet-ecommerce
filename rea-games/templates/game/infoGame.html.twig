@@ -23,11 +23,12 @@
                     Cependant, il existe de grandes différences par rapport à d'anciennes
                     versions du jeu, avec un accent multijoueur important et des environnements
                     entièrement destructibles.</p>
-                <div>
+                <br>
+                <div class="note">
                     <p>Note</p>
                 </div>
-                <p>59,99 €</p>
-                <button class="button">Ajouter au panier</button><br>
+                <p class="price">59,99 €</p>
+                <button class="button-basket" type="submit">Ajouter au panier</button><br>
                 <div class="plateform">
                     <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
                     <img src="{{ asset('/img/002-xbox.png') }}" alt="">
@@ -37,8 +38,36 @@
 
         </div>
         <hr>
-        <div class="comment">
+        <div class="reviews">
             <h2>Avis</h2>
+            <div id="review">
+                <div class="first-part">
+                    <h3>alainproviste</h3><br>
+                    <p>Mon commentaire Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Curabitur in mauris ante. Class aptent taciti sociosqu ad litora torquent per
+                        conubia nostra, per inceptos himenaeos. 
+                    </p>
+                </div>
+                <div class="second-part">
+                    <p>22/03/2020 à 12:02</p><br>
+                    <p>Note</p>
+                </div>
+            </div>
+            
+            <div id="review">
+                <div class="first-part">
+                    <h3>catwoghost</h3><br>
+                    <p>Mon commentaire Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Curabitur in mauris ante. Class aptent taciti sociosqu ad litora torquent per
+                        conubia nostra, per inceptos himenaeos. 
+                    </p>
+                </div>
+                <div class="second-part">
+                    <p>22/03/2020 à 12:02</p><br>
+                    <p>Note</p>
+                </div>
+            </div>
+            <button class="button-review" type="submit">Laisser un avis</button>
         </div>
 
 
