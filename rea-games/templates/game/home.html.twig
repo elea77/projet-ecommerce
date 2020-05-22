@@ -1,9 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}ReaGames{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
+{% endblock %}
 
 {% block body %}
 
-Nous voici sur la page home.
+    <!-- <div id="top"> -->
+    <div id="top" style="background-image:url('{{ asset('img/fond-home.png') }}')"> 
+    <!-- <img src="{{ asset('/img/fond-home.png') }}" alt=""> -->
+
+    Nous voici sur la page home.
+
+    </div>
 
 {% endblock %}
+
+

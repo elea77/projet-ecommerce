@@ -2,6 +2,7 @@ header nav{
     background-color: #1F2326;
     height: 10vh;
     width: 100%;
+    z-index: 1;
 }
 
 header nav ul {
@@ -47,8 +48,8 @@ body, ul {
 }
 
 .icon{
-    width: 45%;
-    height: 45%;
+    width: 70%;
+    height: 70%;
 }
 
 .icon_list{
