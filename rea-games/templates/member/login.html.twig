@@ -9,12 +9,17 @@
 
     <div class="container">
         <h1>Connexion</h1>
-        <form action="" method="post">
+        {% for message in app.flashes('errors') %}
+            <div class="alert">
+                <strong>Warning!</strong> {{ message }}
+            </div>
+        {% endfor %}
+        <form action="{{ path('login_check') }}" method="post">
             <label for="">Adresse mail</label><br>
-            <input type="email" name="lastname" class="input-large"><br><br>
+            <input type="email" name="_username" class="input-large" value="{{ lastUsername }}"><br><br>
             <label for="">Mot de passe</label><br>
-            <input type="password" name="password" class="input-large"><br>
-            <button type="submit" name="submit" class="button">Se connecter</button>
+            <input type="password" name="_password" class="input-large"><br>
+            <button type="submit" name="submit" class="button" value="connexion">Se connecter</button>
         </form>
         <a href=""><p>Mot de passe oublié ?</p></a>
         <div class="register">

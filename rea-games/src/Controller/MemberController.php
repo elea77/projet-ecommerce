@@ -49,7 +49,7 @@ class MemberController extends AbstractController
 
 	public function login(AuthenticationUtils $auth){
 		
-		$lastUsername = $auth -> getLastUsername();
+        $lastUsername = $auth -> getLastUsername();
 		$error = $auth -> getLastAuthenticationError();
 
 		if($error){
