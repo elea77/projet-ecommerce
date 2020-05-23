@@ -1,9 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ReaGames{% endblock %}
+{% block title %}ReaGames - Panier{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/basket.css') }}">
+{% endblock %}
 
 {% block body %}
 
-Voici la page du panier
+    <div class="container">
+        <h1>Mon panier</h1><br>
+        <div class="content">
+            <div class="item">
+                <div class="grid-item-infos">
+                    <div class="item-img">
+                        <img src="{{ asset('/img/Assassins-creed.jpg') }}" alt="">
+                    </div>
+                    <div class="item-game">
+                        <h3>Assassin's Creed Odyssey</h3>
+                        <h4>Quantité : 1</h4>
+                    </div>
+                    <div class="item-price ps">
+                        <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
+                        <h3>69,99 €</h3>
+                    </div>
+                </div>
+                <br><hr><br>
+                <div class="grid-item-infos">
+                    <div class="item-img">
+                        <img src="{{ asset('/img/Assassins-creed.jpg') }}" alt="">
+                    </div>
+                    <div class="item-game">
+                        <h3>Assassin's Creed Odyssey</h3>
+                        <h4>Quantité : 1</h4>
+                    </div>
+                    <div class="item-price xbox">
+                        <img src="{{ asset('/img/002-xbox.png') }}" alt="">
+                        <h3>69,99 €</h3>
+                    </div>
+                </div>
+                <br><hr><br>
+            </div>
+            <button class="button">Passer au paiement</button>
+        </div>
+    </div>
 
 {% endblock %}

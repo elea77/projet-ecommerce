@@ -12,7 +12,7 @@ body {
     display: grid;
     grid-template-columns: 40% 60%;
     text-align: center;
-    height:87vh;
+    height:85vh;
 }
 
 .game-info img {
@@ -28,7 +28,7 @@ body {
 }
 
 .info h1 {
-    margin-block-end: 5%;
+    margin-block-end: 6%;
 }
 
 .info p {
