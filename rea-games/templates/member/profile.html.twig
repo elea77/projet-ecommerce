@@ -13,12 +13,12 @@
             <div class="user-info">
                 <img src="{{ asset('/img/user.png') }}" width="10%" alt="">
                 <div class="info">
-                    <p>Pseudo : <b>Jojo</b></p>
-                    <p>Prénom : <b>John</b></p>
-                    <p>Nom : <b>Doe</b></p>
-                    <p>Adresse mail : <b>john.doe@gmail.com</b></p>
-                    <p>Date de naissance : <b>01/01/1999</b></p>
-                    <p>Solde : <b>34,01€</b></p>
+                    <p>Pseudo : <b>{{ user.username }}</b></p>
+                    <p>Prénom : <b>{{ user.firstname }}</b></p>
+                    <p>Nom : <b>{{ user.lastname }}</b></p>
+                    <p>Adresse mail : <b>{{ user.email }}</b></p>
+                    <p>Date de naissance : <b>{{ user.birthday|date('d/m/Y') }}</b></p>
+                    <p>Solde : <b>{{ user.balance }} €</b></p>
                 </div>
             </div>
             <div class="buttons">       

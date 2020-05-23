@@ -40,7 +40,11 @@ class MemberController extends AbstractController
      */
     public function profile()
     {
-        return $this->render('member/profile.html.twig', []);
+        $user = $this -> getUser();
+
+        return $this->render('member/profile.html.twig', [
+            'user' => $user
+        ]);
     }
 
     /**
