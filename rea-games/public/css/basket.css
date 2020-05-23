@@ -29,10 +29,6 @@
 }
 
 .item-price {
-    /* text-align: center;
-    display: inline-flex;
-    width: 50%;
-    justify-content: space-between;*/
     margin: auto; 
     display: grid;
     grid-template-columns: 50% 50%;
