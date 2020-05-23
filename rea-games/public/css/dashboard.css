@@ -1,81 +1,52 @@
-body {
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    background-color: #363C41;
-    margin: 0;
-}
-
-nav {
-    display: none;
-}
-
-.panel {
-    position: fixed;
-    height: 100vh;
-    width: 15%;
-    background-color: #8D197E;
-    border-right-style: solid;
-    border-width: 1px;
-    overflow: hidden;
-    top: 0;
-}
-
-.top {
-    text-align: center;
-    margin: 5%;
-    border-bottom-style: solid;
-    border-width: 1px;
-}
-
-.top h2 {
-    margin-top: 8%;
-    margin-block-end: 8%;
-}
-
-.tab a {
-    display: inline-flex;
-    width: 90%;
-    text-align: center;
-    margin-left: 15%;
-    margin-block-end: 25%;
-    text-decoration: none;
-    color: white;
-}
-
-.tab h3 {
-    margin: 0;
-    margin-left: 10%;
-    /* margin-top: 1%; */
-}
-
-.tab-home a {
-    position: fixed;
-    bottom: 0;
-    /* display: inline-flex;
-    width: 100%;
-    text-align: center;
-    text-decoration: none;
-    color: white; */
-    display: inline-flex;
-    width: 10%;
-    text-align: center;
-    margin-left: 2%;
-    margin-block-end: 1%;
-    text-decoration: none;
-    color: white;
-}
-
-.tab-home h3 {
-    margin: 0;
-    margin-left: 10%;
-    margin-top: 2%;
-}
-
 .content {
-    width: 85%;
-    margin-left: 15%;
+    width: 84%;
+    margin-left: 16%;
 }
 
 .content h1 {
     margin: 2%;
+    margin-block-end: 4%;
+}
+
+.content h2 {
+    text-align: center;
+    margin-block-end: 3%;
+}
+
+.infos {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    margin-block-end: 8%;
+}
+
+.infos-days {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.case {
+    color: black;
+    background-color: white;
+    width: 180px;
+    height: 120px;
+    margin-block-end: 5%;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    border-left: 5px solid #8D197E;
+    border-radius: 5px;
+}
+
+.case h1 {
+    margin-top: 8%;
+}
+  
+.case h4 {
+    margin: 0;
+    margin-top: 18%;
 }
