@@ -28,6 +28,14 @@ class MemberController extends AbstractController
     }
 
     /**
+     * @Route("/memberArea/{id}", name="memberAreaGame")
+     */
+    public function memberAreaGame($id)
+    {
+        return $this->render('member/memberAreaGame.html.twig', []);
+    }
+
+    /**
      * @Route("/profile", name="profile")
      */
     public function profile()

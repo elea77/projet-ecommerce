@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReaGames - Jeu acheté{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/memberAreaGame.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="game-info">
+
+            <img src="{{ asset('/img/Rainbow6.png') }}" alt="">
+
+            <div class="info">
+                <h1> Rainbow 6 Siege </h1><br>
+                <br>
+                <p>Acheté le : <b>18/05/2020</b></p>
+                <img src="{{ asset('/img/playstation-logotype.png') }}" alt=""><br>
+                <a href=""><button class="button" type="submit">Consulter ma facture</button></a><br>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
