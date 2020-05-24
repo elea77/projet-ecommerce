@@ -11,23 +11,16 @@
 
         <div class="game-info">
 
-            <img src="{{ asset('/img/Rainbow6.png') }}" alt="">
+            <img src="{{ asset('/game-img/') }}{{ game.img2 }}" alt="">
 
             <div class="info">
-                <h1> Rainbow 6 Siege </h1><br>
-                <p class="descrip">Rainbow Six Siege est un jeu de tir tactique où le joueur
-                    incarne différents agents de plusieurs unités de forces spéciales
-                    et de groupes d'interventions qui constituent l’équipe Rainbow.
-                    Comme les autres titres de la série, il se concentre fortement sur
-                    le jeu en équipe et le "réalisme" des interventions.
-                    Cependant, il existe de grandes différences par rapport à d'anciennes
-                    versions du jeu, avec un accent multijoueur important et des environnements
-                    entièrement destructibles.</p>
+                <h1> {{ game.name }} </h1><br>
+                <p class="descrip"> {{ game.description }} </p>
                 <br>
                 <div class="note">
                     <p>Note</p>
                 </div>
-                <p class="price">59,99 €</p>
+                <p class="price"> {{ game.price }} €</p>
                 <button class="button-basket" type="submit">Ajouter au panier</button><br>
                 <div class="plateform">
                     <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">

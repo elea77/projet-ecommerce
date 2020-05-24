@@ -23,54 +23,16 @@
         <h2>Notre Catalogue</h2>
         
         <div class="catalogue">
+            {% for game in games %}
             <div class="game">
-                <a href="/game/1">
-                    <img src="{{ asset('/img/godofwar.jpg') }}" alt="">
+                <a href="/game/{{game.id}}">
+                    <img src="{{ asset('/game-img/') }}{{ game.img1 }}" alt="">
                     <div class="game-name">
-                        <p> God of War </p>
+                        <p> {{ game.name }} </p>
                     </div>
                 </a>
             </div>
-            <div class="game">
-                <a href="/game/1">
-                    <img src="{{ asset('/img/r6.jpeg') }}" alt="">
-                    <div class="game-name">
-                        <p> Rainbow 6 Siege </p>
-                    </div>
-                </a>
-            </div>
-            <div class="game">
-                <a href="/game/1">
-                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" alt="">
-                    <div class="game-name">
-                        <p> Assassin's Creed Odyssey </p>
-                    </div>
-                </a>
-            </div>
-            <div class="game">
-                <a href="/game/1">
-                    <img src="{{ asset('/img/godofwar.jpg') }}" alt="">
-                    <div class="game-name">
-                        <p> God of War </p>
-                    </div>
-                </a>
-            </div>
-            <div class="game">
-                <a href="/game/1">
-                    <img src="{{ asset('/img/r6.jpeg') }}" alt="">
-                    <div class="game-name">
-                        <p> Rainbow 6 Siege </p>
-                    </div>
-                </a>
-            </div>
-            <div class="game">
-                <a href="/game/1">
-                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" alt="">
-                    <div class="game-name">
-                        <p> Assassin's Creed Odyssey </p>
-                    </div>
-                </a>
-            </div>
+            {% endfor %}
         </div>
 
     </div>

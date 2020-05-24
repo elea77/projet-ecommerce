@@ -21,7 +21,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/members", name="members")
      */
-    public function members(Request $request)
+    public function members()
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
         $users = $repository -> listUsers();
