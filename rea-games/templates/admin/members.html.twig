@@ -59,36 +59,18 @@
                     <th>Date du compte</th>
                     <th>Actions</th>
                 </tr>
-                <tr>
-                    <td>10</td>
-                    <td>alainproviste</td>
-                    <td>remi.karmann@ynov.com</td>
-                    <td>20/05/2020</td>
-                    <td>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>alainproviste</td>
-                    <td>remi.karmann@ynov.com</td>
-                    <td>20/05/2020</td>
-                    <td>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>alainproviste</td>
-                    <td>remi.karmann@ynov.com</td>
-                    <td>20/05/2020</td>
-                    <td>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
-                    </td>
-                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.registerDate.date|date("m/d/Y") }}</td>
+                        <td>
+                            <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
+                            <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
             </table>
         </div>
     </div>

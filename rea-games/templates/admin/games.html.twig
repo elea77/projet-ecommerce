@@ -59,36 +59,18 @@
                     <th>Quantité</th>
                     <th>Actions</th>
                 </tr>
-                <tr>
-                    <td>10</td>
-                    <td>Rainbow 6 Siege</td>
-                    <td>59,99 €</td>
-                    <td>200</td>
-                    <td>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Assassin's Creed Odyssey</td>
-                    <td>69,99 €</td>
-                    <td>180</td>
-                    <td>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>God of War</td>
-                    <td>69,99 €</td>
-                    <td>220</td>
-                    <td>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
-                        <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
-                    </td>
-                </tr>
+                {% for game in games %}
+                    <tr>
+                        <td>{{ game.id }}</td>
+                        <td>{{ game.name }}</td>
+                        <td>{{ game.price }}</td>
+                        <td>{{ game.quantity }}</td>
+                        <td>
+                            <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
+                            <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
             </table>
         </div>
     </div>
