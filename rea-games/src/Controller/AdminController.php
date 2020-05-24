@@ -15,7 +15,12 @@ class AdminController extends AbstractController
      */
     public function dashboard()
     {
-        return $this->render('admin/dashboard.html.twig', []);
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $nbUsers = $repository -> nbUsers();
+
+        return $this->render('admin/dashboard.html.twig', [
+            'nbUsers' => $nbUsers
+        ]);
     }
 
     /**

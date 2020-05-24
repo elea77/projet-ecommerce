@@ -47,6 +47,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             -> getResult();
     }
 
+    public function nbUsers() 
+    {
+        $builder = $this -> createQueryBuilder('u');
+        return $builder
+            -> where('u.role = :role ')
+            -> setParameter('role', 'ROLE_USER')
+            -> select('count(u.id) as nbUsers')
+            -> getQuery()
+            -> getResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
