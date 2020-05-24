@@ -28,7 +28,9 @@ class AppFixtures extends Fixture
         $admin1->setUsername("Alainproviste");
         $admin1->setFirstname("Rémi");
         $admin1->setLastname("KARMANN");
+        $admin1->setAvatar("user.png");
         $admin1->setBirthday(new \DateTime('2000-05-08'));
+        $admin1->setRegisterDate(new \DateTime('2020-05-20'));
         $admin1->setBalance(450);
         $manager->persist($admin1);
 
@@ -42,7 +44,9 @@ class AppFixtures extends Fixture
         $admin2->setUsername("Catwoghost");
         $admin2->setFirstname("Eléa");
         $admin2->setLastname("CARTON");
+        $admin2->setAvatar("user.png");
         $admin2->setBirthday(new \DateTime('2000-07-20'));
+        $admin2->setRegisterDate(new \DateTime('2020-05-20'));
         $admin2->setBalance(500);
         $manager->persist($admin2);
 
@@ -57,7 +61,9 @@ class AppFixtures extends Fixture
             $user->setUsername("User" . $count);
             $user->setFirstname("FirstnameUser" . $count);
             $user->setLastname("LastnameUser" . $count);
+            $user->setAvatar("user.png");
             $user->setBirthday(new \DateTime('2000-10-10'));
+            $user->setRegisterDate(new \DateTime('2020-05-20'));
             $user->setBalance(175);
             $manager->persist($user);
         }

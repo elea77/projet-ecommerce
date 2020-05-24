@@ -50,9 +50,19 @@ class User implements UserInterface
     private $lastname;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $avatar;
+
+    /**
      * @ORM\Column(type="date")
      */
     private $birthday;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $register_date;
 
     /**
      * @ORM\Column(type="integer")
@@ -168,6 +178,18 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
     public function getBirthday(): ?\DateTimeInterface
     {
         return $this->birthday;
@@ -176,6 +198,18 @@ class User implements UserInterface
     public function setBirthday(\DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getRegisterDate(): ?\DateTimeInterface
+    {
+        return $this->register_date;
+    }
+
+    public function setRegisterDate(\DateTimeInterface $register_date): self
+    {
+        $this->register_date = $register_date;
 
         return $this;
     }
