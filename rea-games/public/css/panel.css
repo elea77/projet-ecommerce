@@ -64,3 +64,14 @@ nav {
     margin-left: 10%;
     margin-top: 2%;
 }
+
+.content {
+    width: 84%;
+    margin-left: 16%;
+}
+
+.content h1 {
+    margin: 2%;
+    margin-block-end: 4%;
+}
+
