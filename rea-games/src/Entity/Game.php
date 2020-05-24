@@ -25,7 +25,7 @@ class Game
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=500)
      */
     private $description;
 
@@ -45,7 +45,7 @@ class Game
     private $quantity;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=10)
      */
     private $price;
 
@@ -141,12 +141,12 @@ class Game
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): self
+    public function setPrice(string $price): self
     {
         $this->price = $price;
 

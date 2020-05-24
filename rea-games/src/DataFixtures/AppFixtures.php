@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
+use App\Entity\Game;
 
 class AppFixtures extends Fixture
 {
@@ -67,6 +68,42 @@ class AppFixtures extends Fixture
             $user->setBalance(175);
             $manager->persist($user);
         }
+
+
+        
+        $game1 = new Game();
+        $game1->setName("Tom Clancy's Rainbow Six Siege");
+        $game1->setDescription("Rainbow Six Siege est un jeu de tir tactique où le joueur incarne différents agents de plusieurs unités de forces spéciales et de groupes d'interventions qui constituent l’équipe Rainbow. Comme les autres titres de la série, il se concentre fortement sur le jeu en équipe et le réalisme des interventions. Cependant, il existe de grandes différences par rapport à d'anciennes versions du jeu, avec un accent multijoueur important et des environnements entièrement destructibles.");
+        $game1->setImg1("r6-h.jpeg");
+        $game1->setImg2("Rainbow6-v.png");
+        $game1->setQuantity(200);
+        $game1->setPrice("59,99");
+        $game1->setCode("g1R6TC");
+        $manager->persist($game1);
+
+
+        $game2 = new Game();
+        $game2->setName("Assassin's Creed Odyssey");
+        $game2->setDescription("Assassin's Creed Odyssey est un jeu vidéo d'action-aventure et de rôle. L’histoire d’Assassin’s Creed Odyssey se déroule en 431 avant J.-C., au début de la guerre du Péloponnèse. Il raconte la quête de réponses des deux héros (au choix, Alexios et Kassandra), mercenaires spartiates hantés par une tragédie familiale.");
+        $game2->setImg1("assassins-creed-odyssey-h.jpg");
+        $game2->setImg2("assassins-creed-odyssey-v.jpg");
+        $game2->setQuantity(180);
+        $game2->setPrice("69,99");
+        $game2->setCode("g2ACO");
+        $manager->persist($game2);
+
+
+        $game3 = new Game();
+        $game3->setName("God of War");
+        $game3->setDescription("God of War est une série de jeux vidéo d'action-aventure. Le joueur incarne un redoutable guerrier, Kratos, qui se retrouve confronté à un grand nombre d'ennemis. Le joueur dispose d'une large palette de coups, avec de nombreux enchaînements possibles. Les combats sont régulièrement entrecoupés d'attaques contextuelles à la mise en scène préétablie.");
+        $game3->setImg1("godofwar-h.jpg");
+        $game3->setImg2("godofwar-v.jpg");
+        $game3->setQuantity(180);
+        $game3->setPrice("69,99");
+        $game3->setCode("g3GOW");
+        $manager->persist($game3);
+
+
         $manager->flush();
     }
 }
