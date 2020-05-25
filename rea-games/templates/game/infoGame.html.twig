@@ -23,9 +23,17 @@
                 <p class="price"> {{ game.price }} €</p>
                 <button class="button-basket" type="submit">Ajouter au panier</button><br>
                 <div class="plateform">
-                    <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
-                    <img src="{{ asset('/img/002-xbox.png') }}" alt="">
-                    <p>PC</p>
+                {% for comptabi in platform %}
+                    {% if comptabi.name == 'PlayStation' %}
+                        <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
+                    {% endif %}
+                    {% if comptabi.name == 'Xbox' %}
+                        <img src="{{ asset('/img/002-xbox.png') }}" alt="">
+                    {% endif %}
+                    {% if comptabi.name == 'PC' %}
+                        <p>PC</p>
+                    {% endif %}
+                {% endfor %}
                 </div>
             </div>
 

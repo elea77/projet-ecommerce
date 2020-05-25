@@ -18,6 +18,17 @@ class PlatformRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Platform::class);
     }
+    
+    public function platformGame($game)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.games', 'g')
+            ->where('g.id = :game')
+            ->setParameter('game', $game)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     // /**
     //  * @return Platform[] Returns an array of Platform objects
