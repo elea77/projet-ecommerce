@@ -8,7 +8,6 @@
 {% block body %}
 
     <div class="container">
-
         <div class="game-info">
 
             <img src="{{ asset('/game-img/') }}{{ game.img2 }}" alt="">
@@ -41,42 +40,26 @@
         <hr>
         <div class="reviews">
             <h2>Avis</h2>
+
+            {% for comment in comments%}
             <div id="review">
                 <div class="first-part">
-                    <h3>alainproviste</h3><br>
-                    <p>Mon commentaire Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur in mauris ante. Class aptent taciti sociosqu ad litora torquent per
-                        conubia nostra, per inceptos himenaeos. 
+                    <h3>{{ comment.idUser.username }}</h3><br>
+                    <p>{{ comment.review }}
                     </p>
                 </div>
                 <div class="second-part">
-                    <p>22/03/2020 à 12:02</p><br>
+                    <p>{{ comment.date|date('d/m/Y à H:i')  }}</p><br>
                     <p>Note</p>
                 </div>
             </div>
+            {% endfor %}
             
-            <div id="review">
-                <div class="first-part">
-                    <h3>catwoghost</h3><br>
-                    <p>Mon commentaire Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur in mauris ante. Class aptent taciti sociosqu ad litora torquent per
-                        conubia nostra, per inceptos himenaeos. 
-                    </p>
-                </div>
-                <div class="second-part">
-                    <p>22/03/2020 à 12:02</p><br>
-                    <p>Note</p>
-                </div>
-            </div>
             {# mettre condition : si le jeu a été acheté par le user #}
             <a href="#comment"><button class="button-review" type="submit" id="write">Laisser un avis</button></a>
         </div>
         <div id="comment" style="display: none;">
-            <form action="" method="post">
-                <label for="">Écrire un commentaire :</label><br><br>
-                <textarea name="" id="" cols="" rows="3" maxlength="500"></textarea>
-                <button class="button-send" type="submit">Envoyer</button>
-            </form>
+            {{ form(commentForm) }}
         </div>
 
 

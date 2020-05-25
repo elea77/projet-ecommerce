@@ -19,6 +19,19 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    public function commentGame($id)
+    {
+        $builder = $this -> createQueryBuilder('c');
+        return $builder
+            ->leftJoin('c.id_game', 'g')
+            ->where('c.id_game = :id_game')
+            ->setParameter('id_game', $id)
+            ->orderBy('c.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */
