@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+use App\Entity\User;
+
+use App\Form\UserType;
+
 class MemberController extends AbstractController
 {
     /**
@@ -80,9 +84,32 @@ class MemberController extends AbstractController
     /**
      * @Route("/register", name="register")
      */
-    public function register()
+    public function register(UserPasswordEncoderInterface $encoder, Request $request)
     {
-        return $this->render('member/register.html.twig', []);
+        $user = new User;
+
+        $form = $this -> createForm(UserType::class, $user);
+        $form -> handleRequest($request);
+        
+        if ($form -> isSubmitted() && $form -> isValid()) {
+			$manager = $this -> getDoctrine() -> getManager();
+			
+			$manager -> persist($user);
+            $user -> setRole('ROLE_USER');
+            $user -> setBalance(0);
+            $user -> setAvatar('user.png');
+            $user -> setRegisterDate(new \DateTime('now'));
+			$password = $user -> getPassword();
+			$newPassword = $encoder -> encodePassword($user, $password);
+			$user -> setPassword($newPassword);
+
+			$manager -> flush();
+			return $this -> redirectToRoute('home');
+        }
+        
+        return $this->render('member/register.html.twig', [
+            'userForm' => $form -> createView()
+        ]);
     }
 
 
