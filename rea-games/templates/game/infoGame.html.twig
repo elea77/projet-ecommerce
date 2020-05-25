@@ -68,12 +68,32 @@
                     <p>Note</p>
                 </div>
             </div>
-            <button class="button-review" type="submit">Laisser un avis</button>
+            {# mettre condition : si le jeu a été acheté par le user #}
+            <a href="#comment"><button class="button-review" type="submit" id="write">Laisser un avis</button></a>
+        </div>
+        <div id="comment" style="display: none;">
+            <form action="" method="post">
+                <label for="">Écrire un commentaire :</label><br><br>
+                <textarea name="" id="" cols="" rows="3" maxlength="500"></textarea>
+                <button class="button-send" type="submit">Envoyer</button>
+            </form>
         </div>
 
 
-
-
     </div>
+
+    <script>
+        var comment = document.getElementById('comment');
+        
+        document.getElementById('write').addEventListener('click', function () {
+            if(comment.style.display === 'none') {
+                document.getElementById('comment').style.display = 'block'
+            } else {
+                document.getElementById('comment').style.display = 'none'
+            }
+            
+        })
+    
+    </script>
 
 {% endblock %}

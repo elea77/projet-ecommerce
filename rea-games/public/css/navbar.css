@@ -90,6 +90,20 @@ body, ul {
     padding-right: 10px;
 }
 
+button {
+    outline: none;
+    cursor: pointer;
+}
+
+input {
+    outline: none;
+    cursor: pointer;
+}
+
+textarea {
+    outline: none;
+}
+
 
 @media (min-width: 300px) and (max-width: 600px) {
     .icons {
