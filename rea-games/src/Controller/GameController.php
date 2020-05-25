@@ -55,6 +55,8 @@ class GameController extends AbstractController
             $comment -> setIdUser($user);
 
             $manager -> flush();
+            
+            return $this->redirectToRoute('infoGame', ['id' => $id]);
         }
 
         return $this->render('game/infoGame.html.twig', [
