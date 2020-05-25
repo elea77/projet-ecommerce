@@ -9,16 +9,22 @@
 
     <div class="container">
         <h1>Inscription</h1>
+        {{ form_errors(userForm.password) }}  
+        {% for message in app.flashes('errors') %}
+            <div class="alert">
+                <strong>Warning!</strong> {{ message }}
+            </div>
+        {% endfor %}
         <form name="user" method="post">
-            <input type="text" name="user[username]" id="user_username" class="input" placeholder="Pseudo">
-            <input type="date" name="user[birthday]" id="user_birthday" class="input"><br>
-            <input type="text" name="user[firstname]" id="user_firstname" class="input-large" placeholder="Prénom"><br>
-            <input type="text" name="user[lastname]" id="user_lastname" class="input-large" placeholder="Nom"><br>
-            <input type="email" name="user[email]" id="user_email" class="input-large" placeholder="Adresse mail"><br>
-            <input type="password" name="user[password][first]" id="user_password_first" class="input-large" placeholder="Mot de passe"><br>
-            <input type="password" name="user[password][second]" id="user_password_second" class="input-large" placeholder="Confirmer le mot de passe"><br><br>
+            <input type="text" name="user[username]" id="user_username" class="input" placeholder="Pseudo" required>
+            <input type="date" name="user[birthday]" id="user_birthday" class="input" required><br>
+            <input type="text" name="user[firstname]" id="user_firstname" class="input-large" placeholder="Prénom" required><br>
+            <input type="text" name="user[lastname]" id="user_lastname" class="input-large" placeholder="Nom" required><br>
+            <input type="email" name="user[email]" id="user_email" class="input-large" placeholder="Adresse mail" required><br>
+            <input type="password" name="user[password][first]" id="user_password_first" class="input-large" placeholder="Mot de passe" required><br>
+            <input type="password" name="user[password][second]" id="user_password_second" class="input-large" placeholder="Confirmer le mot de passe"required><br><br>
             <button type="submit" name="user[Create_account]" id="user_Create_account" class="button">S'inscrire</button>
-            <input type="hidden" id="user__token" name="user[_token]" value="zm8AubjUEbOimBUTu7con-I_t6l3HMfXbtyqU4ZwM2o">
+            {{ form_row(userForm._token) }}
         </form>
     </div>
 
