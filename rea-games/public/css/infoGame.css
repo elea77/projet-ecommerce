@@ -43,16 +43,22 @@
 .plateform img {
     width: 20px;
     margin:0;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .plateform p {
     margin:0;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .plateform {
     display: inline-flex;
     margin-top: 5%;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    align-items: center;
+    justify-content: center;
     width: 15%;
 }
 

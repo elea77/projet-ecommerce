@@ -125,7 +125,6 @@ class AppFixtures extends Fixture
         $platform2->setName("Xbox");
         $platform2->addGame($game1);
         $platform2->addGame($game2);
-        $platform2->addGame($game3);
         $platform2->addGame($game4);
         $manager->persist($platform2);
 
@@ -133,7 +132,6 @@ class AppFixtures extends Fixture
         $platform3->setName("PC");
         $platform3->addGame($game1);
         $platform3->addGame($game2);
-        $platform3->addGame($game3);
         $platform3->addGame($game4);
         $manager->persist($platform3);
 
