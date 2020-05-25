@@ -6,6 +6,8 @@ use App\Repository\PlatformRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @ORM\Entity(repositoryClass=PlatformRepository::class)

@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 use App\Entity\Game;
+use App\Entity\Platform;
 
 class AppFixtures extends Fixture
 {
@@ -68,8 +69,6 @@ class AppFixtures extends Fixture
             $user->setBalance(175);
             $manager->persist($user);
         }
-
-
         
         $game1 = new Game();
         $game1->setName("Tom Clancy's Rainbow Six Siege");
@@ -102,6 +101,28 @@ class AppFixtures extends Fixture
         $game3->setPrice("69,99");
         $game3->setCode("g3GOW");
         $manager->persist($game3);
+
+
+        $platform1 = new Platform();
+        $platform1->setName("PlayStation");
+        $platform1->addGame($game1);
+        $platform1->addGame($game2);
+        $platform1->addGame($game3);
+        $manager->persist($platform1);
+
+        $platform2 = new Platform();
+        $platform2->setName("Xbox");
+        $platform2->addGame($game1);
+        $platform2->addGame($game2);
+        $platform2->addGame($game3);
+        $manager->persist($platform2);
+
+        $platform3 = new Platform();
+        $platform3->setName("PC");
+        $platform3->addGame($game1);
+        $platform3->addGame($game2);
+        $platform3->addGame($game3);
+        $manager->persist($platform3);
 
 
         $manager->flush();
