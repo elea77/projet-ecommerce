@@ -103,6 +103,17 @@ class AppFixtures extends Fixture
         $manager->persist($game3);
 
 
+        $game4 = new Game();
+        $game4->setName("Halo : The Master Chief Collection");
+        $game4->setDescription("Halo: The Master Chief Collection est un jeu vidéo de la série Halo regroupant une version haute définition des opus Halo: Combat Evolved, Halo 2, Halo 3 et Halo 4, ainsi qu'un accès à la bêta d’Halo 5: Guardians. Chaque épisode remastérisé reprend le gameplay de l'opus respectif auquel il est associé.");
+        $game4->setImg1("halo-h.jpg");
+        $game4->setImg2("halo-v.png");
+        $game4->setQuantity(100);
+        $game4->setPrice("49,99");
+        $game4->setCode("g4HMCC");
+        $manager->persist($game4);
+
+
         $platform1 = new Platform();
         $platform1->setName("PlayStation");
         $platform1->addGame($game1);
@@ -115,6 +126,7 @@ class AppFixtures extends Fixture
         $platform2->addGame($game1);
         $platform2->addGame($game2);
         $platform2->addGame($game3);
+        $platform2->addGame($game4);
         $manager->persist($platform2);
 
         $platform3 = new Platform();
@@ -122,6 +134,7 @@ class AppFixtures extends Fixture
         $platform3->addGame($game1);
         $platform3->addGame($game2);
         $platform3->addGame($game3);
+        $platform3->addGame($game4);
         $manager->persist($platform3);
 
 
