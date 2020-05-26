@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('/css/sideNav.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="panel">
+
+        <div class="top">
+            <h2>ReaGames</h2>
+        </div>
+
+        <div class="menu">
+
+            <div class="tab" style="margin-top: 25%;">
+                <a href="{{path('dashboard')}}">
+                    <span class="iconify" data-inline="false" data-icon="clarity:dashboard-line" style="font-size: 24px; color: white;"></span>
+                    <h3>Dashboard</h3>
+                </a>
+            </div><br>
+
+            <div class="tab">
+                <a href="{{path('members')}}">
+                    <span class="iconify" data-inline="false" data-icon="fa-solid:users" style="font-size: 20px; color: white;"></span>
+                    <h3>Membres</h3>
+                </a>
+            </div><br>
+
+            <div class="tab">
+                <a href="{{path('games')}}">
+                    <span class="iconify" data-inline="false" data-icon="ion:game-controller-outline" style="font-size: 24px; color: white;"></span>
+                    <h3>Jeux</h3>
+                </a>
+            </div>
+
+            <div class="tab-home">
+                <a href="{{path('home')}}">
+                    <span class="iconify" data-inline="false" data-icon="mdi-light:home" style="font-size: 26px; color: white;"></span>
+                    <h3>Accueil</h3>
+                </a>
+            </div>
+        </div>
+
+        
+    </div>
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

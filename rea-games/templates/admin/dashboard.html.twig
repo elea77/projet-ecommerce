@@ -1,53 +1,12 @@
-{% extends 'base.html.twig' %} 
+{% extends 'sidenav.html.twig' %}
 
 {% block title %}ReaGames - Dashboard{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('/css/panel.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
 {% endblock %}
 
 
 {% block body %}
-
-    <div class="panel">
-
-        <div class="top">
-            <h2>ReaGames</h2>
-        </div>
-
-        <div class="menu">
-
-            <div class="tab" style="margin-top: 25%;">
-                <a href="{{path('dashboard')}}">
-                    <span class="iconify" data-inline="false" data-icon="clarity:dashboard-line" style="font-size: 24px; color: white;"></span>
-                    <h3>Dashboard</h3>
-                </a>
-            </div><br>
-
-            <div class="tab">
-                <a href="{{path('members')}}">
-                    <span class="iconify" data-inline="false" data-icon="fa-solid:users" style="font-size: 20px; color: white;"></span>
-                    <h3>Membres</h3>
-                </a>
-            </div><br>
-
-            <div class="tab">
-                <a href="{{path('games')}}">
-                    <span class="iconify" data-inline="false" data-icon="ion:game-controller-outline" style="font-size: 24px; color: white;"></span>
-                    <h3>Jeux</h3>
-                </a>
-            </div>
-
-            <div class="tab-home">
-                <a href="{{path('home')}}">
-                    <span class="iconify" data-inline="false" data-icon="mdi-light:home" style="font-size: 26px; color: white;"></span>
-                    <h3>Accueil</h3>
-                </a>
-            </div>
-        </div>
-
-        
-    </div>
 
     <div class="content">
         <h1>Dashboard</h1>
