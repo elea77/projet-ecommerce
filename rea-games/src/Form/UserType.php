@@ -29,8 +29,14 @@ class UserType extends AbstractType
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Le mot de passe doit être identique !',
-                'first_options'  => ['attr' => ['class' => 'input-large','placeholder' => 'Mot de passe'],'label' => false],
-                'second_options' => ['attr' => ['class' => 'input-large','placeholder' => 'Confirmer le mot de passe'],'label' => false]
+                'first_options'  => ['attr' => ['class' => 'input-large',
+                'placeholder' => 'Mot de passe'],
+                'label' => false,
+                'required'   => true],
+                'second_options' => ['attr' => ['class' => 'input-large',
+                'placeholder' => 'Confirmer le mot de passe'],
+                'label' => false,
+                'required'   => true]
             ))
             ->add('Create_account',SubmitType::class)
         ;
