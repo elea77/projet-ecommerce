@@ -17,7 +17,7 @@
                 <p class="descrip"> {{ game.description }} </p>
                 <br>
                 <div class="note">
-                    {% if noteMoyenne[0].note == '0' %}
+                    {% if noteMoyenne[0].note is empty %}
                         <p>Aucune note</p>
                     {% else %}
                         {# Entre 0 et 1 #}

@@ -113,12 +113,78 @@ class AppFixtures extends Fixture
         $game4->setCode("g4HMCC");
         $manager->persist($game4);
 
+        $game5 = new Game();
+        $game5->setName("Call of Duty : Black Ops IIII");
+        $game5->setDescription("Call of Duty: Black Ops IIII est un jeu vidéo de tir à la première personne. Il s'agit du 15e épisode de la série Call of Duty et 4e opus de la série Black Ops. BO4 propose trois modes de jeu : Multijoueur, Blackout et Zombies.");
+        $game5->setImg1("bo4-h.png");
+        $game5->setImg2("bo4-v.png");
+        $game5->setQuantity(80);
+        $game5->setPrice("49,99");
+        $game5->setCode("g5CODBO4");
+        $manager->persist($game5);
+
+        $game6 = new Game();
+        $game6->setName("Uncharted 4 : A Thief's End");
+        $game6->setDescription("Quatrième opus de la série de jeu d'action/aventure à succès de Naughty Dog, Uncharted 4 A Thief's End vous permet d'incarner Nathan Drake pour la première fois sur PS4. Le célèbre explorateur devra révéler le complot qui se cache derrière un légendaire trésor de pirates.");
+        $game6->setImg1("uncharted4-h.png");
+        $game6->setImg2("uncharted4-v.png");
+        $game6->setQuantity(60);
+        $game6->setPrice("19,99");
+        $game6->setCode("g6U4ATE");
+        $manager->persist($game6);
+
+        $game7 = new Game();
+        $game7->setName("Mortal Kombat 11");
+        $game7->setDescription("Mortal Kombat 11, développé par NetherRealm Studios et édité par Warner Bros. Games, est le dernier venu de la saga des jeux de combat Mortal Kombat. Ce dernier prévoit une customisation poussée pour créer de nombreuses variations de Kombattants.");
+        $game7->setImg1("mk11-h.png");
+        $game7->setImg2("mk11-v.png");
+        $game7->setQuantity(100);
+        $game7->setPrice("29,99");
+        $game7->setCode("g7MK11");
+        $manager->persist($game7);
+
+        $game8 = new Game();
+        $game8->setName("Monster Hunter World");
+        $game8->setDescription("Monster Hunter World est un jeu vidéo d'action-RPG. Le jeu reprend le principe de jeu de base des précédents épisodes de la série Monster Hunter, tout en ajoutant de nouvelles mécaniques de jeu comme les navicioles ou les contrats, aussi nommées investigations, et des améliorations de confort de jeu comme les descriptions des différents talents qui permettent d'augmenter les statistiques du joueur. Le but est de chasser des monstres, seul ou en coopération jusqu'à 4 joueurs.");
+        $game8->setImg1("mhw-h.png");
+        $game8->setImg2("mhw-v.png");
+        $game8->setQuantity(100);
+        $game8->setPrice("30,00");
+        $game8->setCode("g8MHW");
+        $manager->persist($game8);
+
+        $game9 = new Game();
+        $game9->setName("Detroit: Become Human");
+        $game9->setDescription("Detroit : Become Human est un jeu d’aventure-action développé par Quantic Dream. Le joueur pourra incarner 3 personnages différents évoluant chacun de leur côté au sein d'histoires s'entrecoupant les unes les autres. L'action se déroule à Detroit, la ville abritant le principal site de production d'androïdes.");
+        $game9->setImg1("detroit-h.png");
+        $game9->setImg2("detroit-v.png");
+        $game9->setQuantity(120);
+        $game9->setPrice("39,99");
+        $game9->setCode("g9DBH");
+        $manager->persist($game9);
+
+        $game10 = new Game();
+        $game10->setName("Final Fantasy VII Remake");
+        $game10->setDescription("Final Fantasy VII Remake est le remake de Final Fantasy VII. Le joueur y incarne toujours Cloud, un ancien soldat ayant rejoint le groupe terroriste Avalanche. Ce dernier essaye de déjouer les plans de la Shinra et en vient à se battre avec Sephiroth.");
+        $game10->setImg1("final-fantasy-vii-h.png");
+        $game10->setImg2("final-fantasy-vii-v.png");
+        $game10->setQuantity(220);
+        $game10->setPrice("69,99");
+        $game10->setCode("g10FFviiR");
+        $manager->persist($game10);
+
 
         $platform1 = new Platform();
         $platform1->setName("PlayStation");
         $platform1->addGame($game1);
         $platform1->addGame($game2);
         $platform1->addGame($game3);
+        $platform1->addGame($game5);
+        $platform1->addGame($game6);
+        $platform1->addGame($game7);
+        $platform1->addGame($game8);
+        $platform1->addGame($game9);
+        $platform1->addGame($game10);
         $manager->persist($platform1);
 
         $platform2 = new Platform();
@@ -126,6 +192,11 @@ class AppFixtures extends Fixture
         $platform2->addGame($game1);
         $platform2->addGame($game2);
         $platform2->addGame($game4);
+        $platform2->addGame($game5);
+        $platform2->addGame($game7);
+        $platform2->addGame($game8);
+        $platform2->addGame($game9);
+        $platform2->addGame($game10);
         $manager->persist($platform2);
 
         $platform3 = new Platform();
@@ -133,6 +204,11 @@ class AppFixtures extends Fixture
         $platform3->addGame($game1);
         $platform3->addGame($game2);
         $platform3->addGame($game4);
+        $platform3->addGame($game5);
+        $platform3->addGame($game7);
+        $platform3->addGame($game8);
+        $platform3->addGame($game9);
+        $platform3->addGame($game10);
         $manager->persist($platform3);
 
 
