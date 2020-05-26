@@ -55,35 +55,6 @@ button {
     cursor: pointer;
 }
 
-
-
-
-.edit-info {
-    display: grid;
-    grid-template-columns: 40% 60%;
-    margin-block-end: 2%;
-    height: 50vh;
-}
-
-.edit-img {
-    display: block;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-}
-
-.edit-img img {
-    width: 35%;
-}
-
-
-.edit-password {
-    display: block;
-    margin: auto;
-    width: 100%;
-    text-align: center;
-}
-
 .button {
     border-color: white;
     color: white;
@@ -95,29 +66,4 @@ button {
     margin-top: 2%;
     display: block;
     margin: auto;
-}
-
-#cancel {
-    outline: none;
-    cursor: pointer;
-}
-
-input[type=password] {
-    width: 40%;
-    border-color: black;
-    border-radius: 6px;
-    font-size: 16px;
-    padding: 6px;
-    margin-block-end: 1%;
-    outline: none;
-}
-
-input[type=password]:hover {
-    border-color: #8D197E;
-    border-style: solid;
-}
-
-input[type=password]:focus {
-    border-color: #8D197E;
-    border-style: solid;
 }

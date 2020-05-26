@@ -9,11 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-use Symfony\Component\Form\FormError;
-
 use App\Entity\User;
 
 use App\Form\UserType;
+use App\Form\PasswordType;
 
 class MemberController extends AbstractController
 {
@@ -44,7 +43,7 @@ class MemberController extends AbstractController
     /**
      * @Route("/profile", name="profile")
      */
-    public function profile()
+    public function profile(UserPasswordEncoderInterface $encoder, Request $request)
     {
         $user = $this -> getUser();
 
@@ -53,6 +52,43 @@ class MemberController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/profile/passwordModify", name="passwordModify")
+     */
+    public function passwordModify(UserPasswordEncoderInterface $encoder, Request $request)
+    {
+        $user = $this -> getUser();
+        if(isset($_POST['submit'])) {
+            $old_pwd = $request->get('old_password'); 
+            $new_pwd = $request->get('new_password'); 
+            $new_pwd_confirm = $request->get('new_password_confirm');
+            
+            $user = $this->getUser();
+            $checkPass = $encoder->isPasswordValid($user, $old_pwd);
+            if($checkPass === true) {
+                if($new_pwd == $new_pwd_confirm){
+                    $manager = $this -> getDoctrine() -> getManager();
+
+                    $manager -> persist($user);
+                    $new_pwd_encoded = $encoder->encodePassword($user, $new_pwd_confirm);
+                    $user -> setPassword($new_pwd_encoded);
+                    $manager -> flush();
+                    return $this -> redirectToRoute('profile');
+
+                }else{
+                    $this -> addFlash('errors', 'Le nouveau mot de passe doit être identique dans les deux champs !');
+                }
+            } else {
+                $this -> addFlash('errors', 'Le mot de passe rentré est invalide !');
+            }
+        }
+
+        return $this->render('member/passwordModify.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    
     /**
 	* @Route("/login", name="login")
 	*/
@@ -123,6 +159,5 @@ class MemberController extends AbstractController
             'userForm' => $form -> createView()
         ]);
     }
-
 
 }
