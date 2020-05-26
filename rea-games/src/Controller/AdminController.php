@@ -74,4 +74,17 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('games');
     }
+
+    /**
+     * @Route("/admin/admins", name="admins")
+     */
+    public function admins()
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $admins = $repository ->findBy(['role' => 'ROLE_ADMIN']);
+
+        return $this->render('admin/admins.html.twig', [
+            'admins' => $admins
+        ]);
+    }
 }
