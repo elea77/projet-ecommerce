@@ -25,7 +25,7 @@
         <div class="catalogue">
             {% for game in games %}
             <div class="game">
-                <a href="{{ path('game', {id : game.id}) }}}">
+                <a href="{{ path('game', {id : game.id}) }}">
                     <img src="{{ asset('/game-img/') }}{{ game.img1 }}" alt="">
                     <div class="game-name">
                         <p> {{ game.name }} </p>

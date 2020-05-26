@@ -142,3 +142,44 @@
     margin: auto;
     margin-top: 3%;
 }
+
+
+
+
+.rating {
+    width: 330px;
+}
+
+.rating button {
+    float:left;
+    color: #aaa;
+    text-decoration: none;
+    -webkit-transition: color .4s;
+    -moz-transition: color .4s;
+    -o-transition: color .4s;
+    transition: color .4s;
+}
+
+.rating button:hover,
+.rating button:hover ~ button,
+.rating button:focus,
+.rating button:focus ~ button		{
+    color: orange;
+    cursor: pointer;
+}
+
+.rating2 {
+    direction: rtl;
+}
+
+
+.rating2 button {
+    float:none
+}
+
+.rating button {
+    background:transparent;
+    border:none;
+    font-size: 40px;
+    padding: 0;
+}

@@ -17,7 +17,11 @@
                 <p class="descrip"> {{ game.description }} </p>
                 <br>
                 <div class="note">
-                    <p>Note moyenne</p>
+                    {% if noteMoyenne[0].note|round == '0' %}
+                        <p>Aucune note</p>
+                    {% else %}
+                        <p>{{ noteMoyenne[0].note|round }}</p>
+                    {% endif %}
                 </div>
                 <p class="price"> {{ game.price }} €</p>
                 <button class="button-basket" type="submit">Ajouter au panier</button><br>
@@ -39,6 +43,76 @@
         </div>
         <hr>
         <div class="reviews">
+            {% if app.user %}
+                {% if note is empty %}
+                    <div class="rating rating2">
+                        <form action="" method="post"><!--
+                            --><button type="submit" name="submit" value="5">★</button><!--
+                            --><button type="submit" name="submit" value="4">★</button><!--
+                            --><button type="submit" name="submit" value="3">★</button><!--
+                            --><button type="submit" name="submit" value="2">★</button><!--                        
+                            --><button type="submit" name="submit" value="1">★</button>
+                        </form>
+                    </div>
+                {% else %}
+                {% if note[0].note == '1' %}
+                <div class="rating rating2"><!--
+                    --><button>★</button><!--
+                    --><button>★</button><!--
+                    --><button>★</button><!--
+                    --><button>★</button><!--                        
+                    --><button style="color: orange;">★</button>
+                </div>
+
+                {% endif %}
+
+                {% if note[0].note == '2' %}
+                    <div class="rating rating2"><!--
+                        --><button>★</button><!--
+                        --><button>★</button><!--
+                        --><button>★</button><!--
+                        --><button style="color: orange;">★</button><!--                        
+                        --><button style="color: orange;">★</button>
+                    </div>
+
+                {% endif %}
+
+                {% if note[0].note == '3' %}
+                    <div class="rating rating2"><!--
+                        --><button>★</button><!--
+                        --><button>★</button><!--
+                        --><button style="color: orange;">★</button><!--
+                        --><button style="color: orange;">★</button><!--                        
+                        --><button style="color: orange;">★</button>
+                    </div>
+
+                {% endif %}
+
+                {% if note[0].note == '4' %}
+                    <div class="rating rating2"><!--
+                        --><button>★</button><!--
+                        --><button style="color: orange;">★</button><!--
+                        --><button style="color: orange;">★</button><!--
+                        --><button style="color: orange;">★</button><!--                        
+                        --><button style="color: orange;">★</button>
+                    </div>
+
+                {% endif %}
+                {% if note[0].note == '5' %}
+                    <div class="rating rating2"><!--
+                        --><button style="color: orange;">★</button><!--
+                        --><button style="color: orange;">★</button><!--
+                        --><button style="color: orange;">★</button><!--
+                        --><button style="color: orange;">★</button><!--                        
+                        --><button style="color: orange;">★</button>
+                    </div>
+
+                {% endif %}
+                {% endif %}
+            {% endif %}
+
+            
+
             <h2>Avis</h2>
 
             {% for comment in comments%}
