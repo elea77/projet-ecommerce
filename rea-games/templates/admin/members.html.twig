@@ -67,7 +67,7 @@
                         <td>{{ user.registerDate.date|date("m/d/Y") }}</td>
                         <td>
                             <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 30px; color: black;"></span></a>
-                            <a href=""><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
+                            <a href="{{ path('deleteMembers', {id : user.id} ) }}"><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
                         </td>
                     </tr>
                 {% endfor %}

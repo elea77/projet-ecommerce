@@ -37,6 +37,19 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/deleteMembers/{id}", name="deleteMembers")
+     */
+    public function deleteMembers($id)
+    {
+        $member = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $manager = $this -> getDoctrine() -> getManager();
+        $manager->remove($member);
+        $manager->flush();
+
+        return $this->redirectToRoute('members');
+    }
+
+    /**
      * @Route("/admin/games", name="games")
      */
     public function games()
@@ -47,5 +60,18 @@ class AdminController extends AbstractController
         return $this->render('admin/games.html.twig', [
             'games' => $games
         ]);
+    }
+
+    /**
+     * @Route("/admin/deleteGame/{id}", name="deleteGame")
+     */
+    public function deleteGame($id)
+    {
+        $game = $this->getDoctrine()->getRepository(Game::class)->find($id);
+        $manager = $this -> getDoctrine() -> getManager();
+        $manager->remove($game);
+        $manager->flush();
+
+        return $this->redirectToRoute('games');
     }
 }
