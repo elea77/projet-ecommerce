@@ -26,9 +26,9 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/game/{id}", name="infoGame")
+     * @Route("/game/{id}", name="game")
      */
-    public function infoGame($id, Request $request)
+    public function game($id, Request $request)
     {   
         $user = $this->getUser();
 
@@ -56,10 +56,10 @@ class GameController extends AbstractController
 
             $manager -> flush();
             
-            return $this->redirectToRoute('infoGame', ['id' => $id]);
+            return $this->redirectToRoute('game', ['id' => $id]);
         }
 
-        return $this->render('game/infoGame.html.twig', [
+        return $this->render('game/game.html.twig', [
             'game' => $game,
             'platform' => $platform,
             'commentForm' => $form -> createView(),

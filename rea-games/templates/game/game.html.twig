@@ -2,7 +2,7 @@
 
 {% block title %}ReaGames - Jeu{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('/css/infoGame.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/game.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
                 <p class="descrip"> {{ game.description }} </p>
                 <br>
                 <div class="note">
-                    <p>Note</p>
+                    <p>Note moyenne</p>
                 </div>
                 <p class="price"> {{ game.price }} €</p>
                 <button class="button-basket" type="submit">Ajouter au panier</button><br>
@@ -50,7 +50,6 @@
                 </div>
                 <div class="second-part">
                     <p>{{ comment.date|date('d/m/Y à H:i')  }}</p><br>
-                    <p>Note</p>
                 </div>
             </div>
             {% endfor %}
