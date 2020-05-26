@@ -145,9 +145,9 @@
 
 
 
-
 .rating {
-    width: 330px;
+    margin-right: 9%;
+    margin-top:2%;
 }
 
 .rating button {
@@ -180,6 +180,6 @@
 .rating button {
     background:transparent;
     border:none;
-    font-size: 40px;
+    font-size: 32px;
     padding: 0;
 }

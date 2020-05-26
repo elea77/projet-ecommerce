@@ -17,14 +17,36 @@
                 <p class="descrip"> {{ game.description }} </p>
                 <br>
                 <div class="note">
-                    {% if noteMoyenne[0].note|round == '0' %}
+                    {% if noteMoyenne[0].note == '0' %}
                         <p>Aucune note</p>
                     {% else %}
-                        <p>{{ noteMoyenne[0].note|round }}</p>
+                        {# Entre 0 et 1 #}
+                        {% if noteMoyenne[0].note|round > 0 and noteMoyenne[0].note|round <= 1 %}
+                            <img src="{{ asset('/img/1star.png') }}" alt="" style="width: 25%;">
+                        {% endif %}
+                        {# Entre 1 et 2 #}
+                        {% if noteMoyenne[0].note|round > 1 and noteMoyenne[0].note|round <= 2 %}
+                            <img src="{{ asset('/img/2stars.png') }}" alt="" style="width: 25%;">
+                        {% endif %}
+                        {# Entre 2 et 3 #}
+                        {% if noteMoyenne[0].note|round > 2 and noteMoyenne[0].note|round <= 3 %}
+                            <img src="{{ asset('/img/3stars.png') }}" alt="" style="width: 25%;">
+                        {% endif %}
+                        {# Entre 3 et 4 #}
+                        {% if noteMoyenne[0].note|round > 3 and noteMoyenne[0].note|round <= 4 %}
+                            <img src="{{ asset('/img/4stars.png') }}" alt="" style="width: 25%;">
+                        {% endif %}
+                        {# Entre 4 et 5 #}
+                        {% if noteMoyenne[0].note|round > 4 and noteMoyenne[0].note|round <= 5 %}
+                            <img src="{{ asset('/img/5stars.png') }}" alt="" style="width: 25%;">
+                        {% endif %}
+
                     {% endif %}
                 </div>
                 <p class="price"> {{ game.price }} €</p>
-                <button class="button-basket" type="submit">Ajouter au panier</button><br>
+                {% if app.user %}
+                    <button class="button-basket" type="submit">Ajouter au panier</button><br>
+                {% endif %}
                 <div class="plateform">
                 {% for comptabi in platform %}
                     {% if comptabi.name == 'PlayStation' %}
@@ -43,77 +65,81 @@
         </div>
         <hr>
         <div class="reviews">
-            {% if app.user %}
-                {% if note is empty %}
-                    <div class="rating rating2">
-                        <form action="" method="post"><!--
-                            --><button type="submit" name="submit" value="5">★</button><!--
-                            --><button type="submit" name="submit" value="4">★</button><!--
-                            --><button type="submit" name="submit" value="3">★</button><!--
-                            --><button type="submit" name="submit" value="2">★</button><!--                        
-                            --><button type="submit" name="submit" value="1">★</button>
-                        </form>
-                    </div>
-                {% else %}
-                {% if note[0].note == '1' %}
-                <div class="rating rating2"><!--
-                    --><button>★</button><!--
-                    --><button>★</button><!--
-                    --><button>★</button><!--
-                    --><button>★</button><!--                        
-                    --><button style="color: orange;">★</button>
-                </div>
 
-                {% endif %}
-
-                {% if note[0].note == '2' %}
+            <div style="display:grid; grid-template-columns: 50% 50%;">
+                <h2>Avis</h2>
+                {% if app.user %}
+                    {% if note is empty %}
+                        <div class="rating rating2">
+                            <form action="" method="post"><!--
+                                --><button type="submit" name="submit" value="5"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                --><button type="submit" name="submit" value="4"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                --><button type="submit" name="submit" value="3"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                --><button type="submit" name="submit" value="2"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                                --><button type="submit" name="submit" value="1"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                            </form>
+                        </div>
+                    {% else %}
+                    {% if note[0].note == '1' %}
                     <div class="rating rating2"><!--
-                        --><button>★</button><!--
-                        --><button>★</button><!--
-                        --><button>★</button><!--
-                        --><button style="color: orange;">★</button><!--                        
-                        --><button style="color: orange;">★</button>
+                        --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                        --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                        --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                        --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
                     </div>
 
-                {% endif %}
+                    {% endif %}
 
-                {% if note[0].note == '3' %}
-                    <div class="rating rating2"><!--
-                        --><button>★</button><!--
-                        --><button>★</button><!--
-                        --><button style="color: orange;">★</button><!--
-                        --><button style="color: orange;">★</button><!--                        
-                        --><button style="color: orange;">★</button>
-                    </div>
+                    {% if note[0].note == '2' %}
+                        <div class="rating rating2">
+                            <form action="" method="post"><!--
+                                --><button type="submit" name="submit" value="5"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                --><button type="submit" name="submit" value="4"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                --><button type="submit" name="submit" value="3"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                --><button type="submit" name="submit" value="2"><span class="iconify" style="color: orange;" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                                --><button type="submit" name="submit" value="1"><span class="iconify" style="color: orange;" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                            </form>
+                        </div>
 
-                {% endif %}
 
-                {% if note[0].note == '4' %}
-                    <div class="rating rating2"><!--
-                        --><button>★</button><!--
-                        --><button style="color: orange;">★</button><!--
-                        --><button style="color: orange;">★</button><!--
-                        --><button style="color: orange;">★</button><!--                        
-                        --><button style="color: orange;">★</button>
-                    </div>
+                    {% endif %}
 
-                {% endif %}
-                {% if note[0].note == '5' %}
-                    <div class="rating rating2"><!--
-                        --><button style="color: orange;">★</button><!--
-                        --><button style="color: orange;">★</button><!--
-                        --><button style="color: orange;">★</button><!--
-                        --><button style="color: orange;">★</button><!--                        
-                        --><button style="color: orange;">★</button>
-                    </div>
+                    {% if note[0].note == '3' %}
+                        <div class="rating rating2"><!--
+                            --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                        </div>
 
-                {% endif %}
+                    {% endif %}
+
+                    {% if note[0].note == '4' %}
+                        <div class="rating rating2"><!--
+                            --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                        </div>
+
+                    {% endif %}
+                    {% if note[0].note == '5' %}
+                        <div class="rating rating2"><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                            --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                        </div>
+
+                    {% endif %}
                 {% endif %}
             {% endif %}
-
-            
-
-            <h2>Avis</h2>
+            </div>
+            <br><br>
 
             {% for comment in comments%}
             <div id="review">
@@ -128,12 +154,15 @@
             </div>
             {% endfor %}
             
-            {# mettre condition : si le jeu a été acheté par le user #}
-            <a href="#comment"><button class="button-review" type="submit" id="write">Laisser un avis</button></a>
+            {% if app.user %}
+                <a href="#comment"><button class="button-review" type="submit" id="write">Laisser un avis</button></a>
+            {% endif %}
         </div>
-        <div id="comment" style="display: none;">
-            {{ form(commentForm) }}
-        </div>
+        {% if app.user %}
+            <div id="comment" style="display: none;">
+                {{ form(commentForm) }}
+            </div>
+        {% endif %}
 
 
     </div>

@@ -88,9 +88,8 @@ class GameController extends AbstractController
                 return $this->redirectToRoute('game', ['id' => $id]);
 
             }
-        }
+        } 
 
-        
 
 
         return $this->render('game/game.html.twig', [
