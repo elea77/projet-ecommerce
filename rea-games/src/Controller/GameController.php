@@ -11,16 +11,25 @@ use App\Form\NoteType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class GameController extends AbstractController
 {
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(PaginatorInterface $paginator, Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(Game::class);
-        $games = $repository -> findAll();
+        $donnees = $repository -> findAll();
+
+        $games = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1),
+            5 // Nombre de résultats par page
+        );
 
         return $this->render('game/home.html.twig', [
             'games' => $games
