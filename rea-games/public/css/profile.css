@@ -67,3 +67,9 @@ button {
     display: block;
     margin: auto;
 }
+
+.validate{
+    background-color: #363C41;
+    border: none;
+    box-shadow: none;
+}

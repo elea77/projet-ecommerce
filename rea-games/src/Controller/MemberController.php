@@ -43,9 +43,45 @@ class MemberController extends AbstractController
     /**
      * @Route("/profile", name="profile")
      */
-    public function profile(UserPasswordEncoderInterface $encoder, Request $request)
+    public function profile(Request $request)
     {
         $user = $this -> getUser();
+        $manager = $this -> getDoctrine() -> getManager();
+        $manager -> persist($user);
+
+        if(isset($_POST['usernameSubmit'])) {
+            $username = $request->get('usernameChange');
+            $user -> setUsername($username);
+            $manager -> flush();
+            return $this -> redirectToRoute('profile');
+        }
+
+        if(isset($_POST['firstnameSubmit'])) {
+            $firstname = $request->get('firstnameChange');
+            $user -> setFirstname($firstname);
+            $manager -> flush();
+            return $this -> redirectToRoute('profile');
+        }
+
+        if(isset($_POST['lastnameSubmit'])) {
+            $lastname = $request->get('lastnameChange');
+            $user -> setLastname($lastname);
+            $manager -> flush();
+            return $this -> redirectToRoute('profile');
+        }
+
+        if(isset($_POST['emailSubmit'])) {
+            $newEmail = $request->get('emailChange');
+            $userRepo = $this->getDoctrine()->getRepository(USer::class);
+
+            if($userRepo->findOneBy(['email' => $newEmail])){
+                $this -> addFlash('errors', 'Un utilisateur utilise déja cette adresse mail !');
+            } else {
+                $user -> setEmail($newEmail);
+                $manager -> flush();
+            }
+            return $this -> redirectToRoute('profile');
+        }
 
         return $this->render('member/profile.html.twig', [
             'user' => $user
@@ -68,8 +104,8 @@ class MemberController extends AbstractController
             if($checkPass === true) {
                 if($new_pwd == $new_pwd_confirm){
                     $manager = $this -> getDoctrine() -> getManager();
-
                     $manager -> persist($user);
+                    
                     $new_pwd_encoded = $encoder->encodePassword($user, $new_pwd_confirm);
                     $user -> setPassword($new_pwd_encoded);
                     $manager -> flush();
