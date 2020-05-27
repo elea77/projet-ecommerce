@@ -74,6 +74,11 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="id_user", orphanRemoval=true)
+     */
+    private $notes;
+
     public function getId(): ?int
     {
         return $this->id;
