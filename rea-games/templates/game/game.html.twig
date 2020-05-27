@@ -3,6 +3,7 @@
 {% block title %}ReaGames - Jeu{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/game.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/pagination2.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -153,6 +154,9 @@
                 </div>
             </div>
             {% endfor %}
+            <div id="pagination">
+                {{ knp_pagination_render(comments) }}
+            </div>
             
             {% if app.user %}
                 <a href="#comment"><button class="button-review" type="submit" id="write">Laisser un avis</button></a>

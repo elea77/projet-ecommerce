@@ -3,6 +3,7 @@
 {% block title %}ReaGames{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/pagination1.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -34,7 +35,7 @@
             </div>
             {% endfor %}
         </div>
-       <div class="navigation">
+        <div class="navigation">
             {{ knp_pagination_render(games) }}
         </div>
     </div>

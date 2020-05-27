@@ -28,7 +28,7 @@ class GameController extends AbstractController
         $games = $paginator->paginate(
             $donnees, 
             $request->query->getInt('page', 1),
-            5 // Nombre de résultats par page
+            8 // Nombre de résultats par page
         );
 
         return $this->render('game/home.html.twig', [
@@ -39,7 +39,7 @@ class GameController extends AbstractController
     /**
      * @Route("/game/{id}", name="game")
      */
-    public function game($id, Request $request)
+    public function game($id, Request $request, PaginatorInterface $paginator)
     {   
         $user = $this->getUser();
 
@@ -50,7 +50,13 @@ class GameController extends AbstractController
         $platform = $repoPlatform->platformGame($id);
         
         $repo = $this->getDoctrine()->getRepository(Comment::class);
-        $comments = $repo->commentGame($id);
+        $donnees = $repo->commentGame($id);
+
+        $comments = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1),
+            4 // Nombre de résultats par page
+        );
 
         $repo = $this->getDoctrine()->getRepository(Note::class);
         $noteM = $repo->noteMoyenne($id);
