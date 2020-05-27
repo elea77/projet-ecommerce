@@ -54,8 +54,21 @@ input:focus {
     margin-top: 5%;
 }
 
+.buttons a {
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+    background-color: #8D197E;
+    border-radius: 6px;
+    font-size: 20px;
+    padding: 5px;
+    width: 25%;
+    margin: auto;
+    text-decoration: none;
+}
 
-button {
+.buttons button {
     border-color: white;
     color: white;
     background-color: #8D197E;
