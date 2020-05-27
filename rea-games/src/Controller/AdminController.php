@@ -7,6 +7,8 @@ use App\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Knp\Component\Pager\PaginatorInterface;
 
 class AdminController extends AbstractController
 {
@@ -26,10 +28,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/members", name="members")
      */
-    public function members()
+    public function members(PaginatorInterface $paginator, Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
-        $users = $repository -> listUsers();
+        $donnees = $repository -> listUsers();
+
+        $users = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1),
+            8 // Nombre de résultats par page
+        );
 
         return $this->render('admin/members.html.twig', [
             'users' => $users
@@ -52,10 +60,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/games", name="games")
      */
-    public function games()
+    public function games(PaginatorInterface $paginator, Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(Game::class);
-        $games = $repository -> findAll();
+        $donnees = $repository -> findAll();
+
+        $games = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1),
+            8 // Nombre de résultats par page
+        );
 
         return $this->render('admin/games.html.twig', [
             'games' => $games
@@ -78,10 +92,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/admins", name="admins")
      */
-    public function admins()
+    public function admins(PaginatorInterface $paginator, Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(User::class);
-        $admins = $repository ->findBy(['role' => 'ROLE_ADMIN']);
+        $donnees = $repository ->findBy(['role' => 'ROLE_ADMIN']);
+
+        $admins = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1),
+            6 // Nombre de résultats par page
+        );
 
         return $this->render('admin/admins.html.twig', [
             'admins' => $admins

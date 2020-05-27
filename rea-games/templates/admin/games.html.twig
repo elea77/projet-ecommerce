@@ -3,6 +3,7 @@
 {% block title %}ReaGames - Dashboard Jeux{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/games.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/pagination1.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -33,6 +34,9 @@
                     </tr>
                 {% endfor %}
             </table>
+            <div class="navigation">
+                {{ knp_pagination_render(games) }}
+            </div>
         </div>
     </div>
 

@@ -3,6 +3,7 @@
 {% block title %}ReaGames - Dashboard Utilisateurs{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/members.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/pagination1.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -31,6 +32,9 @@
                     </tr>
                 {% endfor %}
             </table>
+            <div class="navigation">
+                {{ knp_pagination_render(users) }}
+            </div>
         </div>
     </div>
 
