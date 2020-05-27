@@ -69,6 +69,11 @@ class User implements UserInterface
      */
     private $balance;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="id_user", orphanRemoval=true)
+     */
+    private $comments;
+
     public function getId(): ?int
     {
         return $this->id;
