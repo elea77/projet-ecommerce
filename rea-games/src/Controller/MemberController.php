@@ -23,7 +23,7 @@ class MemberController extends AbstractController
      */
     public function basket(SessionInterface $session, GameRepository $gameRepository)
     {
-        $basket = $session -> get('panier',[]);
+        $basket = $session -> get('basket',[]);
         $basketData = [];
 
         foreach($basket as $id => $quantity){
@@ -32,7 +32,7 @@ class MemberController extends AbstractController
                 'quantity' => $quantity
             ];
         }
-
+        
         return $this->render('member/basket.html.twig', [
             'items' => $basketData
         ]);
