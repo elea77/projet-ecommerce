@@ -40,6 +40,36 @@ class MemberController extends AbstractController
         return $this->render('member/memberAreaGame.html.twig', []);
     }
 
+
+    /**
+     * @Route("/profile/addMoney", name="addMoney")
+     */
+    public function addMoney(Request $request)
+    {
+        $user = $this -> getUser();
+        $manager = $this -> getDoctrine() -> getManager();
+        $manager -> persist($user);
+
+        $balance = $user->getBalance();
+
+        if(isset($_POST['submit'])) {
+
+            $manager -> persist($user);
+
+            $montant = $request->get('balance');
+
+            $balanceT = $balance + $montant;
+
+            $user -> setBalance($balanceT);
+
+
+            $manager -> flush();
+            return $this -> redirectToRoute('profile');
+        }
+
+        return $this->render('member/addMoney.html.twig', []);
+    }
+
     /**
      * @Route("/profile", name="profile")
      */

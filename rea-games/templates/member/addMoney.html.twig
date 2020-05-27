@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReaGames - Solde{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/addMoney.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="cards-img">
+            <img src="{{ asset('/img/visa-card.jpg') }}" width="10%" alt="">
+            <img src="{{ asset('/img/master-card.png') }}" width="10%" alt="">
+            <img src="{{ asset('/img/cb-card.jpg') }}" width="10%" alt="">
+        </div>
+
+        <br>
+        <div class="formulaire">
+            <label for="">Carte bancaire :</label><br>
+            <input type="text" value="XXXX XXXX XXXX XXXX" disabled="disabled" /><br>
+            <label for="">Date d'expiration :</label><br>
+            <input type="text" value="MM/YY" disabled="disabled" /><br>
+            <label for="">Cryptogramme :</label><br>
+            <input type="text" value="xxx" disabled="disabled" />
+            <form action="" method="post">
+                <label for="">Montant :</label><br>
+                <input type="number" name="balance" min="1"><br>
+                <div class="buttons">
+                    <button id="cancel">Annuler</button>
+                    <button type="submit" name="submit">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+

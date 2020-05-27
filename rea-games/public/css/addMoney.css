@@ -1,0 +1,68 @@
+.container {
+    margin: 3%;
+    text-align: center;
+}
+
+.cards-img {
+    display: inline-flex;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    justify-content: space-between;
+}
+
+.cards-img img {
+    height: 10vh;
+    width: auto;
+}
+
+
+.formulaire {
+    margin-top: 3%;
+}
+
+
+input {
+    width: 16%;
+    border-color: black;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 10px;
+    margin-block-end: 1%;
+}
+
+
+input:hover {
+    border-color: #8D197E;
+    border-style: solid;
+}
+
+input:focus {
+    border-color: #8D197E;
+    border-style: solid;
+}
+
+
+
+.buttons {
+    display: inline-flex;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    justify-content: space-between;
+    margin-block-end: 2%;
+    margin-top: 5%;
+}
+
+
+button {
+    border-color: white;
+    color: white;
+    background-color: #8D197E;
+    border-radius: 6px;
+    font-size: 20px;
+    padding: 5px;
+    width: 25%;
+    margin: auto;
+}
+
