@@ -46,7 +46,7 @@
                 </div>
                 <p class="price"> {{ game.price }} €</p>
                 {% if app.user %}
-                    <button class="button-basket" type="submit">Ajouter au panier</button><br>
+                    <button class="button-basket" type="submit" onclick="window.location.href = '/basket/add/{{ game.id }}';">Ajouter au panier</button><br>
                 {% endif %}
                 <div class="plateform">
                 {% for comptabi in platform %}

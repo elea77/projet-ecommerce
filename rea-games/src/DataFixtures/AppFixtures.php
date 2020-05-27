@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Entity\decimal;
 use App\Entity\User;
 use App\Entity\Game;
 use App\Entity\Platform;
@@ -76,7 +77,7 @@ class AppFixtures extends Fixture
         $game1->setImg1("r6-h.jpeg");
         $game1->setImg2("Rainbow6-v.png");
         $game1->setQuantity(200);
-        $game1->setPrice("59,99");
+        $game1->setPrice(decimale(59,99));
         $game1->setCode("g1R6TC");
         $manager->persist($game1);
 
@@ -87,7 +88,7 @@ class AppFixtures extends Fixture
         $game2->setImg1("assassins-creed-odyssey-h.jpg");
         $game2->setImg2("assassins-creed-odyssey-v.jpg");
         $game2->setQuantity(180);
-        $game2->setPrice("69,99");
+        $game2->setPrice(69.99);
         $game2->setCode("g2ACO");
         $manager->persist($game2);
 
@@ -98,7 +99,7 @@ class AppFixtures extends Fixture
         $game3->setImg1("godofwar-h.jpg");
         $game3->setImg2("godofwar-v.jpg");
         $game3->setQuantity(180);
-        $game3->setPrice("69,99");
+        $game3->setPrice(69.99);
         $game3->setCode("g3GOW");
         $manager->persist($game3);
 
@@ -109,7 +110,7 @@ class AppFixtures extends Fixture
         $game4->setImg1("halo-h.jpg");
         $game4->setImg2("halo-v.png");
         $game4->setQuantity(100);
-        $game4->setPrice("49,99");
+        $game4->setPrice(49.99);
         $game4->setCode("g4HMCC");
         $manager->persist($game4);
 
@@ -119,7 +120,7 @@ class AppFixtures extends Fixture
         $game5->setImg1("bo4-h.png");
         $game5->setImg2("bo4-v.png");
         $game5->setQuantity(80);
-        $game5->setPrice("49,99");
+        $game5->setPrice(49.99);
         $game5->setCode("g5CODBO4");
         $manager->persist($game5);
 
@@ -129,7 +130,7 @@ class AppFixtures extends Fixture
         $game6->setImg1("uncharted4-h.png");
         $game6->setImg2("uncharted4-v.png");
         $game6->setQuantity(60);
-        $game6->setPrice("19,99");
+        $game6->setPrice(19.99);
         $game6->setCode("g6U4ATE");
         $manager->persist($game6);
 
@@ -139,7 +140,7 @@ class AppFixtures extends Fixture
         $game7->setImg1("mk11-h.png");
         $game7->setImg2("mk11-v.png");
         $game7->setQuantity(100);
-        $game7->setPrice("29,99");
+        $game7->setPrice(29.99);
         $game7->setCode("g7MK11");
         $manager->persist($game7);
 
@@ -149,7 +150,7 @@ class AppFixtures extends Fixture
         $game8->setImg1("mhw-h.png");
         $game8->setImg2("mhw-v.png");
         $game8->setQuantity(100);
-        $game8->setPrice("30,00");
+        $game8->setPrice(30.00);
         $game8->setCode("g8MHW");
         $manager->persist($game8);
 
@@ -159,7 +160,7 @@ class AppFixtures extends Fixture
         $game9->setImg1("detroit-h.png");
         $game9->setImg2("detroit-v.png");
         $game9->setQuantity(120);
-        $game9->setPrice("39,99");
+        $game9->setPrice(39.99);
         $game9->setCode("g9DBH");
         $manager->persist($game9);
 
@@ -169,7 +170,7 @@ class AppFixtures extends Fixture
         $game10->setImg1("final-fantasy-vii-h.png");
         $game10->setImg2("final-fantasy-vii-v.png");
         $game10->setQuantity(220);
-        $game10->setPrice("69,99");
+        $game10->setPrice(69.99);
         $game10->setCode("g10FFviiR");
         $manager->persist($game10);
 

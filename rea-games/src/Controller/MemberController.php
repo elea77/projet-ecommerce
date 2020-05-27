@@ -8,20 +8,52 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\GameRepository;
+
 
 use App\Entity\User;
 
 use App\Form\UserType;
-use App\Form\PasswordType;
 
 class MemberController extends AbstractController
 {
     /**
      * @Route("/basket", name="basket")
      */
-    public function basket()
+    public function basket(SessionInterface $session, GameRepository $gameRepository)
     {
-        return $this->render('member/basket.html.twig', []);
+        $basket = $session -> get('panier',[]);
+        $basketData = [];
+
+        foreach($basket as $id => $quantity){
+            $basketData[]=[
+                'game' => $gameRepository->find($id),
+                'quantity' => $quantity
+            ];
+        }
+
+        return $this->render('member/basket.html.twig', [
+            'items' => $basketData
+        ]);
+    }
+
+    /**
+     * @Route("/basket/add/{id}", name="basket_add")
+     */
+    public function basketAdd($id,SessionInterface $session)
+    {
+        $basket = $session -> get('basket',[]);
+
+        if(!empty($basket[$id])){
+            $basket[$id]++;
+        }else{
+            $basket[$id]=1;
+        }
+
+        $session -> set('basket',$basket);
+
+        dd($session->get('basket'));
     }
 
     /**
@@ -38,36 +70,6 @@ class MemberController extends AbstractController
     public function memberAreaGame($id)
     {
         return $this->render('member/memberAreaGame.html.twig', []);
-    }
-
-
-    /**
-     * @Route("/profile/addMoney", name="addMoney")
-     */
-    public function addMoney(Request $request)
-    {
-        $user = $this -> getUser();
-        $manager = $this -> getDoctrine() -> getManager();
-        $manager -> persist($user);
-
-        $balance = $user->getBalance();
-
-        if(isset($_POST['submit'])) {
-
-            $manager -> persist($user);
-
-            $montant = $request->get('balance');
-
-            $balanceT = $balance + $montant;
-
-            $user -> setBalance($balanceT);
-
-
-            $manager -> flush();
-            return $this -> redirectToRoute('profile');
-        }
-
-        return $this->render('member/addMoney.html.twig', []);
     }
 
     /**
@@ -224,6 +226,35 @@ class MemberController extends AbstractController
         return $this->render('member/register.html.twig', [
             'userForm' => $form -> createView()
         ]);
+    }
+
+    /**
+     * @Route("/profile/addMoney", name="addMoney")
+     */
+    public function addMoney(Request $request)
+    {
+        $user = $this -> getUser();
+        $manager = $this -> getDoctrine() -> getManager();
+        $manager -> persist($user);
+
+        $balance = $user->getBalance();
+
+        if(isset($_POST['submit'])) {
+
+            $manager -> persist($user);
+
+            $montant = $request->get('balance');
+
+            $balanceT = $balance + $montant;
+
+            $user -> setBalance($balanceT);
+
+
+            $manager -> flush();
+            return $this -> redirectToRoute('profile');
+        }
+
+        return $this->render('member/addMoney.html.twig', []);
     }
 
 }

@@ -45,7 +45,7 @@ class Game
     private $quantity;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="float")
      */
     private $price;
 
@@ -141,12 +141,12 @@ class Game
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(string $price): self
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
