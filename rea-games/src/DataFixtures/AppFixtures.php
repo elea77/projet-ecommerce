@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Entity\decimal;
 use App\Entity\User;
 use App\Entity\Game;
 use App\Entity\Platform;
@@ -77,7 +76,7 @@ class AppFixtures extends Fixture
         $game1->setImg1("r6-h.jpeg");
         $game1->setImg2("Rainbow6-v.png");
         $game1->setQuantity(200);
-        $game1->setPrice(decimale(59,99));
+        $game1->setPrice(59.99);
         $game1->setCode("g1R6TC");
         $manager->persist($game1);
 
