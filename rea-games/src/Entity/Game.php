@@ -25,7 +25,7 @@ class Game
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=550)
      */
     private $description;
 
