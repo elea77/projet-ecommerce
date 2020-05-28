@@ -126,60 +126,78 @@ textarea {
     height: 24px;
     margin-top: auto;
     margin-bottom: auto;
-  }
+}
 
 
-  #searchbartop #searchbartopbtn { 
+#searchbartop #searchbartopbtn { 
     position:absolute; 
     left: -9999px;
-  }
-  #searchbartop #searchbartopbtn + label { 
+}
+
+
+#searchbartop #searchbartopbtn + label { 
     display:inline-block; 
     cursor:pointer;
     width:24px; height:24px;
     line-height:24px;
     text-align:center;
     background:none;
-  }
-  #searchbartop #searchbartopbtn:checked + label {
+}
+
+#searchbartop #searchbartopbtn:checked + label {
     background:none;
-  }
-  #searchbartop form {
+}
+
+
+#searchbartop form {
     position: absolute; 
     top:0; right:200px;
     display:none;
-  }
-  #searchbartop form > button, #searchbartop form > div {
+}
+
+
+
+#searchbartop form > button, #searchbartop form > div {
     display:table-cell;
     height:24px;
-  }
-  #searchbartop #searchbartopbtn:checked ~ form {
+}
+
+
+#searchbartop #searchbartopbtn:checked ~ form {
     display:table;
-  }
-  #searchbartop form > div > input {
+}
+
+
+#searchbartop form > div > input {
     width:0;
-  }
-  #searchbartop #searchbartopbtn:checked ~ form > div > input {
+}
+
+
+#searchbartop #searchbartopbtn:checked ~ form > div > input {
     animation: expand 0.5s ease-in-out 1;
-      animation-fill-mode: forwards;
-  }
-  @keyframes expand {
-    from { width:0; }
-    to   { width:200px; }
-  }
+    animation-fill-mode: forwards;
+}
+
+@keyframes expand {
+    from { 
+        width:0;
+    }
+    to   {
+        width:200px;
+    }
+}
   
 
-  #searchbartop input {
+#searchbartop input {
     width: 18%;
     border-color: black;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 14px;
     padding: 3px;
-    /* margin-block-end: 1%; */
-    /* margin-top: 1%; */
-  }
+}
 
-  #searchbartop input {
+
+#searchbartop input {
     outline: none;
 }
 
@@ -191,4 +209,34 @@ textarea {
 #searchbartop input:focus {
     border-color: #8D197E;
     border-style: solid;
+}
+
+
+#searchbartop button {
+    border-color: white;
+    color: white;
+    background-color: #8D197E;
+    border-radius: 6px;
+    border-width: 1px;
+    display: block;
+    margin: auto;
+}
+
+#searchbartop  ::-webkit-input-placeholder {
+    font-style: italic;
+}
+
+
+#searchbartop  :-moz-placeholder {
+    font-style: italic;  
+}
+
+
+#searchbartop  ::-moz-placeholder {
+    font-style: italic;  
+}
+
+
+#searchbartop  :-ms-input-placeholder {  
+    font-style: italic; 
 }

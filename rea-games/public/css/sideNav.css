@@ -20,6 +20,11 @@ nav {
     top: 0;
 }
 
+.panel a {
+    text-decoration: none;
+    color: white;
+}
+
 .top {
     text-align: center;
     margin: 5%;
