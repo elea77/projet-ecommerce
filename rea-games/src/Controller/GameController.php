@@ -30,6 +30,7 @@ class GameController extends AbstractController
             $request->query->getInt('page', 1),
             8 // Nombre de résultats par page
         );
+        
 
         return $this->render('game/home.html.twig', [
             'games' => $games
@@ -39,32 +40,26 @@ class GameController extends AbstractController
 
 
     /**
-     * @Route("/results", name="search_results")
+     * @Route("/results/{search}", name="results")
      */
-    public function search_results(PaginatorInterface $paginator, Request $request)
+    public function results(PaginatorInterface $paginator, Request $request, $search)
     {
 
-        if(isset($_POST['submit'])) {
+        $search = $_POST['search'];
 
-            $search = $_POST['search'];
-
-            $repository = $this->getDoctrine()->getRepository(Game::class);
-            $donnees = $repository -> resultsSearch($search);
+        $repository = $this->getDoctrine()->getRepository(Game::class);
+        $donnees = $repository -> resultsSearch($search);
             
-            $results = $paginator->paginate(
-                $donnees, 
-                $request->query->getInt('page', 1),
-                12 // Nombre de résultats par page
-            );
-            
-            return $this->render('game/searchResults.html.twig', [
-                'results' => $results
-            ]);
+        $results = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1),
+            8 
+        );
 
-        }
-
- 
-        return $this->render('game/searchResults.html.twig', []);
+        return $this->render('game/resultsSearch.html.twig', [
+            'results' => $results,
+            'search' => $search
+        ]);
     }
 
 

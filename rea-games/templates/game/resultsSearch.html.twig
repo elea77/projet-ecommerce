@@ -3,19 +3,15 @@
 {% block title %}ReaGames - Recherche{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/pagination1.css') }}">
 {% endblock %}
 
 {% block body %}
 
     <div class="container">
-        <form method="post" action="">
-            <input type="search" value="" name="search" />
-            <button type="submit" name="submit">OK</button>
-        </form>
 
-        <h2>Éléments correspondant à la recherche "{{ app.request.request.get("search") }}" :</h2>
+        <h2>Éléments correspondant à la recherche "{{ search }}" :</h2>
 
-        {% if results is defined %}
         <div class="catalogue">
             {% for result in results %}
             <div class="game">
@@ -28,10 +24,10 @@
             </div>
             {% endfor %}
         </div>
+        <br><br>
         <div class="navigation">
             {{ knp_pagination_render(results) }}
         </div>
-        {% endif %}
     </div>
 
 
