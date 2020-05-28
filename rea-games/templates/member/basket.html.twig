@@ -25,7 +25,7 @@
                             <div class="item-price ps">
                                 <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
                                 <h3>{{ item.game.price * item.quantity }} €</h3>
-                                <a href="{{ path('basket_remove', {id : item.game.id } ) }}"><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
+                                <a href="{{ path('basket_remove', {id : item.game.id } ) }}"><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 25px; color: red;"></span></a>
                             </div>
                         </div>
                         <br><hr><br>
@@ -35,7 +35,7 @@
                 {% else %}
                     Votre panier est vide
                 {% endif %}
-                prix total : {{ prixGames }}
+                <p class="price">Prix total : {{ prixGames }} €</p>
             <button class="button">Passer au paiement</button>
         </div>
     </div>
