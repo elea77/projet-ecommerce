@@ -31,12 +31,12 @@
                         <br><hr><br>
                     </div>
                     {% set prixGames = prixGames + item.game.price * item.quantity %}
+                    <p class="price">Prix total : {{ prixGames }} €</p>
+                    <button class="button">Passer au paiement</button>
                     {% endfor %}
                 {% else %}
                     Votre panier est vide
-                {% endif %}
-                <p class="price">Prix total : {{ prixGames }} €</p>
-            <button class="button">Passer au paiement</button>
+                {% endif %}      
         </div>
     </div>
 

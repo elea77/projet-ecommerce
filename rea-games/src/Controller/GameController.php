@@ -36,6 +36,46 @@ class GameController extends AbstractController
         ]);
     }
 
+
+
+    /**
+     * @Route("/results", name="search_results")
+     */
+    public function search_results(PaginatorInterface $paginator, Request $request)
+    {
+
+        $results = 'vide';
+        $search = 'rien';
+        
+
+        if(isset($_POST['submit'])) {
+
+            $search = $_POST['search'];
+
+            $repository = $this->getDoctrine()->getRepository(Game::class);
+            $donnees = $repository -> resultsSearch($search);
+            
+            $results = $paginator->paginate(
+                $donnees, 
+                $request->query->getInt('page', 1),
+                12 // Nombre de résultats par page
+            );
+            
+            return $this->render('game/searchResults.html.twig', [
+                'results' => $results,
+                'search' => $search
+            ]);
+
+        }
+
+ 
+        return $this->render('game/searchResults.html.twig', [
+            'results' => $results,
+            'search' => $search
+        ]);
+    }
+
+
     /**
      * @Route("/game/{id}", name="game")
      */

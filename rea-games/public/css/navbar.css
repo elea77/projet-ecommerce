@@ -146,7 +146,7 @@ textarea {
   }
   #searchbartop form {
     position: absolute; 
-    top:0; right:100px;
+    top:0; right:200px;
     display:none;
   }
   #searchbartop form > button, #searchbartop form > div {

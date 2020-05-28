@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReaGames - Recherche{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <form method="post" action="">
+            <input type="search" value="" name="search" />
+            <button type="submit" name="submit">OK</button>
+        </form>
+
+        <h2>Éléments correspondant à la recherche "{{ app.request.request.get("search") }}" :</h2>
+        
+        <div class="catalogue">
+            {% for result in results %}
+            <div class="game">
+                <a href="{{ path('game', {id : result.id}) }}">
+                    <img src="{{ asset('/game-img/') }}{{ result.img1 }}" alt="">
+                    <div class="game-name">
+                        <p> {{ result.name }} </p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(results) }}
+        </div>
+    </div>
+
+
+{% endblock %}
