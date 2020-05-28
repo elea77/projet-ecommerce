@@ -44,10 +44,6 @@ class GameController extends AbstractController
     public function search_results(PaginatorInterface $paginator, Request $request)
     {
 
-        $results = 'vide';
-        $search = 'rien';
-        
-
         if(isset($_POST['submit'])) {
 
             $search = $_POST['search'];
@@ -62,17 +58,13 @@ class GameController extends AbstractController
             );
             
             return $this->render('game/searchResults.html.twig', [
-                'results' => $results,
-                'search' => $search
+                'results' => $results
             ]);
 
         }
 
  
-        return $this->render('game/searchResults.html.twig', [
-            'results' => $results,
-            'search' => $search
-        ]);
+        return $this->render('game/searchResults.html.twig', []);
     }
 
 
