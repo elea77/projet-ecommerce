@@ -42,19 +42,14 @@ class GameController extends AbstractController
     /**
      * @Route("/search", name="search")
      */
-    public function search(PaginatorInterface $paginator, Request $request)
+    public function search(Request $request)
     {
-
+        
         $search = $_POST['search'];
 
         $repository = $this->getDoctrine()->getRepository(Game::class);
-        $donnees = $repository -> resultsSearch($search);
-            
-        $results = $paginator->paginate(
-            $donnees, 
-            $request->query->getInt('page', 1),
-            8 
-        );
+        $results = $repository -> resultsSearch($search);
+    
 
         return $this->render('game/resultsSearch.html.twig', [
             'results' => $results,
