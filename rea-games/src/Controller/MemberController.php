@@ -64,6 +64,9 @@ class MemberController extends AbstractController
 
         if(!empty($basket[$id])){
             $basket[$id]--;
+            if(empty($basket[$id])){
+                unset($basket[$id]);
+            }
         }
 
         $session -> set('basket',$basket);
