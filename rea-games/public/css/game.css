@@ -110,7 +110,7 @@
     margin-top: 3%;
 }
 
-#comment textarea {
+textarea {
     width: 97%;
     border-color: black;
     border-radius: 6px;
@@ -119,12 +119,12 @@
     resize: none;
 }
 
-#comment textarea:focus {
+textarea:focus {
     border-color: #8D197E;
     border-style: solid;
 }
 
-#comment textarea:hover {
+textarea:hover {
     border-color: #8D197E;
     border-style: solid;
 }
@@ -181,4 +181,10 @@
     border:none;
     font-size: 32px;
     padding: 0;
+}
+
+.validate{
+    background-color: #363C41;
+    border: none;
+    box-shadow: none;
 }

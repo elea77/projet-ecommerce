@@ -145,14 +145,26 @@
             {% for comment in comments%}
             <div id="review">
                 <div class="first-part">
-                    <h3>{{ comment.idUser.username }}</h3><br>
-                    <p>{{ comment.review }}
-                    </p>
+                    <form method="POST" id="formComment{{comment.id}}" action="/game/modifyComment/{{comment.id}}/{{game.id}}"></form>
+                        <h3>{{ comment.idUser.username }}</h3><br>
+                            <textarea id="commentModify{{comment.id}}" name="newComment" style="display: none;" required>{{ comment.review }}</textarea>
+                        <p id="comment{{comment.id}}">{{ comment.review }}
+                        </p>
+                    </form>
                 </div>
                 <div class="second-part">
                     <p>{{ comment.date|date('d/m/Y à H:i')  }}</p><br>
-                    <span onclick="" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: white;"></span>
-                    <span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 25px; color: white;"></span>
+                    {%if app.user%}
+                        {% if comment.idUser.id == app.user.id %}
+                            <span onclick="commentModify({{ comment.id }})" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: white;"></span>
+                            <a href="{{ path('deleteComment', {id_comment : comment.id, id_game : game.id } ) }}">
+                                <span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 25px; color: white;"></span>
+                            </a>
+                            <button id="commentValidate{{comment.id}}" name="submitComment" class="validate" type="submit" form="formComment{{comment.id}}" style="display: none;">
+                                <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;"></span>
+                            </button>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -184,6 +196,18 @@
             }
             
         })
+
+        function commentModify($id_comment) {
+        if(document.getElementById("commentModify"+$id_comment).style.display == "inline-block") {
+            document.getElementById("commentModify"+$id_comment).style.display = "none";
+            document.getElementById("commentValidate"+$id_comment).style.display = "none";
+            document.getElementById("comment"+$id_comment).style.display = "block";
+        } else  {
+            document.getElementById("commentModify"+$id_comment).style.display = "inline-block";
+            document.getElementById("commentValidate"+$id_comment).style.display = "inline-block";
+            document.getElementById("comment"+$id_comment).style.display = "none";
+        }
+        }
     
     </script>
 

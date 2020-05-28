@@ -105,6 +105,9 @@ class GameController extends AbstractController
             }
         } 
 
+        if(isset($_POST['usernameSubmit'])) {
+
+        }
 
 
         return $this->render('game/game.html.twig', [
@@ -115,5 +118,34 @@ class GameController extends AbstractController
             'note' => $noteUser,
             'noteMoyenne' => $noteM
         ]);
+    }
+
+    /**
+     * @Route("/game/deleteComment/{id_comment}/{id_game}", name="deleteComment")
+     */
+    public function deleteComment($id_comment,$id_game){
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id_comment);
+        $manager = $this -> getDoctrine() -> getManager();
+        $manager->remove($comment);
+        $manager->flush();
+
+        return $this->redirectToRoute('game', ['id' => $id_game]);
+    }
+
+    /**
+     * @Route("/game/modifyComment/{id_comment}/{id_game}", name="modifyComment")
+     */
+    public function modifyComment($id_comment,$id_game,Request $request){
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id_comment);
+        if(isset($_POST['submitComment'])) {
+            $manager = $this -> getDoctrine() -> getManager();
+            $manager -> persist($comment);
+            // $variable = 'newComment'.$id_comment;
+            $newComment = $request->get('newComment');
+            $comment->setReview($newComment);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('home');
     }
 }
