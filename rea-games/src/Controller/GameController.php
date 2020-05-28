@@ -40,9 +40,9 @@ class GameController extends AbstractController
 
 
     /**
-     * @Route("/results/{search}", name="results")
+     * @Route("/search", name="search")
      */
-    public function results(PaginatorInterface $paginator, Request $request, $search)
+    public function search(PaginatorInterface $paginator, Request $request)
     {
 
         $search = $_POST['search'];
