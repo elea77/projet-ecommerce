@@ -10,7 +10,9 @@
 
 `php bin/console make:migration`
 
-`php bin/console doctrine:migrations:migrate php bin/console doctrine:fixtures:load`
+`php bin/console doctrine:migrations:migrate`
+
+`php bin/console doctrine:fixtures:load`
 
 ### Lancer le serveur
 `php -t public -S localhost:8000`
