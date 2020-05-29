@@ -145,7 +145,7 @@
             {% for comment in comments%}
             <div id="review">
                 <div class="first-part">
-                    <form method="POST" id="formComment{{comment.id}}" action="/game/modifyComment/{{comment.id}}/{{game.id}}"></form>
+                    <form method="POST" id="formComment{{comment.id}}" action="/game/modifyComment/{{comment.id}}/{{game.id}}">
                         <h3>{{ comment.idUser.username }}</h3><br>
                             <textarea id="commentModify{{comment.id}}" name="newComment" style="display: none;" required>{{ comment.review }}</textarea>
                         <p id="comment{{comment.id}}">{{ comment.review }}
@@ -160,7 +160,7 @@
                             <a href="{{ path('deleteComment', {id_comment : comment.id, id_game : game.id } ) }}">
                                 <span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 25px; color: white;"></span>
                             </a>
-                            <button id="commentValidate{{comment.id}}" name="submitComment" class="validate" type="submit" form="formComment{{comment.id}}" style="display: none;">
+                            <button id="commentValidate{{comment.id}}" onclick="document.forms['formComment{{comment.id}}'].submit();return false;" class="validate" style="display: none;">
                                 <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;"></span>
                             </button>
                         {% endif %}
