@@ -11,15 +11,24 @@
         <h1>Profil</h1>
         <div id="profile">
             <div class="user-info">
-                <img src="{{ asset('/img/user.png') }}" width="10%" alt="">
+                <div class="img">
+                    <form method="POST">
+                        <img src="{{ asset('/img/user.png') }}" width="100%" alt="">
+                        <input type="file" id="avatarModify" name="avatar" style="display: none;">
+                        <span onclick="avatarModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black; cursor: pointer;"></span>
+                        <button id="avatarValidate" class="validate" type="submit" name="avatarSubmit" style="display: none;">
+                            <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white; cursor: pointer;"></span>
+                        </button>
+                    </form>
+                </div>
                 <div class="info">
                     <form method="POST">
                         <p>
                             Pseudo : <b id="username">{{ user.username }}</b>
                             <input id="usernameModify" type="text" name="usernameChange" placeholder="{{ user.username }}" style="display: none;" required>
-                            <span onclick="usernameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;"></span>
+                            <span onclick="usernameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black; cursor: pointer;"></span>
                             <button id="usernameValidate" class="validate" type="submit" name="usernameSubmit" style="display: none;">
-                                <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;"></span>
+                                <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white; cursor: pointer;" ></span>
                             </button>
                         </p>
                     </form>
@@ -27,9 +36,9 @@
                         <p>
                             Prénom : <b id="firstname">{{ user.firstname }}</b>
                             <input id="firstnameModify" type="text" name="firstnameChange" placeholder="{{ user.firstname }}" style="display: none;" required>
-                            <span onclick="firstnameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;"></span>
+                            <span onclick="firstnameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;cursor: pointer;"></span>
                             <button id="firstnameValidate" class="validate" type="submit" name="firstnameSubmit" style="display: none;">
-                                <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;"></span>
+                                <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white; cursor: pointer;"></span>
                             </button>
                         </p>
                     </form>
@@ -37,9 +46,9 @@
                     <p>
                         Nom : <b id="lastname">{{ user.lastname }}</b>
                         <input id="lastnameModify" type="text" name="lastnameChange" placeholder="{{ user.lastname }}" style="display: none;" required>
-                        <span onclick="lastnameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;"></span>
+                        <span onclick="lastnameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;cursor: pointer;"></span>
                         <button id="lastnameValidate" class="validate" type="submit" name="lastnameSubmit" style="display: none;">
-                            <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;"></span>
+                            <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;cursor: pointer;"></span>
                         </button>
                     </p>
                     </form>
@@ -47,9 +56,9 @@
                         <p>
                             Adresse mail : <b id="email">{{ user.email }}</b>
                             <input id="emailModify" type="email" name="emailChange" placeholder="{{ user.email }}" style="display: none;" required>
-                            <span onclick="emailModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;"></span>
+                            <span onclick="emailModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;cursor: pointer;"></span>
                             <button id="emailValidate" class="validate" type="submit" name="emailSubmit" style="display: none;">
-                                <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;"></span>
+                                <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;cursor: pointer;"></span>
                             </button>
                         </p>
                     </form>
@@ -71,52 +80,65 @@
 
     <script>
         function usernameModify() {
-        if(document.getElementById("usernameModify").style.display == "inline") {
-            document.getElementById("usernameModify").style.display = "none";
-            document.getElementById("usernameValidate").style.display = "none";
-            document.getElementById("username").style.display = "inline";
-        } else  {
-            document.getElementById("usernameModify").style.display = "inline";
-            document.getElementById("usernameValidate").style.display = "inline-block";
-            document.getElementById("username").style.display = "none";
-        }
+            if(document.getElementById("usernameModify").style.display == "inline") {
+                document.getElementById("usernameModify").style.display = "none";
+                document.getElementById("usernameValidate").style.display = "none";
+                document.getElementById("username").style.display = "inline";
+            } else  {
+                document.getElementById("usernameModify").style.display = "inline";
+                document.getElementById("usernameValidate").style.display = "inline-block";
+                document.getElementById("username").style.display = "none";
+            }
         }
 
         function firstnameModify() {
-        if(document.getElementById("firstnameModify").style.display == "inline") {
-            document.getElementById("firstnameModify").style.display = "none";
-            document.getElementById("firstnameValidate").style.display = "none";
-            document.getElementById("firstname").style.display = "inline";
-        } else  {
-            document.getElementById("firstnameModify").style.display = "inline";
-            document.getElementById("firstnameValidate").style.display = "inline-block";
-            document.getElementById("firstname").style.display = "none";
-        }
+            if(document.getElementById("firstnameModify").style.display == "inline") {
+                document.getElementById("firstnameModify").style.display = "none";
+                document.getElementById("firstnameValidate").style.display = "none";
+                document.getElementById("firstname").style.display = "inline";
+            } else  {
+                document.getElementById("firstnameModify").style.display = "inline";
+                document.getElementById("firstnameValidate").style.display = "inline-block";
+                document.getElementById("firstname").style.display = "none";
+            }
         }
 
         function lastnameModify() {
-        if(document.getElementById("lastnameModify").style.display == "inline") {
-            document.getElementById("lastnameModify").style.display = "none";
-            document.getElementById("lastnameValidate").style.display = "none";
-            document.getElementById("lastname").style.display = "inline";
-        } else  {
-            document.getElementById("lastnameModify").style.display = "inline";
-            document.getElementById("lastnameValidate").style.display = "inline-block";
-            document.getElementById("lastname").style.display = "none";
-        }
+            if(document.getElementById("lastnameModify").style.display == "inline") {
+                document.getElementById("lastnameModify").style.display = "none";
+                document.getElementById("lastnameValidate").style.display = "none";
+                document.getElementById("lastname").style.display = "inline";
+            } else  {
+                document.getElementById("lastnameModify").style.display = "inline";
+                document.getElementById("lastnameValidate").style.display = "inline-block";
+                document.getElementById("lastname").style.display = "none";
+            }
         }
 
         function emailModify() {
-        if(document.getElementById("emailModify").style.display == "inline") {
-            document.getElementById("emailModify").style.display = "none";
-            document.getElementById("emailValidate").style.display = "none";
-            document.getElementById("email").style.display = "inline";
-        } else  {
-            document.getElementById("emailModify").style.display = "inline";
-            document.getElementById("emailValidate").style.display = "inline-block";
-            document.getElementById("email").style.display = "none";
+            if(document.getElementById("emailModify").style.display == "inline") {
+                document.getElementById("emailModify").style.display = "none";
+                document.getElementById("emailValidate").style.display = "none";
+                document.getElementById("email").style.display = "inline";
+            } else  {
+                document.getElementById("emailModify").style.display = "inline";
+                document.getElementById("emailValidate").style.display = "inline-block";
+                document.getElementById("email").style.display = "none";
+            }
         }
+
+
+        function avatarModify() {
+            if(document.getElementById("avatarModify").style.display == "inline") {
+                document.getElementById("avatarModify").style.display = "none";
+                document.getElementById("avatarValidate").style.display = "none";
+            } else  {
+                document.getElementById("avatarModify").style.display = "inline";
+                document.getElementById("avatarValidate").style.display = "inline-block";
+            }
         }
+
+
     </script>
 
 {% endblock %}

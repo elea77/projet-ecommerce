@@ -16,7 +16,9 @@
                     <div class="item">
                         <div class="grid-item-infos">
                             <div class="item-img">
-                                <img src="{{ asset( '/game-img/' ~ item.game.img1) }}" alt="">
+                                <a href="{{ path('game', {id : item.game.id}) }}">
+                                    <img src="{{ asset( '/game-img/' ~ item.game.img1) }}" alt="">
+                                </a>
                             </div>
                             <div class="item-game">
                                 <h3>{{ item.game.name }}</h3>
@@ -31,9 +33,9 @@
                         <br><hr><br>
                     </div>
                     {% set prixGames = prixGames + item.game.price * item.quantity %}
+                    {% endfor %}
                     <p class="price">Prix total : {{ prixGames }} €</p>
                     <button class="button">Passer au paiement</button>
-                    {% endfor %}
                 {% else %}
                     Votre panier est vide
                 {% endif %}      

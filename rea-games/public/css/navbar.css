@@ -93,6 +93,7 @@ body, ul {
 button {
     outline: none;
     cursor: pointer;
+    border-width: 1px;
 }
 
 input {

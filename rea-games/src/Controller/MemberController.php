@@ -10,11 +10,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\GameRepository;
-
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 use App\Entity\User;
-
 use App\Form\UserType;
+
+
 
 class MemberController extends AbstractController
 {
@@ -98,6 +101,7 @@ class MemberController extends AbstractController
         $user = $this -> getUser();
         $manager = $this -> getDoctrine() -> getManager();
         $manager -> persist($user);
+
 
         if(isset($_POST['usernameSubmit'])) {
             $username = $request->get('usernameChange');

@@ -46,7 +46,22 @@
                 </div>
                 <p class="price"> {{ game.price }} €</p>
                 {% if app.user %}
-                    <button class="button-basket" type="submit" onclick="window.location.href = '/basket/add/{{ game.id }}';">Ajouter au panier</button><br>
+                <div class="dropdown">
+                    <button class="button-basket" type="submit" onclick="window.location.href = '/basket/add/{{ game.id }}';">Ajouter au panier</button>
+                    <div class="dropdown-content">
+                        {% for comptabi in platform %}
+                            {% if comptabi.name == 'PlayStation' %}
+                                <a href="">&nbsp;&nbsp;PlayStation&nbsp;</a>
+                            {% endif %}
+                            {% if comptabi.name == 'Xbox' %}
+                                <a href="">Xbox</a>
+                            {% endif %}
+                            {% if comptabi.name == 'PC' %}
+                                <a href="">PC</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div><br>
                 {% endif %}
                 <div class="plateform">
                 {% for comptabi in platform %}
