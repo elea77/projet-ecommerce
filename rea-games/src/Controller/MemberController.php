@@ -15,8 +15,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 use App\Entity\User;
-use App\Form\UserType;
 
+use App\Form\UserType;
+use App\Form\ContactType;
 
 
 class MemberController extends AbstractController
@@ -58,6 +59,38 @@ class MemberController extends AbstractController
         
         return $this->render('member/basket.html.twig', [
             'items' => $basketData
+        ]);
+    }
+
+    /**
+	* @Route("/contact", name="contact")
+	*/
+
+    public function contact(\Swift_Mailer $mailer, Request $request){
+        $user = $this -> getUser();
+        $form = $this -> createForm(ContactType::class);
+        $form -> handleRequest($request);
+
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            $contact = $form -> getData();
+            $message = (new \Swift_Message($contact['object']))
+                ->setFrom($user->getEmail())
+                ->setTo('staffreagames@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                        'emails/contactMail.html.twig',
+                        ['contact' => $contact]
+                    ),
+                    'text/html'
+                )
+            ;
+            $mailer->send($message);
+            $this->addFlash('message', 'Votre message a bien été transmis !');
+            
+        }
+
+        return $this->render('member/contact.html.twig', [
+            'contactForm' => $form -> createView()
         ]);
     }
 
