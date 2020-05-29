@@ -24,16 +24,36 @@ class MemberController extends AbstractController
     /**
      * @Route("/basket", name="basket")
      */
-    public function basket(SessionInterface $session, GameRepository $gameRepository)
+    public function basket(SessionInterface $session, GameRepository $gameRepository, \Swift_Mailer $mailer)
     {
         $basket = $session -> get('basket',[]);
         $basketData = [];
+        $user = $this -> getUser();
 
         foreach($basket as $id => $quantity){
             $basketData[]=[
                 'game' => $gameRepository->find($id),
                 'quantity' => $quantity
             ];
+        }
+
+        if(isset($_POST['buySubmit'])){
+            $message = (new \Swift_Message('mail de test'))
+                ->setFrom('staffreagames@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/purchase.html.twig',
+                        ['user' => $user]
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($message);
+            $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
+            return $this -> redirectToRoute("home");
+
         }
         
         return $this->render('member/basket.html.twig', [
