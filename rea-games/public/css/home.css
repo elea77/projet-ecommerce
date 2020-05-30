@@ -2,7 +2,7 @@
     background-image: url('../img/fond-home.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: right;
     z-index: 99999;
     width: 100%;
     height: 93vh;
@@ -12,7 +12,7 @@
 
 #titles-top {
     text-align: start;
-    margin-top: auto; /* eh oui, tout bêtement */
+    margin-top: auto;
     margin-bottom: auto;
     margin-left: 5%;
 }
@@ -26,6 +26,16 @@
 #titles-top p {
     margin-bottom: 3%;
     font-size: 18px;
+}
+
+
+#contact {
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    top: 92vh;
+    right: 5%;
 }
 
 .container {
