@@ -1,0 +1,30 @@
+{% extends 'sidenav.html.twig' %}
+
+{% block title %}ReaGames - Inscription{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/register.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Nouvel administrateur</h1> 
+        {% for message in app.flashes('errors') %}
+            <div class="alert" style="text-align: center;">
+                <strong>Warning!</strong> {{ message }}
+            </div>
+        {% endfor %}
+        <form name="user" method="post">
+            {{ form_errors(userForm.password) }}
+            <input type="text" name="user[username]" id="user_username" class="input" placeholder="Pseudo" required>
+            <input type="date" name="user[birthday]" id="user_birthday" class="input" required><br>
+            <input type="text" name="user[firstname]" id="user_firstname" class="input-large" placeholder="Prénom" required><br>
+            <input type="text" name="user[lastname]" id="user_lastname" class="input-large" placeholder="Nom" required><br>
+            <input type="email" name="user[email]" id="user_email" class="input-large" placeholder="Adresse mail" required><br>
+            {{ form_row(userForm.password) }}
+            <button type="submit" name="user[Create_account]" id="user_Create_account" class="button">S'inscrire</button>
+            {{ form_row(userForm._token) }}
+        </form>
+    </div>
+
+{% endblock %}

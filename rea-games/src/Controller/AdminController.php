@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+use App\Form\UserType;
 
 class AdminController extends AbstractController
 {
@@ -105,6 +108,47 @@ class AdminController extends AbstractController
 
         return $this->render('admin/admins.html.twig', [
             'admins' => $admins
+        ]);
+    }
+
+    /**
+     * @Route("/admin/createAdmin", name="createAdmin")
+     */
+    public function createAdmin(UserPasswordEncoderInterface $encoder, Request $request)
+    {
+        $admin = new User;
+
+        $form = $this -> createForm(UserType::class, $admin);
+        $form -> handleRequest($request);
+        
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            try{
+                $manager = $this -> getDoctrine() -> getManager();
+			
+                $manager -> persist($admin);
+                $admin -> setRole('ROLE_ADMIN');
+                $admin -> setBalance(0);
+                $admin -> setAvatar('user.png');
+                $admin -> setRegisterDate(new \DateTime('now'));
+                $password = $admin -> getPassword();
+                $newPassword = $encoder -> encodePassword($admin, $password);
+                $admin -> setPassword($newPassword);
+
+                $manager -> flush();
+                return $this -> redirectToRoute('admins');
+            }catch(\Doctrine\DBAL\DBALException $e) 
+            {
+                if( $e->getPrevious()->getCode() === '23000' )
+                {
+                    $this -> addFlash('errors', 'Cette adresse mail est déjà utilisée !');
+                }
+
+                else throw $e;    
+            }
+        }
+
+        return $this->render('admin/createAdmin.html.twig', [
+            'userForm' => $form -> createView()
         ]);
     }
 }
