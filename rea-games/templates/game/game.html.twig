@@ -159,6 +159,7 @@
 
             {% for comment in comments%}
             <div id="review">
+                <img src="{{ asset( '/avatar/' ~ comment.idUser.avatar) }}" alt="" class="avatar-img">
                 <div class="first-part">
                     <form method="POST" id="formComment{{comment.id}}" action="/game/modifyComment/{{comment.id}}/{{game.id}}">
                         <h3>{{ comment.idUser.username }}</h3><br>
@@ -169,7 +170,7 @@
                 </div>
                 <div class="second-part">
                     <p>{{ comment.date|date('d/m/Y à H:i')  }}</p><br>
-                    {%if app.user%}
+                    {% if app.user %}
                         {% if comment.idUser.id == app.user.id %}
                             <span onclick="commentModify({{ comment.id }})" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: white;"></span>
                             <a href="{{ path('deleteComment', {id_comment : comment.id, id_game : game.id } ) }}">
