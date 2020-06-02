@@ -17,7 +17,14 @@
 .user-info .img {
     display: block;
     margin: auto;
-    width: 35%;
+    width: 35%;  
+}
+
+.avatar-img {
+    clip-path:ellipse(50% 50%);
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
 }
 
 .info {

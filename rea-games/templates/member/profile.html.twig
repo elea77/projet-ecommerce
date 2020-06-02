@@ -12,7 +12,7 @@
         <div id="profile">
             <div class="user-info">
                 <div class="img">
-                        <img src="{{ asset('/avatar/') }}{{ user.avatar }}" width="250px" alt="">
+                        <img src="{{ asset('/avatar/') }}{{ user.avatar }}" alt="" class="avatar-img">
                         <div id="avatarModify" style="display: none;">
                         {{form_start(form)}}
                             {{form_widget(form.avatar)}}
