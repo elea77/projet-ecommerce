@@ -124,9 +124,10 @@ class AdminController extends AbstractController
         }
 
         $game_id = $game -> getId();
+        $lastImg1 = $game -> getImg1();
+        $lastImg2 = $game -> getImg2();
 
-        if($form1 -> isSubmitted() && $form1 -> isValid()){
-            $lastImg1 = $game -> getImg1();
+        if($form1 -> isSubmitted() && $form1 -> isValid()){          
             $game -> removeFile1();
             unlink($this->getParameter('upload_game_img') . $lastImg1);
 
@@ -142,7 +143,6 @@ class AdminController extends AbstractController
         }
 
         if($form2 -> isSubmitted() && $form2 -> isValid()){
-            $lastImg2 = $game -> getImg2();
             $game -> removeFile2();
             unlink($this->getParameter('upload_game_img') . $lastImg2);
 
