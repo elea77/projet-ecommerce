@@ -202,7 +202,7 @@ class MemberController extends AbstractController
 
         if($form -> isSubmitted() && $form -> isValid()){
             if($user -> getAvatar()){
-                if($user -> getAvatar() -> getClientOriginalName() != 'user.png'){
+                if($lastAvatar != 'user.png' ){
                     $user -> removeFile();
                     unlink($this->getParameter('upload_avatar') . $lastAvatar);
                 }
@@ -211,9 +211,7 @@ class MemberController extends AbstractController
                 $filename = 'image_' . time() . '_' . $user_id . '_' . rand(1,9999) . '.' . $file->guessExtension();
                 $file->move($this->getParameter('upload_avatar'), $filename);
                 $user-> setAvatar($filename);
-            } else{
-                $user -> setAvatar($avatarUser);
-            }
+            } 
             
             $manager = $this-> getDoctrine() -> getManager();
             $manager -> persist($user); //commit(git)
