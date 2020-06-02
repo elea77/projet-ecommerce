@@ -105,24 +105,24 @@ class Game
         return $this;
     }
 
-    public function getImg1(): ?string
+    public function getImg1()
     {
         return $this->img1;
     }
 
-    public function setImg1(string $img1): self
+    public function setImg1($img1)
     {
         $this->img1 = $img1;
 
         return $this;
     }
 
-    public function getImg2(): ?string
+    public function getImg2()
     {
         return $this->img2;
     }
 
-    public function setImg2(string $img2): self
+    public function setImg2($img2)
     {
         $this->img2 = $img2;
 
@@ -251,5 +251,19 @@ class Game
         }
 
         return $this;
+    }
+
+    public function removeFile1()
+    {
+        if(file_exists('/../../public/game-img/' . $this-> img1) ){
+            unlink('/../../public/game-img/' . $this-> img1);
+        }
+    }
+
+    public function removeFile2()
+    {
+        if(file_exists('/../../public/game-img/' . $this-> img2) ){
+            unlink('/../../public/game-img/' . $this-> img2);
+        }
     }
 }

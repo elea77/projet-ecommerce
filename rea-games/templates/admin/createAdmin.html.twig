@@ -1,6 +1,6 @@
 {% extends 'sidenav.html.twig' %}
 
-{% block title %}ReaGames - Inscription{% endblock %}
+{% block title %}ReaGames - nouvel admin{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/css/register.css') }}">
 {% endblock %}
@@ -22,7 +22,7 @@
             <input type="text" name="user[lastname]" id="user_lastname" class="input-large" placeholder="Nom" required><br>
             <input type="email" name="user[email]" id="user_email" class="input-large" placeholder="Adresse mail" required><br>
             {{ form_row(userForm.password) }}
-            <button type="submit" name="user[Create_account]" id="user_Create_account" class="button">S'inscrire</button>
+            <button type="submit" name="user[Create_account]" id="user_Create_account" class="button">Créer</button>
             {{ form_row(userForm._token) }}
         </form>
     </div>

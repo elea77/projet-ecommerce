@@ -10,8 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 use App\Form\UserType;
+use App\Form\GameImg1Type;
+use App\Form\GameImg2Type;
 
 class AdminController extends AbstractController
 {
@@ -93,6 +98,73 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/updateGame/{id}", name="updateGame")
+     */
+    public function updateGame($id, Request $request)
+    {
+        $game = $this->getDoctrine()->getRepository(Game::class)->find($id);
+
+        $form1 = $this -> createForm(GameImg1Type::class, $game);
+        $form1 -> handleRequest($request);
+        $form2 = $this -> createForm(GameImg2Type::class, $game);
+        $form2 -> handleRequest($request);
+
+        if(isset($_POST['submit'])) {
+            $newName = $_POST['newName'];
+            $newDesc = $_POST['newDesc'];
+            $newPrice = $_POST['newPrice'];
+            $game -> setName($newName);
+            $game -> setPrice($newPrice);
+            $game -> setDescription($newDesc);
+ 
+            $manager = $this-> getDoctrine() -> getManager();
+            $manager -> persist($game); //commit(git)
+            $manager -> flush(); // push(git)
+            return $this -> redirectToRoute('games');
+        }
+
+        $game_id = $game -> getId();
+
+        if($form1 -> isSubmitted() && $form1 -> isValid()){
+            $lastImg1 = $game -> getImg1();
+            $game -> removeFile1();
+            unlink($this->getParameter('upload_game_img') . $lastImg1);
+
+            $file1 = $game->getImg1();
+            $filename1 = 'image_' . time() . '_' . $game_id . '_' . rand(1,9999) . '.' . $file1->guessExtension();
+            $file1->move($this->getParameter('upload_game_img'), $filename1);
+            $game-> setImg1($filename1);
+
+            $manager = $this-> getDoctrine() -> getManager();
+            $manager -> persist($game); //commit(git)
+            $manager -> flush(); // push(git)
+            $this -> addFlash('success','Les informations ont été modifié avec succès !');
+        }
+
+        if($form2 -> isSubmitted() && $form2 -> isValid()){
+            $lastImg2 = $game -> getImg2();
+            $game -> removeFile2();
+            unlink($this->getParameter('upload_game_img') . $lastImg2);
+
+            $file2 = $game->getImg2();
+            $filename2 = 'image_' . time() . '_' . $game_id . '_' . rand(1,9999) . '.' . $file2->guessExtension();
+            $file2->move($this->getParameter('upload_game_img'), $filename2);
+            $game-> setImg2($filename2);
+
+            $manager = $this-> getDoctrine() -> getManager();
+            $manager -> persist($game); //commit(git)
+            $manager -> flush(); // push(git)
+            $this -> addFlash('success','Les informations ont été modifié avec succès !');
+        }
+
+        return $this->render('admin/updateGame.html.twig', [
+            'game' => $game,
+            'form1'=> $form1 -> createView(),
+            'form2'=> $form2 -> createView()
+        ]);
+    }
+
+    /**
      * @Route("/admin/admins", name="admins")
      */
     public function admins(PaginatorInterface $paginator, Request $request)
@@ -151,4 +223,5 @@ class AdminController extends AbstractController
             'userForm' => $form -> createView()
         ]);
     }
+
 }

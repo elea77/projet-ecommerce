@@ -53,6 +53,14 @@ class MemberController extends AbstractController
                 )
             ;
 
+            foreach($basket as $id => $quantity){
+                $basket[$id]--;
+                if(empty($basket[$id])){
+                    unset($basket[$id]);
+                }
+            }
+            $session -> set('basket',$basket);
+
             $mailer->send($message);
             $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
             return $this -> redirectToRoute("home");
