@@ -14,9 +14,11 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
 use App\Entity\User;
 
 use App\Form\UserType;
+use App\Form\AvatarType;
 use App\Form\ContactType;
 
 
@@ -179,7 +181,7 @@ class MemberController extends AbstractController
 
         if(isset($_POST['emailSubmit'])) {
             $newEmail = $request->get('emailChange');
-            $userRepo = $this->getDoctrine()->getRepository(USer::class);
+            $userRepo = $this->getDoctrine()->getRepository(User::class);
 
             if($userRepo->findOneBy(['email' => $newEmail])){
                 $this -> addFlash('errors', 'Un utilisateur utilise déja cette adresse mail !');
@@ -190,7 +192,38 @@ class MemberController extends AbstractController
             return $this -> redirectToRoute('profile');
         }
 
+        $lastAvatar = $user -> getAvatar();
+
+        $user_id = $user -> getId();
+        
+        $form = $this -> createForm(AvatarType::class, $user);
+        $form -> handleRequest($request);
+
+
+        if($form -> isSubmitted() && $form -> isValid()){
+            if($user -> getAvatar()){
+                if($user -> getAvatar() -> getClientOriginalName() != 'user.png'){
+                    $user -> removeFile();
+                    unlink($this->getParameter('upload_avatar') . $lastAvatar);
+                }
+                
+                $file = $user->getAvatar();
+                $filename = 'image_' . time() . '_' . $user_id . '_' . rand(1,9999) . '.' . $file->guessExtension();
+                $file->move($this->getParameter('upload_avatar'), $filename);
+                $user-> setAvatar($filename);
+            } else{
+                $user -> setAvatar($avatarUser);
+            }
+            
+            $manager = $this-> getDoctrine() -> getManager();
+            $manager -> persist($user); //commit(git)
+            $manager -> flush(); // push(git)
+            $this -> addFlash('success','Les informations ont été modifié avec succès !');
+        }
+
+
         return $this->render('member/profile.html.twig', [
+            'form' => $form -> createView(),
             'user' => $user
         ]);
     }

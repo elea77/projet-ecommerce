@@ -6,8 +6,15 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Error;
+
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields="email", message="Le mail existe déja")
  */
 class User implements UserInterface
 {
@@ -188,12 +195,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatar(): ?string
+    public function getAvatar()
     {
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): self
+    public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
 
@@ -234,5 +241,12 @@ class User implements UserInterface
         $this->balance = $balance;
 
         return $this;
+    }
+
+    public function removeFile()
+    {
+        if(file_exists('/../../public/avatar/' . $this-> avatar) && $this-> avatar != 'user.png'){
+            unlink('/../../public/avatar/' . $this-> avatar);
+        }
     }
 }

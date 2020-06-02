@@ -12,14 +12,16 @@
         <div id="profile">
             <div class="user-info">
                 <div class="img">
-                    <form method="POST">
-                        <img src="{{ asset('/img/user.png') }}" width="100%" alt="">
-                        <input type="file" id="avatarModify" name="avatar" style="display: none;">
+                        <img src="{{ asset('/avatar/') }}{{ user.avatar }}" width="250px" alt="">
+                        <div id="avatarModify" style="display: none;">
+                        {{form_start(form)}}
+                            {{form_widget(form.avatar)}}
+                        </div>
                         <span onclick="avatarModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black; cursor: pointer;"></span>
                         <button id="avatarValidate" class="validate" type="submit" name="avatarSubmit" style="display: none;">
                             <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white; cursor: pointer;"></span>
                         </button>
-                    </form>
+                        {{form_end(form)}}
                 </div>
                 <div class="info">
                     <form method="POST">
