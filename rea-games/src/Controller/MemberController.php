@@ -13,9 +13,11 @@ use App\Repository\GameRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 use App\Entity\User;
+use App\Entity\Invoice;
 
 use App\Form\UserType;
 use App\Form\AvatarType;
@@ -63,6 +65,54 @@ class MemberController extends AbstractController
 
             $mailer->send($message);
             $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
+
+            // Insertion de la facture dans la bdd
+            $invoice = new Invoice;
+
+            $manager = $this -> getDoctrine() -> getManager();
+			
+            $manager -> persist($invoice);
+            $invoice -> setIdUser($user);
+            $invoice -> setDocumentName(time() . 'test');
+            $invoice -> setDate(new \DateTime('now'));
+            $invoice -> setCode('test');
+              
+            $manager -> flush();
+
+
+            // Configure Dompdf according to your needs
+            $pdfOptions = new Options();
+            $pdfOptions->set('defaultFont', 'Roboto');
+
+            // Instantiate Dompdf with our options
+            $dompdf = new Dompdf($pdfOptions);
+
+            // Retrieve the HTML generated in our twig file
+            $html = $this->renderView('member/pdf.html.twig', [
+                'title' => "Facture"
+            ]);
+
+            // Load HTML to Dompdf
+            $dompdf->loadHtml($html);
+
+            // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+            $dompdf->setPaper('A4', 'portrait');
+
+            // Render the HTML as PDF
+            $dompdf->render();
+
+            // Store PDF Binary Data
+            $output = $dompdf->output();
+
+            // In this case, we want to write the file in the public directory
+            $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/invoices';
+            // e.g /var/www/project/public/mypdf.pdf
+            $pdfFilepath =  $publicDirectory . '/mypdf.pdf';
+
+            // Write file to the desired path
+            file_put_contents($pdfFilepath, $output);
+
+
             return $this -> redirectToRoute("home");
 
         }
