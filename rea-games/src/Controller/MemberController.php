@@ -373,5 +373,95 @@ class MemberController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/resetPassword", name="resetPassword")
+     */
+    public function resetPassword(UserPasswordEncoderInterface $encoder, Request $request,\Swift_Mailer $mailer,SessionInterface $session)
+    {
+        $id = 1;
+
+        if(isset($_POST['submitEmail'])) {
+            $email = $request->get('email');
+            $repository = $this->getDoctrine()->getRepository(User::class);
+            $user = $repository->findOneBy(['email' => $email]);
+            $email = $session -> get('email');
+
+            $codeEnvoyé = rand(100000,999999);
+            $code = $session -> get('code',[]);
+            if
+            (!empty($code[$id])){
+                $code[$id] = $codeEnvoyé;
+                $session -> set('code',$code);
+            }else
+            {
+                $code[$id] = $codeEnvoyé;
+                $session -> set('code',$code);
+            }
+
+
+            if($user != null)
+            {
+                $message = (new \Swift_Message('Récupération de mot de passe'))
+                ->setFrom('staffreagames@gmail.com')
+                ->setTo($email)
+                ->setBody(
+                    $this->renderView(
+                        'emails/emailResetPassword.html.twig',
+                        ['code' => $codeEnvoyé]
+                    ),
+                    'text/html'
+                )
+                ;
+                $mailer->send($message);
+                $email = $user -> getEmail();
+                $session -> set('email',$email);
+                $this -> addFlash('message', 'Un email vous a été envoyé !');
+            }else
+            {
+                $this -> addFlash('errors', 'Aucun utilisateur ne correspond a cette adresse email !');
+            }
+        }
+
+
+        if(isset($_POST['submitCode'])) {
+            $codeRecu = $request->get('code');
+            $code = $session -> get('code',[]);
+            $codeEnvoyé = $code[$id];
+            if($codeEnvoyé == $codeRecu)
+            {
+                $this -> addFlash('success', 'Bon code !  Votre mot de passe est: ');
+                return $this->render('member/resetPassword.html.twig', []);
+            }else
+            {
+                $this -> addFlash('errors', 'Le code rentré ne correspond pas !');
+            }
+        }
+
+
+        if(isset($_POST['submitPassword'])) {
+            $new_pwd = $request->get('new_password'); 
+            $new_pwd_confirm = $request->get('new_password_confirm');
+            $user = $this->getDoctrine()->getRepository(User::class);
+            $email = $session -> get('email');
+            $user = $user->findOneBy(['email' => $email]);
+
+            $manager = $this -> getDoctrine() -> getManager();
+            $manager->persist($user);
+
+            if($new_pwd == $new_pwd_confirm)
+            {             
+                $new_pwd_encoded = $encoder->encodePassword($user, $new_pwd_confirm);
+                $user -> setPassword($new_pwd_encoded);
+                $manager -> flush();
+                return $this -> redirectToRoute('login');
+            }else
+            {
+                $this -> addFlash('errors', 'Le nouveau mot de passe doit être identique dans les deux champs ! Recommencer la manipulation.');
+            }
+        }
+
+        return $this->render('member/resetPassword.html.twig', []);
+    }
+
 
 }
