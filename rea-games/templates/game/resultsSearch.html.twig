@@ -12,6 +12,10 @@
 
         <h2>Éléments correspondant à la recherche "{{ search }}" :</h2>
 
+        {% if results is empty %}
+            <h3>Aucun élément ne corresponds à votre recherche</h3>
+        {% endif %}
+
         <div class="catalogue">
             {% for result in results %}
             <div class="game">
