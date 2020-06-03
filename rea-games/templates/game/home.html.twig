@@ -17,7 +17,9 @@
             <p>Découvrez une sélection <br>de jeux vidéos </p>
             
         </div>
-        <a href="{{ path('contact') }}" id="contact">Nous contacter</a>
+        {% if app.user %}
+            <a href="{{ path('contact') }}" id="contact">Nous contacter</a>
+        {% endif %}
     </div>
 
     <div class="container">
