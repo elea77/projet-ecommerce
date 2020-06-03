@@ -109,7 +109,7 @@ class MemberController extends AbstractController
 
             $html = $this->renderView('member/pdf.html.twig', [
                 'title' => "Facture",
-                ''
+                'items' => $basketData
             ]);
 
             $dompdf->loadHtml($html);
@@ -126,7 +126,7 @@ class MemberController extends AbstractController
 
 
             foreach($basket as $id => $quantity){
-                $basket[$id]--;
+                $basket[$id] = null;
                 if(empty($basket[$id])){
                     unset($basket[$id]);
                 }

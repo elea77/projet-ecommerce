@@ -5,7 +5,46 @@
         <title>Facture</title>
     </head>
     <body>
+        <h1>Facture</h1>
+        <img src="../../../public/img/logo_reagames2.png" alt="Mon logo">
         <h4>{{ title }}</h4>
-        <p>Lorem Ipsum</p>
+        {% set prixGames = 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Montant</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.game.name }}</td>
+                        <td>{{ item.game.price }} €</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.game.price * item.quantity }} €</td>
+                    </tr>
+                    {% set prixGames = prixGames + item.game.price * item.quantity %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="price">Prix total : {{ prixGames }} €</p>
     </body>
 </html>
+
+<style>
+table,td {
+    border: 1px solid #333;
+}
+
+thead,tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+img{
+    float: right;
+}
+</style>
