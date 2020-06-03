@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InvoiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,16 @@ class Invoice
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="invoice", orphanRemoval=true)
+     */
+    private $purchases;
+
+    public function __construct()
+    {
+        $this->purchases = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +99,37 @@ class Invoice
     public function setIdUser(?User $id_user): self
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Purchase[]
+     */
+    public function getPurchases(): Collection
+    {
+        return $this->purchases;
+    }
+
+    public function addPurchase(Purchase $purchase): self
+    {
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setInvoice($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchase $purchase): self
+    {
+        if ($this->purchases->contains($purchase)) {
+            $this->purchases->removeElement($purchase);
+            // set the owning side to null (unless already changed)
+            if ($purchase->getInvoice() === $this) {
+                $purchase->setInvoice(null);
+            }
+        }
 
         return $this;
     }

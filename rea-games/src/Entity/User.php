@@ -3,12 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Error;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -85,6 +83,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Note::class, mappedBy="id_user", orphanRemoval=true)
      */
     private $notes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $purchases;
+
+    public function __construct()
+    {
+        $this->purchases = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -248,5 +256,36 @@ class User implements UserInterface
         if(file_exists('/../../public/avatar/' . $this-> avatar) && $this-> avatar != 'user.png'){
             unlink('/../../public/avatar/' . $this-> avatar);
         }
+    }
+
+    /**
+     * @return Collection|Purchase[]
+     */
+    public function getPurchases(): Collection
+    {
+        return $this->purchases;
+    }
+
+    public function addPurchase(Purchase $purchase): self
+    {
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchase $purchase): self
+    {
+        if ($this->purchases->contains($purchase)) {
+            $this->purchases->removeElement($purchase);
+            // set the owning side to null (unless already changed)
+            if ($purchase->getUser() === $this) {
+                $purchase->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

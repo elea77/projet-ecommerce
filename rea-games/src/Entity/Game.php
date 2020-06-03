@@ -69,11 +69,17 @@ class Game
      */
     private $compatibility;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="game", orphanRemoval=true)
+     */
+    private $purchases;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->compatibility = new ArrayCollection();
+        $this->purchases = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -265,5 +271,36 @@ class Game
         if(file_exists('/../../public/game-img/' . $this-> img2) ){
             unlink('/../../public/game-img/' . $this-> img2);
         }
+    }
+
+    /**
+     * @return Collection|Purchase[]
+     */
+    public function getPurchases(): Collection
+    {
+        return $this->purchases;
+    }
+
+    public function addPurchase(Purchase $purchase): self
+    {
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchase $purchase): self
+    {
+        if ($this->purchases->contains($purchase)) {
+            $this->purchases->removeElement($purchase);
+            // set the owning side to null (unless already changed)
+            if ($purchase->getGame() === $this) {
+                $purchase->setGame(null);
+            }
+        }
+
+        return $this;
     }
 }

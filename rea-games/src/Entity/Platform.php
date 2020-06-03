@@ -31,9 +31,15 @@ class Platform
      */
     private $games;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="platform", orphanRemoval=true)
+     */
+    private $purchases;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
+        $this->purchases = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,6 +82,37 @@ class Platform
         if ($this->games->contains($game)) {
             $this->games->removeElement($game);
             $game->removeCompatibility($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Purchase[]
+     */
+    public function getPurchases(): Collection
+    {
+        return $this->purchases;
+    }
+
+    public function addPurchase(Purchase $purchase): self
+    {
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setPlatform($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchase $purchase): self
+    {
+        if ($this->purchases->contains($purchase)) {
+            $this->purchases->removeElement($purchase);
+            // set the owning side to null (unless already changed)
+            if ($purchase->getPlatform() === $this) {
+                $purchase->setPlatform(null);
+            }
         }
 
         return $this;
