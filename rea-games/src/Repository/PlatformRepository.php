@@ -30,6 +30,17 @@ class PlatformRepository extends ServiceEntityRepository
         ;
     }
 
+    public function platformName($name)
+    {
+        $builder = $this -> createQueryBuilder('r');
+        return $builder
+            ->where('r.name LIKE :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Platform[] Returns an array of Platform objects
     //  */

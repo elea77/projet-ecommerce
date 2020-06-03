@@ -18,6 +18,9 @@ use Dompdf\Options;
 
 use App\Entity\User;
 use App\Entity\Invoice;
+use App\Entity\Purchase;
+use App\Entity\Game;
+use App\Entity\Platform;
 
 use App\Form\UserType;
 use App\Form\AvatarType;
@@ -34,6 +37,8 @@ class MemberController extends AbstractController
         $basket = $session -> get('basket',[]);
         $basketData = [];
         $user = $this -> getUser();
+
+        $username = $user -> getUsername();
 
         foreach($basket as $id => $quantity){
             $basketData[]=[
@@ -55,13 +60,6 @@ class MemberController extends AbstractController
                 )
             ;
 
-            foreach($basket as $id => $quantity){
-                $basket[$id]--;
-                if(empty($basket[$id])){
-                    unset($basket[$id]);
-                }
-            }
-            $session -> set('basket',$basket);
 
             $mailer->send($message);
             $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
@@ -70,47 +68,71 @@ class MemberController extends AbstractController
             $invoice = new Invoice;
 
             $manager = $this -> getDoctrine() -> getManager();
-			
+
             $manager -> persist($invoice);
             $invoice -> setIdUser($user);
-            $invoice -> setDocumentName(time() . 'test');
+            $invoice -> setDocumentName($username . '_' . date('d-m-Y_H-m') . '_' . rand(1,99));
             $invoice -> setDate(new \DateTime('now'));
-            $invoice -> setCode('test');
               
             $manager -> flush();
 
 
-            // Configure Dompdf according to your needs
+            //Insertion des achats dans la bdd
+            foreach($basket as $id => $quantity){
+                $manager = $this->getDoctrine()->getManager();
+                $game = $manager->find(Game::class, $id);
+
+                $manager = $this->getDoctrine()->getManager();
+                $platform = $manager->find(Platform::class, 1);
+                
+                $purchase = new Purchase;
+
+                $manager = $this -> getDoctrine() -> getManager();
+                
+                $manager -> persist($purchase);
+                $purchase -> setUser($user);
+                $purchase -> setDate(new \DateTime('now'));
+                $purchase -> setQuantity($quantity);
+                $purchase -> setGame($game);
+                $purchase -> setInvoice($invoice);
+                $purchase -> setPlatform($platform);
+            }
+              
+
+            $manager -> flush();
+
+            //Creation et enregistrement du fichier pdf
+
             $pdfOptions = new Options();
             $pdfOptions->set('defaultFont', 'Roboto');
-
-            // Instantiate Dompdf with our options
             $dompdf = new Dompdf($pdfOptions);
 
-            // Retrieve the HTML generated in our twig file
             $html = $this->renderView('member/pdf.html.twig', [
-                'title' => "Facture"
+                'title' => "Facture",
+                ''
             ]);
 
-            // Load HTML to Dompdf
             $dompdf->loadHtml($html);
-
-            // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
             $dompdf->setPaper('A4', 'portrait');
-
-            // Render the HTML as PDF
             $dompdf->render();
-
-            // Store PDF Binary Data
             $output = $dompdf->output();
 
-            // In this case, we want to write the file in the public directory
-            $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/invoices';
-            // e.g /var/www/project/public/mypdf.pdf
-            $pdfFilepath =  $publicDirectory . '/mypdf.pdf';
+            $docName = $invoice -> getDocumentName();
 
-            // Write file to the desired path
+            $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/invoices';
+            $pdfFilepath =  $publicDirectory . '/'.$docName.'.pdf';
+
             file_put_contents($pdfFilepath, $output);
+
+
+            foreach($basket as $id => $quantity){
+                $basket[$id]--;
+                if(empty($basket[$id])){
+                    unset($basket[$id]);
+                }
+            }
+
+            $session -> set('basket',$basket);
 
 
             return $this -> redirectToRoute("home");

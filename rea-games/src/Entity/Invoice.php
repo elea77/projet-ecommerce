@@ -30,11 +30,6 @@ class Invoice
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $code;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invoices")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -75,18 +70,6 @@ class Invoice
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
 
         return $this;
     }
