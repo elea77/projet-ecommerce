@@ -11,10 +11,10 @@
     <div class="container">
         <div class="game-info">
 
-            <img src="{{ asset('/game-img/') }}{{ game.img2 }}" alt="">
+            <img src="{{ asset('/game-img/') }}{{ game.img2 }}" alt="" id="game-img">
 
             <div class="info">
-                <h1> {{ game.name }} </h1><br>
+                <h1> {{ game.name }} </h1>
                 <p class="descrip"> {{ game.description }} </p>
                 <br>
                 <div class="note">
@@ -164,7 +164,7 @@
             </div>
             <br><br>
 
-            {% for comment in comments%}
+            {% for comment in comments %}
             <div id="review">
                 <img src="{{ asset( '/avatar/' ~ comment.idUser.avatar) }}" alt="" class="avatar-img">
                 <div class="first-part">

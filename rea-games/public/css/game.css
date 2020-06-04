@@ -21,6 +21,10 @@
     margin-block-end: auto;
 }
 
+.info h1 {
+    margin-block-end: 8%;
+}
+
 .descrip {
     text-align: start;
     line-height: 25px;
@@ -237,4 +241,88 @@ textarea:hover {
     background-color: #363C41;
     border: none;
     box-shadow: none;
+}
+
+
+
+@media(max-width:1200px) {}
+
+@media(max-width:1080px) {}
+
+@media(max-width:992px) {
+    .button-review {
+        width: 20%;
+    }
+
+    .button-send {
+        width: 16%;
+    }
+}
+
+@media(max-width:768px) {
+    .game-info {
+        height: auto;
+    }
+
+    .button-review {
+        width: 30%;
+    }
+
+    .button-send {
+        width: 18%;
+    }
+}
+
+@media(max-width:576px) {
+    .game-info {
+        display: block;
+        text-align: center;
+    }
+
+    .game-info h1 {
+        font-size: 25px;
+    }
+
+    #game-img {
+        display: none;
+    }
+
+    .info h1 {
+        margin-block-end: 2%;
+    }
+
+    #review {
+        display: grid;
+        grid-template-columns: 75% 25%;
+        margin-left: 2%;
+        margin-right: 4%;
+        margin-block-end: 5%;
+    }
+
+    .reviews h2 {
+        font-size: 20px;
+    }
+
+    #review h3 {
+        font-size: 17px;
+    }
+
+    .avatar-img {
+        display: none;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .button-review {
+        width: 52%;
+    }
+
+    .button-send {
+        width: 38%;
+    }
+}
+
+@media(max-width:320px) {
 }

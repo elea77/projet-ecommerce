@@ -21,7 +21,7 @@ class CommentType extends AbstractType
                 ],
                 'label' => "Écrire un commentaire :"
             ])
-            ->add('send',SubmitType::class, [
+            ->add('Envoyer',SubmitType::class, [
                 'attr' => [
                     'class' => 'button-send'
                 ]

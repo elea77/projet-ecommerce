@@ -91,3 +91,85 @@ img {
 .game a {
     text-decoration: none;
 }
+
+
+
+@media(max-width:1200px) {}
+
+@media(max-width:1080px) {}
+
+@media(max-width:992px) {}
+
+@media(max-width:768px) {
+    #top {
+        height: 35vh;
+    }
+
+    #titles-top h1 {
+        font-size: 20px;
+    }
+    
+    #titles-top p {
+        font-size: 12px;
+    }
+    
+    #contact {
+        top: 36vh;
+        right: 5%;
+        font-size: 12px;
+    }
+
+    .container h2 {
+        font-size: 20px;
+    }
+
+    .catalogue {
+        display: grid;
+        grid-template-columns: repeat(2,50%);
+    }
+
+    .game-name p {
+        font-size: 12px;
+    }
+}
+
+@media(max-width:576px) {
+    #top {
+        height: 25vh;
+    }
+
+    #titles-top h1 {
+        font-size: 20px;
+    }
+    
+    #titles-top p {
+        font-size: 12px;
+    }
+    
+    #contact {
+        font-size: 18px;
+        text-decoration: none;
+        color: white;
+        position: absolute;
+        top: 26vh;
+        right: 5%;
+        font-size: 12px;
+    }
+
+    .container h2 {
+        font-size: 20px;
+    }
+
+    .catalogue {
+        display: grid;
+        grid-template-columns: repeat(2,50%);
+    }
+
+    .game-name p {
+        font-size: 12px;
+    }
+
+}
+
+@media(max-width:320px) {
+}
