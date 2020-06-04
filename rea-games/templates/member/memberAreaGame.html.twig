@@ -23,7 +23,7 @@
                 {% if purchase.platform.name == 'PC' %}
                     <img src="{{ asset('/img/pc-logo-png-2.png') }}" alt="">
                 {% endif %}<br>
-                <a href=""><button class="button" type="submit">Consulter ma facture</button></a>
+                <a href="{{ asset('/invoices/') }}{{ purchase.invoice.documentName }}{{'.pdf'}}"><button class="button" type="submit">Consulter ma facture</button></a>
             </div>
 
         </div>
