@@ -50,17 +50,17 @@
                         <h4>Rupture de stock</h4>
                     {% else %}
                     <div class="dropdown">
-                        <button class="button-basket" type="submit" onclick="window.location.href = '/basket/add/{{ game.id }}';">Ajouter au panier</button>
+                        <button class="button-basket">Ajouter au panier</button>
                         <div class="dropdown-content">
                             {% for comptabi in platform %}
                                 {% if comptabi.name == 'PlayStation' %}
-                                    <a href="">&nbsp;&nbsp;PlayStation&nbsp;</a>
+                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}">&nbsp;&nbsp;PlayStation&nbsp;</a>
                                 {% endif %}
                                 {% if comptabi.name == 'Xbox' %}
-                                    <a href="">Xbox</a>
+                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}">Xbox</a>
                                 {% endif %}
                                 {% if comptabi.name == 'PC' %}
-                                    <a href="">PC</a>
+                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}">PC</a>
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -76,10 +76,10 @@
                         <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
                     {% endif %}
                     {% if comptabi.name == 'Xbox' %}
-                        <img src="{{ asset('/img/002-xbox.png') }}" alt="">
+                        <img src="{{ asset('/img/logo_xbox.png') }}" alt="">
                     {% endif %}
                     {% if comptabi.name == 'PC' %}
-                        <p>PC</p>
+                        <img src="{{ asset('/img/pc-logo-png-2.png') }}" alt="">
                     {% endif %}
                 {% endfor %}
                 </div>

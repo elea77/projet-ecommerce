@@ -23,11 +23,20 @@
                             <div class="item-game">
                                 <h3>{{ item.game.name }}</h3>
                                 <h4>Quantité : {{ item.quantity }}</h4>
+                                {{ item.platform.name }}
                             </div>
                             <div class="item-price ps">
-                                <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
+                                {% if item.platform.name == 'PlayStation' %}
+                                    <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
+                                {% endif %}
+                                {% if item.platform.name == 'Xbox' %}
+                                    <img src="{{ asset('/img/logo_xbox.png') }}" alt="">
+                                {% endif %}
+                                {% if item.platform.name == 'PC' %}
+                                    <img src="{{ asset('/img/pc-logo-png-2.png') }}" alt="">
+                                {% endif %}
                                 <h3>{{ item.game.price * item.quantity }} €</h3>
-                                <a href="{{ path('basket_remove', {id : item.game.id } ) }}"><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 25px; color: red;"></span></a>
+                                <a href="{{ path('basket_remove', {id_game : item.game.id , id_platform : item.platform.id } ) }}"><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 25px; color: red;"></span></a>
                             </div>
                         </div>
                         <br><hr><br>

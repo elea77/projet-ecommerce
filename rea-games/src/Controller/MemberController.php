@@ -10,6 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\GameRepository;
+use App\Repository\PlatformRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -32,7 +33,7 @@ class MemberController extends AbstractController
     /**
      * @Route("/basket", name="basket")
      */
-    public function basket(SessionInterface $session, GameRepository $gameRepository, \Swift_Mailer $mailer)
+    public function basket(SessionInterface $session, GameRepository $gameRepository,PlatformRepository $platformRepository, \Swift_Mailer $mailer)
     {
         $basket = $session -> get('basket',[]);
         $basketData = [];
@@ -40,12 +41,17 @@ class MemberController extends AbstractController
 
         $username = $user -> getUsername();
 
-        foreach($basket as $id => $quantity){
-            $basketData[]=[
-                'game' => $gameRepository->find($id),
-                'quantity' => $quantity
-            ];
+        $keys = array_keys($basket);
+        for($i = 0; $i < count($keys); $i++){
+            foreach($basket[$keys[$i]] as $id => $quantity) {
+                $basketData[]=[
+                    'game' => $gameRepository->find($keys[$i]),
+                    'platform' => $platformRepository->find($id),
+                    'quantity' => $quantity
+                ];
+            }
         }
+        
 
         if(isset($_POST['buySubmit'])){
             $message = (new \Swift_Message('mail de test'))
@@ -78,25 +84,28 @@ class MemberController extends AbstractController
 
 
             //Insertion des achats dans la bdd
-            foreach($basket as $id => $quantity){
-                $manager = $this->getDoctrine()->getManager();
-                $game = $manager->find(Game::class, $id);
 
-                $manager = $this->getDoctrine()->getManager();
-                $platform = $manager->find(Platform::class, 1);
-                
-                $purchase = new Purchase;
-
-                $manager = $this -> getDoctrine() -> getManager();
-                
-                $manager -> persist($purchase);
-                $purchase -> setUser($user);
-                $purchase -> setDate(new \DateTime('now'));
-                $purchase -> setQuantity($quantity);
-                $purchase -> setGame($game);
-                $purchase -> setInvoice($invoice);
-                $purchase -> setPlatform($platform);
+            $keys = array_keys($basket);
+            for($i = 0; $i < count($keys); $i++){
+                foreach($basket[$keys[$i]] as $id => $quantity){
+                    $game = $gameRepository->find($keys[$i]);
+    
+                    $platform = $platformRepository->find($id);
+                    
+                    $purchase = new Purchase;
+    
+                    $manager = $this -> getDoctrine() -> getManager();
+                    
+                    $manager -> persist($purchase);
+                    $purchase -> setUser($user);
+                    $purchase -> setDate(new \DateTime('now'));
+                    $purchase -> setQuantity($quantity);
+                    $purchase -> setGame($game);
+                    $purchase -> setInvoice($invoice);
+                    $purchase -> setPlatform($platform);
+                }
             }
+            
               
 
             $manager -> flush();
@@ -177,16 +186,16 @@ class MemberController extends AbstractController
     }
 
     /**
-     * @Route("/basket/add/{id}", name="basket_add")
+     * @Route("/basket/add/{id_game}/{id_platform}", name="basket_add")
      */
-    public function basketAdd($id,SessionInterface $session)
+    public function basketAdd($id_game,$id_platform,SessionInterface $session)
     {
         $basket = $session -> get('basket',[]);
 
-        if(!empty($basket[$id])){
-            $basket[$id]++;
+        if(!empty($basket[$id_game][$id_platform])){
+            $basket[$id_game][$id_platform]++;
         }else{
-            $basket[$id]=1;
+            $basket[$id_game][$id_platform]=1;
         }
 
         $session -> set('basket',$basket);
@@ -195,15 +204,15 @@ class MemberController extends AbstractController
     }
 
     /**
-     * @Route("/basket/remove/{id}", name="basket_remove")
+     * @Route("/basket/remove/{id_game}/{id_platform}", name="basket_remove")
      */
-    public function basketRemove($id, SessionInterface $session){
+    public function basketRemove($id_game,$id_platform, SessionInterface $session){
         $basket = $session -> get('basket',[]);
 
-        if(!empty($basket[$id])){
-            $basket[$id]--;
-            if(empty($basket[$id])){
-                unset($basket[$id]);
+        if(!empty($basket[$id_game][$id_platform])){
+            $basket[$id_game][$id_platform]--;
+            if(empty($basket[$id_game][$id_platform])){
+                unset($basket[$id_game][$id_platform]);
             }
         }
 
