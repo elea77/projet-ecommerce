@@ -241,7 +241,15 @@ class MemberController extends AbstractController
      */
     public function memberArea()
     {
-        return $this->render('member/memberArea.html.twig', []);
+        $user = $this->getUser();
+        $id = $user -> getId();
+
+        $repo = $this->getDoctrine()->getRepository(Purchase::class);
+        $games = $repo->purchasedGames($id);
+
+        return $this->render('member/memberArea.html.twig', [
+            'games' => $games
+        ]);
     }
 
     /**

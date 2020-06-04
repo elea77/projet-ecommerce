@@ -12,26 +12,39 @@
         <h1>Espace membre</h1>
         <div class="games">
             <h3>Liste de mes jeux achetés :</h3>
+
+            {{ dump(games) }}
+
             <h4>Sur PlayStation :</h4>
             <div id="div-scroll">
                 <div id="scrollmenu">
-                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
+                    {% for game in games %}
+                        {% if game.platform.name == 'PlayStation' %}
+                            <img src="{{ asset('/game-img/') }}{{ game.game.img1 }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/{{ game.game.id }}'"> 
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div><br>
+
+            <h4>Sur Xbox :</h4>
+            <div id="div-scroll">
+                <div id="scrollmenu">
+                    {% for game in games %}
+                        {% if game.platform.name == 'Xbox' %}
+                            <img src="{{ asset('/game-img/') }}{{ game.game.img1 }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/{{ game.game.id }}'">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div><br>
+
             <h4>Sur PC :</h4>
             <div id="div-scroll">
                 <div id="scrollmenu">
-                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/godofwar.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/Assassins-creed.jpg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
-                    <img src="{{ asset('/img/r6.jpeg') }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/1'">
+                    {% for game in games %}
+                        {% if game.platform.name == 'PC' %}
+                            <img src="{{ asset('/game-img/') }}{{ game.game.img1 }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/{{ game.game.id }}'">
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
