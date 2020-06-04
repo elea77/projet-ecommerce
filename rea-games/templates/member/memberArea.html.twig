@@ -16,11 +16,16 @@
             <h4>Sur PlayStation :</h4>
             <div id="div-scroll">
                 <div id="scrollmenu">
+                    {% set jeuxPlaystation = 0 %}
                     {% for game in games %}
                         {% if game.platform.name == 'PlayStation' %}
+                            {% set jeuxPlaystation = jeuxPlaystation + 1 %}
                             <img src="{{ asset('/game-img/') }}{{ game.game.img1 }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/{{ game.id }}'"> 
                         {% endif %}
                     {% endfor %}
+                    {% if jeuxPlaystation == 0 %}
+                        <p>Vous n'avez pas acheté de produit sur cette plateforme.</p>
+                    {% endif %}
                 </div>
             </div><br>
 
@@ -28,11 +33,16 @@
             <h4>Sur Xbox :</h4>
             <div id="div-scroll">
                 <div id="scrollmenu">
+                    {% set jeuxXbox = 0 %}
                     {% for game in games %}
                         {% if game.platform.name == 'Xbox' %}
+                            {% set jeuxXbox = jeuxXbox + 1 %}
                             <img src="{{ asset('/game-img/') }}{{ game.game.img1 }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/{{ game.id }}'">
                         {% endif %}
                     {% endfor %}
+                    {% if jeuxXbox == 0 %}
+                        <p>Vous n'avez pas acheté de produit sur cette plateforme.</p>
+                    {% endif %}
                 </div>
             </div><br>
             
@@ -40,11 +50,16 @@
             <h4>Sur PC :</h4>
             <div id="div-scroll">
                 <div id="scrollmenu">
+                    {% set jeuxPC = 0 %}
                     {% for game in games %}
                         {% if game.platform.name == 'PC' %}
+                            {% set jeuxPC = jeuxPC + 1 %}
                             <img src="{{ asset('/game-img/') }}{{ game.game.img1 }}" class="game" style="color:white;" alt="" onclick="location.href='/memberArea/{{ game.id }}'">
                         {% endif %}
                     {% endfor %}
+                    {% if jeuxPC == 0 %}
+                        <p>Vous n'avez pas acheté de produit sur cette plateforme.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
