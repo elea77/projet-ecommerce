@@ -10,13 +10,19 @@
     <div class="container">
 
         <div class="game-info">
-
-            <img src="{{ asset('/img/Rainbow6.png') }}" alt="">
-
+            <img src="{{ asset('/game-img/') }}{{ purchase.game.img2 }}" alt="">
             <div class="info">
-                <h1> Rainbow 6 Siege </h1><br>
-                <p>Acheté le : <b>18/05/2020</b></p>
-                <img src="{{ asset('/img/playstation-logotype.png') }}" alt=""><br>
+                <h1> {{ purchase.game.name }} </h1><br>
+                <p>Acheté le : <b>{{ purchase.date|date('d/m/Y') }}</b></p>
+                {% if purchase.platform.name == 'PlayStation' %}
+                    <img src="{{ asset('/img/playstation-logotype.png') }}" alt="">
+                {% endif %}
+                {% if purchase.platform.name == 'Xbox' %}
+                    <img src="{{ asset('/img/logo_xbox.png') }}" alt="">
+                {% endif %}
+                {% if purchase.platform.name == 'PC' %}
+                    <img src="{{ asset('/img/pc-logo-png-2.png') }}" alt="">
+                {% endif %}<br>
                 <a href=""><button class="button" type="submit">Consulter ma facture</button></a>
             </div>
 

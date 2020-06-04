@@ -19,18 +19,6 @@ class PurchaseRepository extends ServiceEntityRepository
         parent::__construct($registry, Purchase::class);
     }
 
-    public function purchasedGames($id)
-    {
-        $builder = $this -> createQueryBuilder('c');
-        return $builder
-            ->leftJoin('c.user', 'u')
-            ->where('c.user = :user')
-            ->setParameter('user', $id)
-            ->orderBy('c.date', 'DESC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
 
     // /**
     //  * @return Purchase[] Returns an array of Purchase objects

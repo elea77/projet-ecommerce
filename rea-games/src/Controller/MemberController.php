@@ -244,8 +244,7 @@ class MemberController extends AbstractController
         $user = $this->getUser();
         $id = $user -> getId();
 
-        $repo = $this->getDoctrine()->getRepository(Purchase::class);
-        $games = $repo->purchasedGames($id);
+        $games = $user->getPurchases();
 
         return $this->render('member/memberArea.html.twig', [
             'games' => $games
@@ -257,7 +256,13 @@ class MemberController extends AbstractController
      */
     public function memberAreaGame($id)
     {
-        return $this->render('member/memberAreaGame.html.twig', []);
+
+        $manager = $this->getDoctrine()->getManager();
+        $purchase = $manager->find(Purchase::class, $id);
+
+        return $this->render('member/memberAreaGame.html.twig', [
+            'purchase' => $purchase
+        ]);
     }
 
     /**
