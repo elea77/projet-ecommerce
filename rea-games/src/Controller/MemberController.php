@@ -71,6 +71,15 @@ class MemberController extends AbstractController
               
             $manager -> flush();
 
+            // créditation sur le compte de l'utilisateur
+
+            $user = $this -> getUser();
+            $manager -> persist($user);
+            $balanceUser = $user-> getBalance();
+            $newBalance = $balanceUser - $prixGames;
+            $user -> setBalance($newBalance);
+
+            $manager -> flush();
 
             //Insertion des achats dans la bdd
 

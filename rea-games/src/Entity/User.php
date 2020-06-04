@@ -70,7 +70,7 @@ class User implements UserInterface
     private $register_date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $balance;
 
@@ -239,12 +239,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBalance(): ?int
+    public function getBalance(): ?float
     {
         return $this->balance;
     }
 
-    public function setBalance(int $balance): self
+    public function setBalance(float $balance): self
     {
         $this->balance = $balance;
 
