@@ -22,7 +22,8 @@
                 {% endif %}
                 {% if purchase.platform.name == 'PC' %}
                     <img src="{{ asset('/img/pc-logo-png-2.png') }}" alt="">
-                {% endif %}<br>
+                {% endif %}
+                <a href="{{ path('game', {id : purchase.game.id}) }}" style="color:white;"><h3>Voir la fiche du jeu</h3></a><br>
                 <a href="{{ asset('/invoices/') }}{{ purchase.invoice.documentName }}{{'.pdf'}}"><button class="button" type="submit">Consulter ma facture</button></a>
             </div>
 
