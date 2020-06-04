@@ -25,7 +25,6 @@ class PurchaseRepository extends ServiceEntityRepository
         return $builder
             ->leftJoin('c.user', 'u')
             ->where('c.user = :user')
-            ->where('c.platform')
             ->setParameter('user', $id)
             ->orderBy('c.date', 'DESC')
             ->getQuery()
