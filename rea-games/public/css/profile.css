@@ -86,7 +86,6 @@ input[type=text] {
     width: 25%;
     border-color: black;
     border-radius: 6px;
-    /* font-size: 16px; */
     padding: 6px;
     margin-block-end: 1%;
     outline: none;
@@ -96,7 +95,6 @@ input[type=email] {
     width: 30%;
     border-color: black;
     border-radius: 6px;
-    /* font-size: 16px; */
     padding: 6px;
     margin-block-end: 1%;
     outline: none;
@@ -110,4 +108,94 @@ input[type=text]:hover, input[type=email]:hover {
 input[type=text]:focus, input[type=email]:focus {
     border-color: #8D197E;
     border-style: solid;
+}
+
+
+
+
+@media(max-width:1200px) {}
+
+@media(max-width:1080px) {
+    .buttons {
+        width: 70%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}
+
+@media(max-width:992px) {
+    .buttons {
+        width: 70%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    
+
+}
+
+@media(max-width:768px) {
+    .avatar-img {
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        margin: auto;
+    }
+
+    .info {
+        margin-left: 0;
+    }
+
+    .user-info {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .buttons {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    .buttons button {
+        width: 50%;
+        margin-block-end: 5%;
+    }
+    
+
+}
+
+@media(max-width:576px) {
+    .user-info {
+        display: block;
+    }
+
+    .avatar-img {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        margin: auto;
+    }
+
+    .user-info .img {
+        text-align: center;
+    }
+
+    .info {
+        font-size: 20px;
+        margin-left: 2%;
+    }
+
+    .buttons {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    .buttons button {
+        width: 80%;
+        margin-block-end: 5%;
+    }
+}
+
+@media(max-width:320px) {
 }
