@@ -40,6 +40,11 @@ class Invoice
      */
     private $purchases;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $cost;
+
     public function __construct()
     {
         $this->purchases = new ArrayCollection();
@@ -113,6 +118,18 @@ class Invoice
                 $purchase->setInvoice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCost(): ?float
+    {
+        return $this->cost;
+    }
+
+    public function setCost(float $cost): self
+    {
+        $this->cost = $cost;
 
         return $this;
     }

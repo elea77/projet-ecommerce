@@ -16,7 +16,7 @@ class GameImg1Type extends AbstractType
         $builder
         ->add('img1', FileType::class, [
             'data_class' => null,
-            'required' => false,
+            'required' => true,
             'label' => 'Image 1 du jeu: '
         ])
         ->add('Changer',SubmitType::class)

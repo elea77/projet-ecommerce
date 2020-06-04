@@ -40,6 +40,7 @@ class MemberController extends AbstractController
         $user = $this -> getUser();
 
         $username = $user -> getUsername();
+        $prixGames = 0;
 
         $keys = array_keys($basket);
         for($i = 0; $i < count($keys); $i++){
@@ -49,9 +50,10 @@ class MemberController extends AbstractController
                     'platform' => $platformRepository->find($id),
                     'quantity' => $quantity
                 ];
+                $price = $gameRepository->find($keys[$i])->getPrice();
+                $prixGames = $prixGames + $quantity * $price;
             }
         }
-        
 
         if(isset($_POST['buySubmit'])){
 
@@ -62,6 +64,7 @@ class MemberController extends AbstractController
 
             $manager -> persist($invoice);
             $invoice -> setIdUser($user);
+            $invoice -> setCost($prixGames);
             $invoice -> setDocumentName($username . '_' . date('d-m-Y_H-m') . '_' . rand(1,99));
             $invoice -> setDate(new \DateTime('now'));
               
@@ -90,8 +93,6 @@ class MemberController extends AbstractController
                     $purchase -> setPlatform($platform);
                 }
             }
-            
-              
 
             $manager -> flush();
 

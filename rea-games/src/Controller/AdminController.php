@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Game;
+use App\Entity\Invoice;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +29,20 @@ class AdminController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(User::class);
         $nbUsers = $repository -> nbUsers();
 
+        $repository = $this->getDoctrine()->getRepository(Invoice::class);
+        $invoices = $repository -> findAll();
+
+        $nbInvoice = 0;
+        $revenu = 0;
+        foreach($invoices as $invoice){
+            $nbInvoice += 1;
+            $revenu += $invoice->getCost();
+        }
+
         return $this->render('admin/dashboard.html.twig', [
-            'nbUsers' => $nbUsers
+            'nbUsers' => $nbUsers,
+            'nbInvoice' => $nbInvoice,
+            'revenu' => $revenu
         ]);
     }
 
@@ -124,13 +137,8 @@ class AdminController extends AbstractController
         }
 
         $game_id = $game -> getId();
-        $lastImg1 = $game -> getImg1();
-        $lastImg2 = $game -> getImg2();
-
 
         if($form1 -> isSubmitted() && $form1 -> isValid()){          
-            $game -> removeFile1();
-            unlink($this->getParameter('upload_game_img') . $lastImg1);
 
             $file1 = $game->getImg1();
             $filename1 = 'image_' . time() . '_' . $game_id . '_' . rand(1,9999) . '.' . $file1->guessExtension();
@@ -144,8 +152,6 @@ class AdminController extends AbstractController
         }
 
         if($form2 -> isSubmitted() && $form2 -> isValid()){
-            $game -> removeFile2();
-            unlink($this->getParameter('upload_game_img') . $lastImg2);
 
             $file2 = $game->getImg2();
             $filename2 = 'image_' . time() . '_' . $game_id . '_' . rand(1,9999) . '.' . $file2->guessExtension();

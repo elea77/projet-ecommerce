@@ -27,7 +27,7 @@
                     <form method="POST">
                         <p>
                             Pseudo : <b id="username">{{ user.username }}</b>
-                            <input id="usernameModify" type="text" name="usernameChange" placeholder="{{ user.username }}" style="display: none;" required>
+                            <input id="usernameModify" type="text" name="usernameChange" value="{{ user.username }}" style="display: none;" required>
                             <span onclick="usernameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black; cursor: pointer;"></span>
                             <button id="usernameValidate" class="validate" type="submit" name="usernameSubmit" style="display: none;">
                                 <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white; cursor: pointer;" ></span>
@@ -37,7 +37,7 @@
                     <form method="POST">
                         <p>
                             Prénom : <b id="firstname">{{ user.firstname }}</b>
-                            <input id="firstnameModify" type="text" name="firstnameChange" placeholder="{{ user.firstname }}" style="display: none;" required>
+                            <input id="firstnameModify" type="text" name="firstnameChange" value="{{ user.firstname }}" style="display: none;" required>
                             <span onclick="firstnameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;cursor: pointer;"></span>
                             <button id="firstnameValidate" class="validate" type="submit" name="firstnameSubmit" style="display: none;">
                                 <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white; cursor: pointer;"></span>
@@ -47,7 +47,7 @@
                     <form method="POST">
                     <p>
                         Nom : <b id="lastname">{{ user.lastname }}</b>
-                        <input id="lastnameModify" type="text" name="lastnameChange" placeholder="{{ user.lastname }}" style="display: none;" required>
+                        <input id="lastnameModify" type="text" name="lastnameChange" value="{{ user.lastname }}" style="display: none;" required>
                         <span onclick="lastnameModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;cursor: pointer;"></span>
                         <button id="lastnameValidate" class="validate" type="submit" name="lastnameSubmit" style="display: none;">
                             <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;cursor: pointer;"></span>
@@ -57,7 +57,7 @@
                     <form method="POST">
                         <p>
                             Adresse mail : <b id="email">{{ user.email }}</b>
-                            <input id="emailModify" type="email" name="emailChange" placeholder="{{ user.email }}" style="display: none;" required>
+                            <input id="emailModify" type="email" name="emailChange" value="{{ user.email }}" style="display: none;" required>
                             <span onclick="emailModify()" class="iconify" data-inline="false" data-icon="ant-design:edit-outlined" style="font-size: 25px; color: black;cursor: pointer;"></span>
                             <button id="emailValidate" class="validate" type="submit" name="emailSubmit" style="display: none;">
                                 <span class="iconify" data-inline="false" data-icon="heroicons-outline:check" style="font-size: 24px; color: white;cursor: pointer;"></span>
