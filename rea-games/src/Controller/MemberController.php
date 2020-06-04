@@ -39,7 +39,8 @@ class MemberController extends AbstractController
         $basketData = [];
         $user = $this -> getUser();
 
-        $username = $user -> getUsername();
+        $firstname = $user -> getFirstname();
+        $lastname = $user -> getLastname();
         $prixGames = 0;
 
         $keys = array_keys($basket);
@@ -65,7 +66,7 @@ class MemberController extends AbstractController
             $manager -> persist($invoice);
             $invoice -> setIdUser($user);
             $invoice -> setCost($prixGames);
-            $invoice -> setDocumentName($username . '_' . date('d-m-Y_H-m') . '_' . rand(1,99));
+            $invoice -> setDocumentName($firstname . '_' . $lastname . '_' . date('d-m-Y_H-m') . '_' . rand(1,99));
             $invoice -> setDate(new \DateTime('now'));
               
             $manager -> flush();
@@ -122,7 +123,7 @@ class MemberController extends AbstractController
             file_put_contents($pdfFilepath, $output);
 
             // envoi du mail de confirmation d'achat
-            $message = (new \Swift_Message('mail de test'))
+            $message = (new \Swift_Message('Confirmation d\'achat'))
                 ->setFrom('staffreagames@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(

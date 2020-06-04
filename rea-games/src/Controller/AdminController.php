@@ -32,6 +32,12 @@ class AdminController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Invoice::class);
         $invoices = $repository -> findAll();
 
+        $repository = $this->getDoctrine()->getRepository(Invoice::class);
+        $revenu7days = $repository -> nbRevenus7days();
+
+        $repository = $this->getDoctrine()->getRepository(Invoice::class);
+        $vente7days = $repository -> nbVentes7days();
+
         $nbInvoice = 0;
         $revenu = 0;
         foreach($invoices as $invoice){
@@ -42,7 +48,9 @@ class AdminController extends AbstractController
         return $this->render('admin/dashboard.html.twig', [
             'nbUsers' => $nbUsers,
             'nbInvoice' => $nbInvoice,
-            'revenu' => $revenu
+            'revenu' => $revenu,
+            'revenu7' => $revenu7days,
+            'vente7' => $vente7days
         ]);
     }
 
