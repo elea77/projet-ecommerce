@@ -6,8 +6,12 @@
     </head>
     <body>
         <h1>Facture</h1>
-        <img src="../../../public/img/logo_reagames2.png" alt="Mon logo">
-        <h4>{{ title }}</h4>
+        <h4>{{ title }} du {{ purchase.date|date("m/d/Y") }}</h4>
+        <div class="acheteur">
+            <h5>A :</h5>
+            <p>{{ user.lastname }} {{ user.Firstname }}</p>
+            <p>{{ user.email }}</p>
+        </div>
         {% set prixGames = 0 %}
         <table>
             <thead>
@@ -46,7 +50,8 @@ thead,tfoot {
     color: #fff;
 }
 
-img{
-    float: right;
+.acheteur{
+    right: 0px;
+    width: 100%;
 }
 </style>

@@ -54,21 +54,6 @@ class MemberController extends AbstractController
         
 
         if(isset($_POST['buySubmit'])){
-            $message = (new \Swift_Message('mail de test'))
-                ->setFrom('staffreagames@gmail.com')
-                ->setTo($user->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'emails/purchase.html.twig',
-                        ['user' => $user]
-                    ),
-                    'text/html'
-                )
-            ;
-
-
-            $mailer->send($message);
-            $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
 
             // Insertion de la facture dans la bdd
             $invoice = new Invoice;
@@ -118,7 +103,9 @@ class MemberController extends AbstractController
 
             $html = $this->renderView('member/pdf.html.twig', [
                 'title' => "Facture",
-                'items' => $basketData
+                'items' => $basketData,
+                'user' => $user,
+                'purchase' => $purchase
             ]);
 
             $dompdf->loadHtml($html);
@@ -132,6 +119,23 @@ class MemberController extends AbstractController
             $pdfFilepath =  $publicDirectory . '/'.$docName.'.pdf';
 
             file_put_contents($pdfFilepath, $output);
+
+            // envoi du mail de confirmation d'achat
+            $message = (new \Swift_Message('mail de test'))
+                ->setFrom('staffreagames@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/purchase.html.twig',
+                        ['user' => $user]
+                    ),
+                    'text/html'
+                )
+            ;
+            $message->attach(\Swift_Attachment::fromPath($pdfFilepath));
+
+            $mailer->send($message);
+            $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
 
 
             foreach($basket as $id => $quantity){
