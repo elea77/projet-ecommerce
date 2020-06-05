@@ -134,8 +134,10 @@ class AdminController extends AbstractController
         if(isset($_POST['submit'])) {
             $newName = $_POST['newName'];
             $newDesc = $_POST['newDesc'];
+            $newQuantity = $_POST['newQuantity'];
             $newPrice = $_POST['newPrice'];
             $game -> setName($newName);
+            $game -> setQuantity($newQuantity);
             $game -> setPrice($newPrice);
             $game -> setDescription($newDesc);
  

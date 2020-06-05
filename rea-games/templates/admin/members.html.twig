@@ -15,6 +15,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Pseudo</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
                     <th>Adresse mail</th>
                     <th>Date du compte</th>
                     <th>Actions</th>
@@ -23,6 +25,8 @@
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.username }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.registerDate.date|date("m/d/Y") }}</td>
                         <td>
