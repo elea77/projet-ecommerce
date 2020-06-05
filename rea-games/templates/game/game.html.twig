@@ -54,13 +54,13 @@
                         <div class="dropdown-content">
                             {% for comptabi in platform %}
                                 {% if comptabi.name == 'PlayStation' %}
-                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}">&nbsp;&nbsp;PlayStation&nbsp;</a>
+                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}" style="padding: 10px 44.5px;">PlayStation</a>
                                 {% endif %}
                                 {% if comptabi.name == 'Xbox' %}
-                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}">Xbox</a>
+                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}" style="padding: 10px 65.5px;">Xbox</a>
                                 {% endif %}
                                 {% if comptabi.name == 'PC' %}
-                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}">PC</a>
+                                    <a href="/basket/add/{{ game.id }}/{{ comptabi.id }}" style="padding: 10px 44.5px;">PC</a>
                                 {% endif %}
                             {% endfor %}
                         </div>

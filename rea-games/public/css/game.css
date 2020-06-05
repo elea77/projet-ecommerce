@@ -48,7 +48,8 @@
 .button-basket:hover {
     border-radius: 6px 6px 0px 0px;
 } 
-  
+
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -67,7 +68,7 @@
 .dropdown-content a {
     color: black;
     font-size: 15px;
-    padding: 10px 39px;
+    /* padding: 10px 44.5px; */
     text-decoration: none;
     display: block;
 }
