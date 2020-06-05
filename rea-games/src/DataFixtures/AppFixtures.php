@@ -120,7 +120,7 @@ class AppFixtures extends Fixture
         $game5->setImg2("bo4-v.png");
         $game5->setQuantity(80);
         $game5->setPrice(49.99);
-        $game5->setCode("g5CODBO4");
+        $game5->setCode("g5CoDBo4");
         $manager->persist($game5);
 
         $game6 = new Game();
@@ -173,6 +173,75 @@ class AppFixtures extends Fixture
         $game10->setCode("g10FFviiR");
         $manager->persist($game10);
 
+        $game11 = new Game();
+        $game11->setName("Call of Duty : Advanced Warfare");
+        $game11->setDescription("Advanced Warfare fait partie de la série Call of Duty. Advanced Warfare met en scène d'impressionnants champs de bataille futuristes, où la technologie et les tactiques ont évolué et signé l'avènement d'une nouvelle ère du combat. L'acteur oscarisé Kevin Spacey livre une performance éblouissante dans le rôle de Jonathan Irons, l'un des hommes les plus puissants du monde, et donne ainsi corps à cette vision effrayante de la guerre du futur.");
+        $game11->setImg1("advanced_warfare-h.png");
+        $game11->setImg2("advanced_warfare-v.png");
+        $game11->setQuantity(20);
+        $game11->setPrice(9.99);
+        $game11->setCode("g11CoDAW");
+        $manager->persist($game11);
+
+        $game12 = new Game();
+        $game12->setName("Call of Duty : Black Ops I");
+        $game12->setDescription("Call of Duty: Black Ops vous fera voyager de conflit en conflit dans le monde entier en tant qu'agent des forces spéciales participant à des opérations confidentielles et à des guerres secrètes au coeur de la Guerre froide. ");
+        $game12->setImg1("bo1-h.png");
+        $game12->setImg2("bo1-v.png");
+        $game12->setQuantity(35);
+        $game12->setPrice(19.99);
+        $game12->setCode("g12CoDBo1");
+        $manager->persist($game12);
+
+        $game13 = new Game();
+        $game13->setName("Call of Duty : Black Ops II");
+        $game13->setDescription("Black Ops II fait partie de la série Call of Duty. Déjouant les attentes les plus folles des fans de cette licence qui défie tous les records, Call of Duty®: Black Ops II propulse les joueurs dans un avenir proche, au milieu d'une guerre froide du XXIe siècle où la convergence de technologies et d'armes inédites a abouti à l'apparition d'un nouveau type de conflits.");
+        $game13->setImg1("bo2-h.png");
+        $game13->setImg2("bo2-v.png");
+        $game13->setQuantity(52);
+        $game13->setPrice(29.99);
+        $game13->setCode("g13CoDBo2");
+        $manager->persist($game13);
+
+        $game14 = new Game();
+        $game14->setName("Call of Duty : Black Ops III");
+        $game14->setDescription("Bienvenue en 2065. Une nouvelle espèce de soldats Black Ops a émergé et la frontière se brouille entre l'humanité et la robotique militaire de pointe qui définit le combat du futur.");
+        $game14->setImg1("bo3-h.png");
+        $game14->setImg2("bo3-v.png");
+        $game14->setQuantity(46);
+        $game14->setPrice(19.99);
+        $game14->setCode("g14CoDBo3");
+        $manager->persist($game14);
+
+        $game15 = new Game();
+        $game15->setName("Call of Duty : Ghosts");
+        $game15->setDescription("Ce nouveau chapitre de Call of Duty introduit une dynamique inédite qui place les joueurs dans le camp d'un pays brisé qui se bat, non pas pour la liberté, mais tout simplement pour survivre. Au sein d'un groupe mystérieux connu sous le nom de \"Ghosts\", d'anciens membres des forces spéciales mènent le combat contre une nouvelle puissance mondiale technologiquement supérieure.");
+        $game15->setImg1("cod_ghosts-h.png");
+        $game15->setImg2("cod_ghosts-v.png");
+        $game15->setQuantity(3);
+        $game15->setPrice(4.99);
+        $game15->setCode("g15CoDG");
+        $manager->persist($game15);
+
+        $game16 = new Game();
+        $game16->setName("Call of Duty : World War II");
+        $game16->setDescription("Call of Duty retourne à ses origines avec Call of Duty: WWII, une expérience à couper le souffle qui servira de référence à la nouvelle génération de joueurs. Débarquez en Normandie pour le jour J et combattez à travers l'Europe dans les lieux emblématiques de la plus grande guerre de l'Histoire. Prenez part à des combats classiques dans la tradition Call of Duty, créez des liens de camaraderie et survivez à cette guerre impitoyable.");
+        $game16->setImg1("wwii-h.png");
+        $game16->setImg2("wwii-v.png");
+        $game16->setQuantity(70);
+        $game16->setPrice(39.99);
+        $game16->setCode("g16CoDWWII");
+        $manager->persist($game16);
+
+        $game17 = new Game();
+        $game17->setName("Call of Duty : Modern Warfare");
+        $game17->setDescription("Le jeu se déroule dans un cadre réaliste et moderne d'où son nom. La campagne suit les officiers américains de la CIA et les SAS des forces armées britanniques, qui font équipe avec les rebelles du pays fictif d’Urzikstan pour lutter ensemble contre les forces russes qui ont envahi le pays.");
+        $game17->setImg1("modern_warfare-h.png");
+        $game17->setImg2("modern_warfare-v.png");
+        $game17->setQuantity(200);
+        $game17->setPrice(69.99);
+        $game17->setCode("g17CoDMW19");
+        $manager->persist($game17);
 
         $platform1 = new Platform();
         $platform1->setName("PlayStation");
