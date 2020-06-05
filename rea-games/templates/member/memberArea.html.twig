@@ -9,7 +9,7 @@
 {% block body %}
 
     <div class="container">
-        <h1>Espace membre</h1>
+        <h1>Espace membre{% if user is defined %} de {{ user.username }}{% endif %}</h1>
         <div class="games">
             <h3>Liste de mes jeux achetés :</h3>
 

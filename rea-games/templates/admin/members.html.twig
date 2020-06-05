@@ -30,6 +30,7 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.registerDate.date|date("m/d/Y") }}</td>
                         <td>
+                            <a href="{{ path('adminMemberArea', {id : user.id} ) }}" style="color: black;"><span class="iconify" data-inline="false" data-icon="fa-solid:file-invoice" style="color: #black; font-size: 25px;"></span></a>
                             <a href="{{ path('deleteMembers', {id : user.id} ) }}"><span class="iconify" data-inline="false" data-icon="ant-design:delete-outlined" style="font-size: 30px; color: black;"></span></a>
                         </td>
                     </tr>
