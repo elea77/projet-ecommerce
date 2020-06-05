@@ -16,6 +16,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Pseudo</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
                     <th>Adresse mail</th>
                     <th>Date du compte</th>
                 </tr>
@@ -23,6 +25,8 @@
                     <tr>
                         <td>{{ admin.id }}</td>
                         <td>{{ admin.username }}</td>
+                        <td>{{ admin.firstname }}</td>
+                        <td>{{ admin.lastname }}</td>
                         <td>{{ admin.email }}</td>
                         <td>{{ admin.registerDate.date|date("m/d/Y") }}</td>
                     </tr>

@@ -19,7 +19,11 @@ class GameImg2Type extends AbstractType
             'required' => true,
             'label' => 'Image 2 du jeu: '
         ])
-        ->add('Changer',SubmitType::class)
+        ->add('Changer',SubmitType::class, [
+            'attr' => [
+                'class' => 'button'
+            ]
+        ])
         ;
     }
 
