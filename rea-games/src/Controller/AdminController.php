@@ -242,4 +242,21 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/memberArea/{id}", name="adminMemberArea")
+     */
+    public function memberArea($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user = $repository ->findBy(['id' => $id]);
+        $user = $user[0];
+
+        $games = $user->getPurchases();
+
+        return $this->render('member/memberArea.html.twig', [
+            'games' => $games,
+            'user' => $user
+        ]);
+    }
+
 }
