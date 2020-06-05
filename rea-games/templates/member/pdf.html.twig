@@ -20,6 +20,7 @@
                     <th>Prix</th>
                     <th>Quantité</th>
                     <th>Plateforme</th>
+                    <th>Code d'activation</th>
                     <th>Montant</th>
                 </tr>
             </thead>
@@ -30,6 +31,7 @@
                         <td>{{ item.game.price }} €</td>
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.platform.name }}</td>
+                        <td>{{ item.game.code }}</td>
                         <td>{{ item.game.price * item.quantity }} €</td>
                     </tr>
                     {% set prixGames = prixGames + item.game.price * item.quantity %}
