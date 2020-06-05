@@ -34,6 +34,7 @@ class AdminController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(Invoice::class);
         $revenu7days = $repository -> nbRevenus7days();
+        $revenu7days = round($revenu7days[0]['revenu7'], 2);
 
         $repository = $this->getDoctrine()->getRepository(Invoice::class);
         $vente7days = $repository -> nbVentes7days();
