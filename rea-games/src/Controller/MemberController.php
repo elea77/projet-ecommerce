@@ -42,6 +42,7 @@ class MemberController extends AbstractController
         $firstname = $user -> getFirstname();
         $lastname = $user -> getLastname();
         $prixGames = 0;
+        
 
         $keys = array_keys($basket);
         for($i = 0; $i < count($keys); $i++){
@@ -53,114 +54,128 @@ class MemberController extends AbstractController
                 ];
                 $price = $gameRepository->find($keys[$i])->getPrice();
                 $prixGames = $prixGames + $quantity * $price;
+                $price = $gameRepository->find($keys[$i])->getPrice();
             }
         }
 
         if(isset($_POST['buySubmit'])){
+            if($prixGames > $user ->getBalance()){
+                $this -> addFlash('errors', 'Votre compte ne possède pas assez d\'argent pour effectuer cet achat ! Rendez-vous sur votre profil pour en ajouter.');
+            }else{
+                // Insertion de la facture dans la bdd
+                $invoice = new Invoice;
 
-            // Insertion de la facture dans la bdd
-            $invoice = new Invoice;
+                $manager = $this -> getDoctrine() -> getManager();
 
-            $manager = $this -> getDoctrine() -> getManager();
+                $manager -> persist($invoice);
+                $invoice -> setIdUser($user);
+                $invoice -> setCost($prixGames);
+                $invoice -> setDocumentName($firstname . '_' . $lastname . '_' . date('d-m-Y_H-m') . '_' . rand(1,99));
+                $invoice -> setDate(new \DateTime('now'));
+                
+                $manager -> flush();
 
-            $manager -> persist($invoice);
-            $invoice -> setIdUser($user);
-            $invoice -> setCost($prixGames);
-            $invoice -> setDocumentName($firstname . '_' . $lastname . '_' . date('d-m-Y_H-m') . '_' . rand(1,99));
-            $invoice -> setDate(new \DateTime('now'));
-              
-            $manager -> flush();
+                // créditation sur le compte de l'utilisateur
 
-            // créditation sur le compte de l'utilisateur
+                $user = $this -> getUser();
+                $manager -> persist($user);
+                $balanceUser = $user-> getBalance();
+                $newBalance = $balanceUser - $prixGames;
+                $user -> setBalance($newBalance);
 
-            $user = $this -> getUser();
-            $manager -> persist($user);
-            $balanceUser = $user-> getBalance();
-            $newBalance = $balanceUser - $prixGames;
-            $user -> setBalance($newBalance);
+                $manager -> flush();
 
-            $manager -> flush();
+                //Insertion des achats dans la bdd
 
-            //Insertion des achats dans la bdd
+                $keys = array_keys($basket);
+                for($i = 0; $i < count($keys); $i++){
+                    foreach($basket[$keys[$i]] as $id => $quantity){
+                        $game = $gameRepository->find($keys[$i]);
+        
+                        $platform = $platformRepository->find($id);
+                        
+                        $purchase = new Purchase;
+        
+                        $manager = $this -> getDoctrine() -> getManager();
+                        
+                        $manager -> persist($purchase);
+                        $purchase -> setUser($user);
+                        $purchase -> setDate(new \DateTime('now'));
+                        $purchase -> setQuantity($quantity);
+                        $purchase -> setGame($game);
+                        $purchase -> setInvoice($invoice);
+                        $purchase -> setPlatform($platform);
 
-            $keys = array_keys($basket);
-            for($i = 0; $i < count($keys); $i++){
-                foreach($basket[$keys[$i]] as $id => $quantity){
-                    $game = $gameRepository->find($keys[$i]);
-    
-                    $platform = $platformRepository->find($id);
-                    
-                    $purchase = new Purchase;
-    
-                    $manager = $this -> getDoctrine() -> getManager();
-                    
-                    $manager -> persist($purchase);
-                    $purchase -> setUser($user);
-                    $purchase -> setDate(new \DateTime('now'));
-                    $purchase -> setQuantity($quantity);
-                    $purchase -> setGame($game);
-                    $purchase -> setInvoice($invoice);
-                    $purchase -> setPlatform($platform);
+                        // Diminution dans le stock
+
+                        $manager2 = $this -> getDoctrine() -> getManager();
+                        $stock = $game->getQuantity();
+                        $stock = $stock - $quantity;
+                        $manager2 -> persist($game);
+                        $game -> setQuantity($stock);
+
+                        $manager2 -> flush();
+                    }
                 }
-            }
 
-            $manager -> flush();
+                $manager -> flush();
 
-            //Creation et enregistrement du fichier pdf
+                //Creation et enregistrement du fichier pdf
 
-            $pdfOptions = new Options();
-            $pdfOptions->set('defaultFont', 'Roboto');
-            $dompdf = new Dompdf($pdfOptions);
+                $pdfOptions = new Options();
+                $pdfOptions->set('defaultFont', 'Roboto');
+                $dompdf = new Dompdf($pdfOptions);
 
-            $html = $this->renderView('member/pdf.html.twig', [
-                'title' => "Facture",
-                'items' => $basketData,
-                'user' => $user,
-                'purchase' => $purchase
-            ]);
+                $html = $this->renderView('member/pdf.html.twig', [
+                    'title' => "Facture",
+                    'items' => $basketData,
+                    'user' => $user,
+                    'purchase' => $purchase
+                ]);
 
-            $dompdf->loadHtml($html);
-            $dompdf->setPaper('A4', 'portrait');
-            $dompdf->render();
-            $output = $dompdf->output();
+                $dompdf->loadHtml($html);
+                $dompdf->setPaper('A4', 'portrait');
+                $dompdf->render();
+                $output = $dompdf->output();
 
-            $docName = $invoice -> getDocumentName();
+                $docName = $invoice -> getDocumentName();
 
-            $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/invoices';
-            $pdfFilepath =  $publicDirectory . '/'.$docName.'.pdf';
+                $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/invoices';
+                $pdfFilepath =  $publicDirectory . '/'.$docName.'.pdf';
 
-            file_put_contents($pdfFilepath, $output);
+                file_put_contents($pdfFilepath, $output);
 
-            // envoi du mail de confirmation d'achat
-            $message = (new \Swift_Message('Confirmation d\'achat'))
-                ->setFrom('staffreagames@gmail.com')
-                ->setTo($user->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'emails/purchase.html.twig',
-                        ['user' => $user]
-                    ),
-                    'text/html'
-                )
-            ;
-            $message->attach(\Swift_Attachment::fromPath($pdfFilepath));
+                // envoi du mail de confirmation d'achat
+                $message = (new \Swift_Message('Confirmation d\'achat'))
+                    ->setFrom('staffreagames@gmail.com')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'emails/purchase.html.twig',
+                            ['user' => $user]
+                        ),
+                        'text/html'
+                    )
+                ;
+                $message->attach(\Swift_Attachment::fromPath($pdfFilepath));
 
-            $mailer->send($message);
-            $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
+                $mailer->send($message);
+                $this->addFlash('message', 'Votre achat a bien été effectué. Un mail de confirmation vous a été envoyé.');
 
 
-            foreach($basket as $id => $quantity){
-                $basket[$id] = null;
-                if(empty($basket[$id])){
-                    unset($basket[$id]);
+                foreach($basket as $id => $quantity){
+                    $basket[$id] = null;
+                    if(empty($basket[$id])){
+                        unset($basket[$id]);
+                    }
                 }
+
+                $session -> set('basket',$basket);
+
+
+                return $this -> redirectToRoute("home");
+
             }
-
-            $session -> set('basket',$basket);
-
-
-            return $this -> redirectToRoute("home");
-
         }
         
         return $this->render('member/basket.html.twig', [
