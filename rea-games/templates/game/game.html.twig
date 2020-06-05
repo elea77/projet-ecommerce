@@ -87,6 +87,22 @@
 
         </div>
         <hr>
+
+        {# {{ dump(app.user.purchases ) }} #}
+
+        {# Prout #}
+        {% set x = 0 %}
+        {% for p in app.user.purchases %}
+            {% if p.game.id == game.id %}
+                <p>Je peux noter</p>
+                {% set x = x + 1 %}
+            {% endif %}
+             {% if x == 0 %}
+                <p>Je peux pas noter</p>
+            {% endif %}
+
+        {% endfor %}
+
         <div class="reviews">
 
             <div style="display:grid; grid-template-columns: 50% 50%;">
