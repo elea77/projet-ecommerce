@@ -105,11 +105,11 @@ class GameController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Note::class);
         $noteUser = $repository ->findBy(['id_user' => $user, 'id_game' => $id ]);
 
-        if(empty($noteUser) ) {
+        if(isset($_POST['submit'])) {
 
-            $note = new Note;
+            if(empty($noteUser) ) {
 
-            if(isset($_POST['submit'])) {
+                $note = new Note;
 
                 $notePost = $_POST['submit'];
 
@@ -124,8 +124,17 @@ class GameController extends AbstractController
                 
                 return $this->redirectToRoute('game', ['id' => $id]);
 
+            }else{
+                $manager = $this -> getDoctrine() -> getManager();
+                $notePost = $_POST['submit'];
+
+                $manager -> persist($noteUser[0]);
+                $noteUser[0] -> setNote($notePost);
+                $manager ->  flush();   
+                
+                return $this->redirectToRoute('game', ['id' => $id]);
             }
-        } 
+        }
 
         return $this->render('game/game.html.twig', [
             'game' => $game,

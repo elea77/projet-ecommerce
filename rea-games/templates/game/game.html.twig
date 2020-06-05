@@ -88,16 +88,6 @@
         </div>
         <hr>
 
-            {% set x = 0 %}
-            {% for p in app.user.purchases %}
-                {% if x == 0 %}
-                    {% if p.game.id == game.id %}
-                        <p>Je peux noter</p>
-                        {% set x = x + 1 %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-
         <div class="reviews">
 
             <div style="display:grid; grid-template-columns: 50% 50%;">
@@ -120,24 +110,27 @@
                                     </div>
                                 {% else %}
                                 {% if note[0].note == '1' %}
-                                <div class="rating rating2"><!--
-                                    --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                    --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                    --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                    --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
-                                    --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                <div class="rating rating2">
+                                    <form action="" method="post"><!--
+                                        --><button type="submit" name="submit" value="5"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                        --><button type="submit" name="submit" value="4"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                        --><button type="submit" name="submit" value="3"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                        --><button type="submit" name="submit" value="2"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                                        --><button style="color: orange;" type="submit" name="submit" value="1"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                    </form>
                                 </div>
 
                                 {% endif %}
 
                                 {% if note[0].note == '2' %}
                                     <div class="rating rating2">
-                                        <form action="" method="post"><!--
-                                            --><button type="submit" name="submit" value="5"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                            --><button type="submit" name="submit" value="4"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                            --><button type="submit" name="submit" value="3"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                            --><button type="submit" name="submit" value="2"><span class="iconify" style="color: orange;" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
-                                            --><button type="submit" name="submit" value="1"><span class="iconify" style="color: orange;" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                        <form action="" method="post">
+                                            <form action="" method="post"><!--
+                                                --><button type="submit" name="submit" value="5"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                                --><button type="submit" name="submit" value="4"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                                --><button type="submit" name="submit" value="3"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                                --><button type="submit" name="submit" value="2"><span class="iconify" style="color: orange;" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                                                --><button type="submit" name="submit" value="1"><span class="iconify" style="color: orange;" data-inline="false" data-icon="ant-design:star-filled"></span></button>
                                         </form>
                                     </div>
 
@@ -145,33 +138,39 @@
                                 {% endif %}
 
                                 {% if note[0].note == '3' %}
-                                    <div class="rating rating2"><!--
-                                        --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                    <div class="rating rating2">
+                                        <form action="" method="post"><!--
+                                            --><button type="submit" name="submit" value="5"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="4"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="3" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="2" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                                            --><button type="submit" name="submit" value="1" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                        </form>
                                     </div>
 
                                 {% endif %}
 
                                 {% if note[0].note == '4' %}
-                                    <div class="rating rating2"><!--
-                                        --><button><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                    <div class="rating rating2">
+                                        <form action="" method="post"><!--
+                                            --><button type="submit" name="submit" value="5"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="4" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="3" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="2" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                                            --><button type="submit" name="submit" value="1" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                        </form>
                                     </div>
 
                                 {% endif %}
                                 {% if note[0].note == '5' %}
-                                    <div class="rating rating2"><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
-                                        --><button style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                    <div class="rating rating2">
+                                        <form action="" method="post"><!--
+                                            --><button type="submit" name="submit" value="5" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="4" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="3" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--
+                                            --><button type="submit" name="submit" value="2" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button><!--                        
+                                            --><button type="submit" name="submit" value="1" style="color: orange;"><span class="iconify" data-inline="false" data-icon="ant-design:star-filled"></span></button>
+                                        </form>
                                     </div>
 
                                 {% endif %}
