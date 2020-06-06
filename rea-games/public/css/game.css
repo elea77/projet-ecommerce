@@ -14,6 +14,10 @@
     margin: auto;
 }
 
+#responsive {
+    display: none;
+}
+
 .info {
     margin-left: 8%;
     margin-right: 8%;
@@ -285,6 +289,10 @@ textarea:hover {
 
     #game-img {
         display: none;
+    }
+
+    #responsive {
+        display: block;
     }
 
     .info h1 {

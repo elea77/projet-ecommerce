@@ -14,6 +14,10 @@
     margin: auto;
 }
 
+#responsive {
+    display: none;
+}
+
 .info {
     margin-left: 8%;
     margin-right: 8%;
@@ -49,4 +53,67 @@
 
 .button:hover {
     cursor: pointer;
+}
+
+
+
+
+@media(max-width:1200px) {
+    .button {
+        width: 50%;
+    }
+}
+
+@media(max-width:1080px) {
+    .button {
+        width: 55%;
+    }
+}
+
+@media(max-width:992px) {
+    .button {
+        width: 70%;
+    }
+}
+
+@media(max-width:768px) {
+    .button {
+        width: 70%;
+    }
+}
+
+@media(max-width:576px) {
+    .container h1 {
+        font-size: 25px;
+    }
+
+    .container h3 {
+        font-size: 18px;
+    }
+
+    .container h4 {
+        font-size: 15px;
+    }
+
+    .game-info {
+        display: block;
+    }
+
+    #game-img {
+        display: none;
+    }
+
+    #responsive {
+        display: block;
+    }
+
+    .button {
+        width: 70%;
+    }
+}
+
+@media(max-width:320px) {
+    .button {
+        width: 85%;
+    }
 }
