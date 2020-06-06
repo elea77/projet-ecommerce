@@ -8,6 +8,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 use App\Entity\Game;
 use App\Entity\Platform;
+use App\Entity\Note;
+use App\Entity\Comment;
+use App\Entity\Invoice;
+use App\Entity\Purchase;
 
 class AppFixtures extends Fixture
 {
@@ -69,6 +73,38 @@ class AppFixtures extends Fixture
             $user->setBalance(175);
             $manager->persist($user);
         }
+
+        $batman = new User();
+        $batman->setEmail("batmanofficiel@gotham.com");
+        $batman->setRole("ROLE_USER");
+        $batman->setPassword("passwordbatman");
+        $password = $batman -> getPassword();
+        $newPassword = $this->encoder-> encodePassword($batman, $password);
+        $batman -> setPassword($newPassword);
+        $batman->setUsername("Batman");
+        $batman->setFirstname("Bruce");
+        $batman->setLastname("Wayne");
+        $batman->setAvatar("batman.png");
+        $batman->setBirthday(new \DateTime('1915-04-17'));
+        $batman->setRegisterDate(new \DateTime('2019-08-02'));
+        $batman->setBalance(2000);
+        $manager->persist($batman);
+
+        $ironman = new User();
+        $ironman->setEmail("therealironman@riche.com");
+        $ironman->setRole("ROLE_USER");
+        $ironman->setPassword("ironpassword");
+        $password = $ironman -> getPassword();
+        $newPassword = $this->encoder-> encodePassword($ironman, $password);
+        $ironman -> setPassword($newPassword);
+        $ironman->setUsername("Iron Man");
+        $ironman->setFirstname("Tony");
+        $ironman->setLastname("Stark");
+        $ironman->setAvatar("ironman.png");
+        $ironman->setBirthday(new \DateTime('1963-03-01'));
+        $ironman->setRegisterDate(new \DateTime('2017-10-27'));
+        $ironman->setBalance(4000);
+        $manager->persist($ironman);
         
         $game1 = new Game();
         $game1->setName("Tom Clancy's Rainbow Six Siege");
@@ -254,6 +290,13 @@ class AppFixtures extends Fixture
         $platform1->addGame($game8);
         $platform1->addGame($game9);
         $platform1->addGame($game10);
+        $platform1->addGame($game11);
+        $platform1->addGame($game12);
+        $platform1->addGame($game13);
+        $platform1->addGame($game14);
+        $platform1->addGame($game15);
+        $platform1->addGame($game16);
+        $platform1->addGame($game17);
         $manager->persist($platform1);
 
         $platform2 = new Platform();
@@ -266,6 +309,13 @@ class AppFixtures extends Fixture
         $platform2->addGame($game8);
         $platform2->addGame($game9);
         $platform2->addGame($game10);
+        $platform2->addGame($game11);
+        $platform2->addGame($game12);
+        $platform2->addGame($game13);
+        $platform2->addGame($game14);
+        $platform2->addGame($game15);
+        $platform2->addGame($game16);
+        $platform2->addGame($game17);
         $manager->persist($platform2);
 
         $platform3 = new Platform();
@@ -278,8 +328,399 @@ class AppFixtures extends Fixture
         $platform3->addGame($game8);
         $platform3->addGame($game9);
         $platform3->addGame($game10);
+        $platform3->addGame($game11);
+        $platform3->addGame($game12);
+        $platform3->addGame($game13);
+        $platform3->addGame($game14);
+        $platform3->addGame($game15);
+        $platform3->addGame($game16);
+        $platform3->addGame($game17);
         $manager->persist($platform3);
 
+        $note = new Note();
+        $note->setIdUser($admin1);
+        $note->setIdGame($game1);
+        $note->setNote(3);
+        $manager->persist($note);
+        
+        $note = new Note();
+        $note->setIdUser($admin1);
+        $note->setIdGame($game3);
+        $note->setNote(1);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($admin1);
+        $note->setIdGame($game4);
+        $note->setNote(5);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($admin2);
+        $note->setIdGame($game3);
+        $note->setNote(4);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($admin2);
+        $note->setIdGame($game4);
+        $note->setNote(2);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($admin2);
+        $note->setIdGame($game5);
+        $note->setNote(3);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($batman);
+        $note->setIdGame($game1);
+        $note->setNote(5);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($batman);
+        $note->setIdGame($game4);
+        $note->setNote(2);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($batman);
+        $note->setIdGame($game5);
+        $note->setNote(1);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($ironman);
+        $note->setIdGame($game3);
+        $note->setNote(2);
+        $manager->persist($note);
+
+        $note = new Note();
+        $note->setIdUser($ironman);
+        $note->setIdGame($game4);
+        $note->setNote(3);
+        $manager->persist($note);
+
+
+        $comment = new Comment;
+        $comment -> setReview('Vous savez que je suis riche ?');
+        $datetime = new \DateTime('2020-05-08 09:29:45');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game1);
+        $comment -> setIdUser($ironman);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Vous savez que je suis riche ?');
+        $datetime = new \DateTime('2020-05-08 09:33:45');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game2);
+        $comment -> setIdUser($ironman);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Vous savez que je suis riche ?');
+        $datetime = new \DateTime('2020-05-08 09:32:45');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game3);
+        $comment -> setIdUser($ironman);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Vous savez que je suis riche ?');
+        $datetime = new \DateTime('2020-05-08 09:31:45');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game4);
+        $comment -> setIdUser($ironman);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Vous savez que je suis riche ?');
+        $datetime = new \DateTime('2020-05-08 09:30:45');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game5);
+        $comment -> setIdUser($ironman);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Pas mal ce jeu j\'aime bien mais avec une BATMOBILE il serait bien bien meilleur.');
+        $datetime = new \DateTime('2020-05-08 18:19:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game4);
+        $comment -> setIdUser($batman);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Ces agents sont aussi efficace que LE BATMAN. #validerParBatou');
+        $datetime = new \DateTime('2020-05-08 18:19:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game1);
+        $comment -> setIdUser($batman);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Il y a une ile ou il y a une armée de poulet qui nous attaque et il faut tous les tuer. Meme que l\'une d\'elle est légendaire.');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game2);
+        $comment -> setIdUser($admin1);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Il ressemble beaucoup à origins mais vous fiez pas seulement à ça. Les développeurs ont repris les qualités du précédent AC et ont améliorés le reste. Et la Grèce Antique est magnifique à explorer !');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game2);
+        $comment -> setIdUser($admin1);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('J\'ai jamais joué à un HAlo de ma vie. !');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game4);
+        $comment -> setIdUser($admin1);
+        $manager -> persist($comment);
+
+
+        $comment = new Comment;
+        $comment -> setReview('Faut croire que j\'aime COD vu que j\'ai mis 50 jeux COD sur le site !');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game5);
+        $comment -> setIdUser($admin2);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('Woaw j\'adore la relation père fils qu\'il y a entre Kratos et son fils.');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game3);
+        $comment -> setIdUser($admin2);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('COD TROP BIEN !');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game5);
+        $comment -> setIdUser($admin2);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('COD TROP TROP BIEN !');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game5);
+        $comment -> setIdUser($admin2);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('COD TROP TROP TROP BIEN !');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game5);
+        $comment -> setIdUser($admin2);
+        $manager -> persist($comment);
+
+        $comment = new Comment;
+        $comment -> setReview('COD TROP TROP TROP TROP BIEN !');
+        $datetime = new \DateTime('2020-06-02 22:22:22');
+        $comment -> setDate($datetime);
+        $comment -> setIdGame($game5);
+        $comment -> setIdUser($admin2);
+        $manager -> persist($comment);
+
+
+        $invoice1 = new Invoice;
+        $invoice1 -> setIdUser($admin1);
+        $invoice1 -> setCost(299.95);
+        $invoice1 -> setDocumentName('Rémi_KARMANN_06-06-2020_11-06_85');
+        $datetime = new \DateTime('2020-06-06 11:59:1');
+        $invoice1 -> setDate($datetime);
+        $manager -> persist($invoice1);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin1);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game1);
+        $purchase -> setInvoice($invoice1);
+        $purchase -> setPlatform($platform1);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin1);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game2);
+        $purchase -> setInvoice($invoice1);
+        $purchase -> setPlatform($platform2);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin1);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game3);
+        $purchase -> setInvoice($invoice1);
+        $purchase -> setPlatform($platform1);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin1);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(2);
+        $purchase -> setGame($game4);
+        $purchase -> setInvoice($invoice1);
+        $purchase -> setPlatform($platform2);
+        $manager -> persist($purchase);
+
+
+        $invoice2 = new Invoice;
+        $invoice2 -> setIdUser($admin2);
+        $invoice2 -> setCost(319.94);
+        $invoice2 -> setDocumentName('Eléa_CARTON_06-06-2020_12-06_19');
+        $datetime = new \DateTime('2020-06-06 12:11:08');
+        $invoice2 -> setDate($datetime);
+        $manager -> persist($invoice2);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin2);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game3);
+        $purchase -> setInvoice($invoice2);
+        $purchase -> setPlatform($platform1);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin2);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game4);
+        $purchase -> setInvoice($invoice2);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin2);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(2);
+        $purchase -> setGame($game5);
+        $purchase -> setInvoice($invoice2);
+        $purchase -> setPlatform($platform1);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin2);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game5);
+        $purchase -> setInvoice($invoice2);
+        $purchase -> setPlatform($platform2);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($admin2);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game5);
+        $purchase -> setInvoice($invoice2);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
+
+
+        $invoice3 = new Invoice;
+        $invoice3 -> setIdUser($batman);
+        $invoice3 -> setCost(219.96);
+        $invoice3 -> setDocumentName('Bruce_Wayne_06-06-2020_12-06_83');
+        $datetime = new \DateTime('2020-06-06 12:24:01');
+        $invoice3 -> setDate($datetime);
+        $manager -> persist($invoice3);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($batman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(2);
+        $purchase -> setGame($game1);
+        $purchase -> setInvoice($invoice3);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($batman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game4);
+        $purchase -> setInvoice($invoice3);
+        $purchase -> setPlatform($platform2);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($batman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game5);
+        $purchase -> setInvoice($invoice3);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
+
+
+        $invoice4 = new Invoice;
+        $invoice4 -> setIdUser($ironman);
+        $invoice4 -> setCost(299.95);
+        $invoice4 -> setDocumentName('Tony_Stark_06-06-2020_12-06_83');
+        $datetime = new \DateTime('2020-06-06 12:38:01');
+        $invoice4 -> setDate($datetime);
+        $manager -> persist($invoice4);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($ironman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game1);
+        $purchase -> setInvoice($invoice4);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($ironman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game2);
+        $purchase -> setInvoice($invoice4);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($ironman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game3);
+        $purchase -> setInvoice($invoice4);
+        $purchase -> setPlatform($platform1);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($ironman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game4);
+        $purchase -> setInvoice($invoice4);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
+
+        $purchase = new Purchase;
+        $purchase -> setUser($ironman);
+        $purchase -> setDate(new \DateTime('2020-06-06'));
+        $purchase -> setQuantity(1);
+        $purchase -> setGame($game5);
+        $purchase -> setInvoice($invoice4);
+        $purchase -> setPlatform($platform3);
+        $manager -> persist($purchase);
 
         $manager->flush();
     }
