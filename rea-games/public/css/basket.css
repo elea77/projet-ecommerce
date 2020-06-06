@@ -78,3 +78,62 @@
     display: block;
     margin: auto;
 }
+
+
+
+
+
+@media(max-width:1200px) {}
+
+@media(max-width:1080px) {}
+
+@media(max-width:992px) {
+    .button {
+        width: 35%;
+    }
+}
+
+@media(max-width:768px) {
+    .button {
+        width: 40%;
+    }
+}
+
+@media(max-width:576px) {
+    .container h1 {
+        font-size: 25px;
+    }
+
+    .container h3 {
+        font-size: 18px;
+    }
+
+    .container h4 {
+        font-size: 15px;
+    }
+
+    .item-img {
+        display: none;
+    }
+
+    .grid-item-infos {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .button {
+        width: 50%;
+    }
+
+    .item-img img {
+        width: 100%;
+    }
+
+    .item-game h3, .item-game h4 {
+        margin: 0;
+    }
+
+}
+
+@media(max-width:320px) {
+}

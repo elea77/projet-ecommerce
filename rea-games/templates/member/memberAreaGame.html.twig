@@ -10,7 +10,12 @@
     <div class="container">
 
         <div class="game-info">
-            <img src="{{ asset('/game-img/') }}{{ purchase.game.img2 }}" alt="">
+            <img src="{{ asset('/game-img/') }}{{ purchase.game.img2 }}" alt="" id="game-img">
+
+            {# Image pour telephone #}
+            <img src="{{ asset('/game-img/') }}{{ purchase.game.img1 }}" alt="" id="responsive">
+
+
             <div class="info">
                 <h1> {{ purchase.game.name }} </h1><br>
                 <p>Acheté le : <b>{{ purchase.date|date('d/m/Y') }}</b></p>
