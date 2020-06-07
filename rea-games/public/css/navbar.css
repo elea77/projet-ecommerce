@@ -344,6 +344,47 @@ textarea {
     font-size: 170%;
 }
 
+
+
+#search-responsive input {
+    width: 80%;
+    border-color: black;
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 3px;
+    margin-block-end: 3%;
+}
+
+
+#search-responsive input {
+    outline: none;
+}
+
+#search-responsive input:hover {
+    border-color: #8D197E;
+    border-style: solid;
+}
+
+#search-responsive input:focus {
+    border-color: #8D197E;
+    border-style: solid;
+}
+
+
+#search-responsive button {
+    border-color: white;
+    color: white;
+    background-color: #8D197E;
+    border-radius: 6px;
+    border-width: 1px;
+    display: block;
+    margin: auto;
+    font-size: 18px;
+}
+
+
+
+
 @media(max-width:768px) {
     .header__nav__wrapper {
         display: flex;
@@ -364,4 +405,5 @@ textarea {
     .nav_pc ul li{
         display: none;
     }
+
 }

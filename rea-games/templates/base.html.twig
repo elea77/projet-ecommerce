@@ -31,26 +31,31 @@
                             <a href="{{ path('memberArea') }}">Espace membre</a>
                         </li>
                     {% endif %}
-                        {% if app.user %}
-                        <li>
-                            <a href="{{ path('logout') }}">
-                                Déconnexion
-                            </a>
-                        </li>
-                        {% endif %}
 
-                        {% if app.user %}
-                        <li>
-                            <a href="{{ path('basket') }}">
-                                Panier
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('profile') }}">
-                                Mon Profile
-                            </a>
-                        </li>
-                        {% endif %}
+                    {% if app.user %}
+                    <li>
+                        <a href="{{ path('basket') }}">
+                            Panier
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('profile') }}">
+                            Profil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('logout') }}">
+                            Déconnexion
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <form method="post" action="{{ path('search') }}" id="search-responsive">
+                            <input type="search" name="search" placeholder="Rechercher un jeu..." />
+                            <button type="submit" name="submit">Rechercher</button>
+                        </form>
+                    </li>
 
                 </ul>
             </nav>
@@ -59,7 +64,7 @@
             <nav class="nav_pc">
                 <ul>
                     <div class="logo_site">
-                        <img class="logo_reagames" src="{{ asset('/img/logo_reagames2.png') }}">
+                        <img class="logo_reagames" src="{{ asset('/img/logo_reagames2.png') }}" onclick="location.href='/'">
                     </div>
                     <div class="header__nav__wrapper">
                         <div class="header-nav-burger">
